@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router'
 import { ProjectComponent } from './project.component';
 import { ProjectFormComponent } from './project.form.component';
+import { ProjectListComponent } from './project.list.component';
 
 export const ProjectRouteNames = {
     projectHome: 'projects',
@@ -9,17 +10,11 @@ export const ProjectRouteNames = {
 
 export const ProjectRoutes: Routes = [
     {
-        path: ProjectRouteNames.projectHome, children: [
-            { path: '', component: ProjectComponent, outlet: 'content' }
-
+        path: ProjectRouteNames.projectHome, component: ProjectComponent,
+        children: [
+            { path: '', component: ProjectListComponent },
+            { path: 'new', component: ProjectFormComponent }
         ],
 
-    },
-    {
-        path: 'new',
-        children: [
-            { path: '', component: ProjectFormComponent, outlet: 'content' }
-
-        ]
     }
 ];

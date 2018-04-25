@@ -5,27 +5,31 @@ import { ProjectRoutes } from './project.route';
 import { Router, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { ProjectFormComponent } from './project.form.component';
+import { ProjectListComponent } from './project.list.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ProjectForm} from './project.form';
 
 @NgModule({
     imports: [
-        RouterModule.forChild(ProjectRoutes),
         MatTableModule,
         MatInputModule,
         MatButtonModule,
         FlexLayoutModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule.forChild(ProjectRoutes)
     ],
     declarations: [
         ProjectComponent,
-        ProjectFormComponent
+        ProjectFormComponent,
+        ProjectListComponent
     ],
     providers: [
-        ProjectService
+        ProjectService,
+        ProjectForm
     ]
 })
 export class ProjectModule {

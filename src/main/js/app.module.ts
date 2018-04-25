@@ -27,7 +27,8 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot([
       { path: '', redirectTo: '/' + ProjectRouteNames.projectHome, pathMatch: 'full' },
       { path: '', component: HeaderComponent, outlet: 'toolbar' }
-    ]),
+    ],
+    { enableTracing: false } ),
   ],
   exports: [
     FlexLayoutModule
