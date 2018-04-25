@@ -1,0 +1,13 @@
+<form [formGroup]="projectForm" fxLayout="column" fxLayoutGap="20px">
+    <h2 fxFlex fxFlexAlign="center">New Project</h2>
+    <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="login__form">
+        <mat-form-field>
+            <input matInput type="text" formControlName="name" placeholder="Name" id="name" />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="description" formControlName="description" placeholder="Description" id="description" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="create()">Log in</button>
+
+    </div>
+</form>
