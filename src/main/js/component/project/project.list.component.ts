@@ -1,4 +1,4 @@
-import {Component , OnInit} from '@angular/core';
+import {Component , OnInit, HostBinding} from '@angular/core';
 import {ProjectService} from './project.service';
 import {MatTableDataSource} from '@angular/material';
 import {Project} from './project';
@@ -12,12 +12,14 @@ export class ProjectListComponent implements OnInit {
     projects: Project[];
     dataSource: MatTableDataSource<Project>;
     displayedColumns = [ 'name', 'description'];
+    @HostBinding('class.flexBox') flex: boolean = false;
 
     constructor(private projectService: ProjectService) {
 
     }
 
     ngOnInit(): void {
+        this.flex = true;
         this.findAllProjects();
         
     }

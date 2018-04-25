@@ -96,3 +96,18 @@ body {
     padding-left: 24px;
     padding-right: 24px;
 }
+
+.flexBox{
+  display: flex;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+}
+mat-card.pad--zero{
+  padding:0;
+}
+
+button.button__float{
+  position: fixed;
+  right: 48px;
+  bottom: 48px;
+}

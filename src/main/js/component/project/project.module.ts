@@ -8,15 +8,19 @@ import { ProjectFormComponent } from './project.form.component';
 import { ProjectListComponent } from './project.list.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {ProjectForm} from './project.form';
+import { ProjectForm } from './project.form';
 
 @NgModule({
     imports: [
         MatTableModule,
         MatInputModule,
         MatButtonModule,
+        MatCardModule,
+        MatIconModule,
         FlexLayoutModule,
         FormsModule,
         ReactiveFormsModule,
