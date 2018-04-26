@@ -1,6 +1,7 @@
 <form [formGroup]="projectForm.form" fxLayout="column" fxLayoutGap="20px">
     <h2 fxFlex fxFlexAlign="center">New Project</h2>
     <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="login__form">
+        <mat-progress-bar mode="indeterminate" *ngIf="inProgress"></mat-progress-bar>
         <mat-form-field>
             <input matInput type="text" formControlName="name" placeholder="Name" id="name" />
         </mat-form-field>

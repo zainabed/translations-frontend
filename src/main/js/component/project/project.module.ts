@@ -1,18 +1,26 @@
+// Core Modules
 import { NgModule } from '@angular/core';
-import { ProjectComponent } from './project.component';
-import { ProjectService } from './project.service';
-import { ProjectRoutes } from './project.route';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';  
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Material Modules
 import { MatTableModule } from '@angular/material/table';
-import { ProjectFormComponent } from './project.form.component';
-import { ProjectListComponent } from './project.list.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Projects Component and Services
+import { ProjectComponent } from './project.component';
+import { ProjectFormComponent } from './project.form.component';
+import { ProjectListComponent } from './project.list.component';
+import { ProjectService } from './project.service';
+import { ProjectRoutes } from './project.route';
 import { ProjectForm } from './project.form';
+
 
 @NgModule({
     imports: [
@@ -21,8 +29,10 @@ import { ProjectForm } from './project.form';
         MatButtonModule,
         MatCardModule,
         MatIconModule,
+        MatProgressBarModule,
         FlexLayoutModule,
         FormsModule,
+        CommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ProjectRoutes)
     ],
