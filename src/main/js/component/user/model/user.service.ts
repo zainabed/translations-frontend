@@ -13,4 +13,6 @@ export class UserService extends HttpResource<User>{
     constructor(http: HttpClient) {
         super(http, "users", "http://localhost:8080/");
     }
+
+    
 }

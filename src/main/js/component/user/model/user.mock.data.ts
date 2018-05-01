@@ -41,3 +41,23 @@ export const USER_GET_ALL_RESPONSE = {
         "number": 0
     }
 };
+
+export const USER_GET_ONE_RESPONSE = {
+    "createdAt": null,
+    "updatedAt": null,
+    "username": "zainabed",
+    "email": "zainabed@gmail.com",
+    "password": "abcdef",
+    "status": null,
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/users/1"
+        },
+        "user": {
+            "href": "http://localhost:8080/users/1"
+        },
+        "projects": {
+            "href": "http://localhost:8080/users/1/projects"
+        }
+    }
+};
