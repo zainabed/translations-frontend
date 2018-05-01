@@ -17,7 +17,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // User Component and Services
-import { UserForm, UserFormComponent } from "./user.core";
+import { UserForm, UserFormComponent, UserComponent} from "./user.core";
+import { UserRoutes } from "./user.route";
 
 @NgModule({
     imports: [
@@ -32,7 +33,7 @@ import { UserForm, UserFormComponent } from "./user.core";
         MatIconModule,
         MatProgressBarModule,
         FlexLayoutModule,
-        AngularHalModule.forRoot()
+        RouterModule.forChild(UserRoutes)
     ],
     exports: [
         CommonModule,
@@ -41,7 +42,8 @@ import { UserForm, UserFormComponent } from "./user.core";
         MatFormFieldModule
     ],
     declarations: [
-       // UserFormComponent
+        UserComponent, 
+        UserFormComponent
     ],
     providers: [UserForm]
 })

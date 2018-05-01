@@ -10,17 +10,14 @@ import { ProjectRouteNames } from './component/project/project.route';
 import { HeaderModule } from './layout/header/header.module';
 import { HeaderComponent } from './layout/header/header.component';
 
-import {UserModule} from "./component/user/user.module";
+import { UserModule } from "./component/user/user.module";
 
 import { AppComponent } from './app.component';
-import {UserFormComponent} from "./component/user/component/user.form.component";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UserFormComponent
-  ],
+    AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
