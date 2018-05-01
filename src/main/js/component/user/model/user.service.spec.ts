@@ -4,7 +4,6 @@ import { HttpClientTestingModule, HttpTestingController } from "@angular/common/
 import { UserService } from './user.service';
 import { USER_GET_ALL_RESPONSE } from './user.mock.data';
 import { User } from './user';
-import { UserList } from './user.list';
 
 describe("Unit test for User HTTP service.\n", () => {
     let service: UserService;
@@ -23,8 +22,9 @@ describe("Unit test for User HTTP service.\n", () => {
     });
 
     it("findAll method should fetch all user from API.\n", () => {
-        let users = service.get().subscribe((userList: UserList) => {
-            expect(userList.list.length).toEqual(1);
+        let users = service.get().subscribe((userService: UserService) => {
+            console.log(userService);
+            expect(userService.list.length).toEqual(1);
             
         });
         let httpCall = http.expectOne("http://localhost:8080/users");

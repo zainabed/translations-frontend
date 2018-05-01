@@ -3,22 +3,14 @@ import { HttpClient } from "@angular/common/http";
 import { Response } from "@angular/http";
 import { Observable } from "rxjs/observable";
 
+import { HttpResource } from "../../../lib/http/http.resource";
+
 import { User } from './user';
-import { UserList } from "./user.list";
 
 @Injectable()
-export class UserService {
-    protected endPoint: string = "http://localhost:8080/";
-    protected path: string = "users";
-    protected apiEndPoint: string;
+export class UserService extends HttpResource<User>{
 
-    constructor(private http: HttpClient) {
-        this.apiEndPoint = this.endPoint + this.path;
-    }
-
-    get(): Observable<UserList> {
-        return this.http.get(this.apiEndPoint)
-            .map((response: Response) => response)
-            .map((data) => new UserList(data));
+    constructor(http: HttpClient) {
+        super(http, "users", "http://localhost:8080/");
     }
 }
