@@ -1,0 +1,15 @@
+<form [formGroup]="userForm.form" fxLayout="column" fxLayoutGap="20px">
+    <h2 fxFlex fxFlexAlign="center">New User</h2>
+    <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+    </div>
+</form>
