@@ -1,8 +1,9 @@
 // Core Modules
 import { NgModule } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularHalModule } from "angular4-hal";
 
 // Material Modules
 import { MatTableModule } from '@angular/material/table';
@@ -25,7 +26,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatCardModule,
         MatIconModule,
         MatProgressBarModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        AngularHalModule.forRoot()
     ],
     declarations: [
 

@@ -1,7 +1,7 @@
 // Core Modules
 import { NgModule } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Material Modules
@@ -14,13 +14,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Projects Component and Services
-import { ProjectComponent } from './project.component';
-import { ProjectFormComponent } from './project.form.component';
-import { ProjectListComponent } from './project.list.component';
-import { ProjectService } from './project.service';
+import {
+    ProjectComponent, ProjectFormComponent, ProjectListComponent,
+    ProjectService, ProjectForm
+} from './project.core';
 import { ProjectRoutes } from './project.route';
-import { ProjectForm } from './project.form';
-
 
 @NgModule({
     imports: [

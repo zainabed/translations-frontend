@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ProjectService } from './project.service';
-import { Project } from './project';
-import { ProjectForm } from './project.form';
+import { ProjectService } from '../model/project.service';
+import { Project } from '../model/project';
+import { ProjectForm } from '../form/project.form';
 import {Router} from '@angular/router';
 
 @Component({

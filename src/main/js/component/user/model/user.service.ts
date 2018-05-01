@@ -1,10 +1,19 @@
-import {RestService} from 'angular4-hal';
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+
 import {User} from './user';
-import {Injectable, Injector} from '@angular/core';
 
 @Injectable()
-export class UserService extends RestService<User> {
-    constructor(injector: Injector){
-        super(User, 'users', injector);
+export class UserService {
+    protected endPoint: string = "http://localhost:8080/";
+    protected modelPath: string = "users";
+    protected apiEndPoint: string;
+
+    constructor(private http: HttpClient) {
+        this.apiEndPoint = this.endPoint + this.modelPath;
+    }
+
+    get(){
+        return this.http.get(this.apiEndPoint);
     }
 }

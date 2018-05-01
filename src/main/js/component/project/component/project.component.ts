@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ProjectService } from './project.service';
 import { MatTableDataSource } from '@angular/material';
-import { Project } from './project';
+
+import { Project } from '../model/project';
+import { ProjectService } from '../model/project.service';
 
 @Component({
     selector: "project-component",

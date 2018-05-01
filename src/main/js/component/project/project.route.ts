@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router'
-import { ProjectComponent } from './project.component';
-import { ProjectFormComponent } from './project.form.component';
-import { ProjectListComponent } from './project.list.component';
+import { ProjectComponent, ProjectFormComponent, ProjectListComponent } from './project.core';
 
 export const ProjectRouteNames = {
     projectHome: 'projects',

@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { Project } from './project';
+import { Project } from '../model/project';
 
 @Injectable()
 export class ProjectForm {

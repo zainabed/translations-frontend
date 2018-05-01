@@ -8,15 +8,15 @@ import { ModelForm } from '../../../lib/form/model.form';
  */
 @Injectable()
 export class UserForm extends ModelForm<User>{
-    
+
     constructor(fb: FormBuilder) {
-       super(fb);
+        super(fb);
     }
 
     buildForm(fb: FormBuilder): FormGroup {
         return fb.group({
-            'username': ['', Validators.required],
-            'email': ['', Validators.email],
+            'username': ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+            'email': ['', [Validators.email, Validators.minLength(5), Validators.maxLength(30)]],
             'password': ['', Validators.required]
         });
     }
