@@ -1,0 +1,24 @@
+<mat-card flexLayout="row" fxFlex="0 0 100%" class="pad--zero">
+        <div fxFlex>
+            <mat-table #table [dataSource]="dataSource">
+    
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                </ng-container>
+    
+    
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-card>
+    <button mat-fab class="button__float" routerLink="/users/new">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+    </button>

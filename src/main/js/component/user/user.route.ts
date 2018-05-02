@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router'
-import { UserFormComponent , UserComponent} from './user.core';
+import { UserFormComponent , UserComponent, UserListComponent} from './user.core';
 
 export const UserRouteNames = {
     UserHome: 'users',
@@ -10,7 +10,8 @@ export const UserRoutes: Routes = [
     {
         path: UserRouteNames.UserHome, component: UserComponent,
         children: [
-            { path: '', component: UserFormComponent },
+            { path: '', component: UserListComponent },
+            { path: 'new', component: UserFormComponent },
         ],
 
     }
