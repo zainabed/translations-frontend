@@ -1,28 +1,43 @@
 import { TestBed, ComponentFixture } from "@angular/core/testing";
+import { Observable } from 'rxjs/Observable';
+import {HttpResponse} from "@angular/common/http";
 
 import { UserModule } from "../user.module";
 import { UserFormComponent } from "./user.form.component";
 import { Component } from "@angular/core";
-import { UserForm } from "../form/user.form";
+import { UserForm, UserService, User } from "../user.core";
 
 describe("BDD test for UserFormComponent.\n", () => {
     let component: UserFormComponent;
     let fixture: ComponentFixture<UserFormComponent>;
+    let userService;
 
     beforeEach(() => {
+        userService = jasmine.createSpyObj("userService", ["save"]);
+
         TestBed.configureTestingModule({
-            providers: [UserForm],
+            providers: [
+                UserForm,
+                { provide: UserService, useValue: userService }
+            ],
             imports: [UserModule]
-        }).compileComponents();;
+        }).compileComponents();
     });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(UserFormComponent);
         component = fixture.componentInstance;
+        userService = fixture.debugElement.injector.get(UserService);
+        userService.save.and.returnValue(new Observable<HttpResponse<User>>())
     });
 
     it("Component should be defined.\n", () => {
         expect(component).toBeDefined();
+    });
+
+    it("Save method should call save method of UserService.\n", () => {
+        component.save();
+        expect(userService.save).toHaveBeenCalledWith(component.userForm.getData());
     });
 
     describe("Test for username field validation.\n", () => {
@@ -117,6 +132,8 @@ describe("BDD test for UserFormComponent.\n", () => {
         });
 
     });
+
+
 });
 
 function expectErrorMessageToBeTruthy(input, fixture, errorId, expectNull) {
