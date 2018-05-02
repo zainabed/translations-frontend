@@ -2,14 +2,44 @@
     <h2 fxFlex fxFlexAlign="center">New User</h2>
     <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username" formControlName="username">
+
+            <input matInput placeholder="Username" formControlName="username" id="username" [errorStateMatcher]="matcher">
+            <ng-container>
+                <mat-error id="username-empty-error" *ngIf="userForm.form.get('username').hasError('required')">
+                    Username can't be empty
+                </mat-error>
+                <mat-error id="username-less-error" *ngIf="userForm.form.get('username').hasError('minlength')">
+                    Please enter at least 5 characters
+                </mat-error>
+                <mat-error id="username-max-error" *ngIf="userForm.form.get('username').hasError('maxlength')">
+                    Maximum characters limit of username is 20
+                </mat-error>
+
+            </ng-container>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" formControlName="email">
+            <input matInput placeholder="Email" formControlName="email" id="email" [errorStateMatcher]="matcher">
+            <ng-container>
+                <mat-error id="email-invalid-error" *ngIf="userForm.form.get('email').hasError('email')">
+                    Email can't be empty
+                </mat-error>
+                <mat-error id="email-less-error" *ngIf="userForm.form.get('email').hasError('minlength')">
+                    Please enter at least 5 characters
+                </mat-error>
+                <mat-error id="email-max-error" *ngIf="userForm.form.get('email').hasError('maxlength')">
+                    Maximum characters limit of username is 30
+                </mat-error>
+
+            </ng-container>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" formControlName="password">
+            <input matInput placeholder="Password" formControlName="password" id="password" [errorStateMatcher]="matcher">
+            <ng-container>
+                <mat-error id="password-empty-error" *ngIf="userForm.form.get('password').hasError('required')">
+                    Username can't be empty
+                </mat-error>
+            </ng-container>
         </mat-form-field>
     </div>
 </form>

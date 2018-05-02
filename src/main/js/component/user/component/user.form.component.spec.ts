@@ -1,29 +1,18 @@
 import { TestBed, ComponentFixture } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { UserModule } from "../user.module";
 import { UserFormComponent } from "./user.form.component";
 import { Component } from "@angular/core";
 import { UserForm } from "../form/user.form";
 
-describe("Unit test for UserFormComponent.\n", () => {
+describe("BDD test for UserFormComponent.\n", () => {
     let component: UserFormComponent;
     let fixture: ComponentFixture<UserFormComponent>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [UserFormComponent],
             providers: [UserForm],
-            imports: [ReactiveFormsModule, CommonModule,
-                MatInputModule, MatButtonModule, MatIconModule,
-                MatProgressBarModule, FlexLayoutModule, BrowserAnimationsModule]
+            imports: [UserModule]
         }).compileComponents();;
     });
 
@@ -36,29 +25,108 @@ describe("Unit test for UserFormComponent.\n", () => {
         expect(component).toBeDefined();
     });
 
-    describe("Test for username validation.\n", () => {
+    describe("Test for username field validation.\n", () => {
         let username: HTMLInputElement;
         let errorMesage: HTMLElement;
+        let fieldName = "username";
+        let usernameFormControl;
 
         beforeEach(() => {
             username = fixture.debugElement.nativeElement.querySelector("#username");
-
+            usernameFormControl = component.userForm.form.get(fieldName);
         });
 
         it("Empty username should display error message.\n", () => {
-            username.value = null;
-            username.dispatchEvent(new Event("input"));
-            fixture.detectChanges();
-            errorMesage = fixture.debugElement.nativeElement.querySelector("#username-empty-error");
-            expect(errorMesage).toBeTruthy();
+            usernameFormControl.setValue("");
+            expectErrorMessageToBeTruthy(username, fixture, "#username-empty-error", false);
         });
 
         it("Empty username should not display error message.\n", () => {
-            username.value = "zainabed";
-            username.dispatchEvent(new Event("input"));
-            fixture.detectChanges();
-            errorMesage = fixture.debugElement.nativeElement.querySelector("#username-empty-error");
-            expect(errorMesage).toEqual(null);
+            usernameFormControl.setValue("abcded");
+            expectErrorMessageToBeTruthy(username, fixture, "#username-empty-error", true);
         });
+
+        it("Min length error message should be displayed when username value is less than 5.\n", () => {
+            usernameFormControl.setValue("abcd");
+            expectErrorMessageToBeTruthy(username, fixture, "#username-less-error", false);
+
+        });
+
+        it("Max length error message should be displayed when username value is more than 20.\n", () => {
+            usernameFormControl.setValue("123456789012345678901");
+            expectErrorMessageToBeTruthy(username, fixture, "#username-max-error", false);
+
+        });
+
+    });
+
+
+    describe("Test for email field validation.\n", () => {
+        let email: HTMLInputElement;
+        let errorMesage: HTMLElement;
+        let fieldName = "email";
+        let emailFormControl;
+
+        beforeEach(() => {
+            email = fixture.debugElement.nativeElement.querySelector("#username");
+            emailFormControl = component.userForm.form.get(fieldName);
+        });
+
+        it("Empty email should display error message.\n", () => {
+            emailFormControl.setValue("");
+            expectErrorMessageToBeTruthy(email, fixture, "#email-invalid-error", false);
+        });
+
+        it("Empty email should not display error message.\n", () => {
+            emailFormControl.setValue("a@c.ed");
+            expectErrorMessageToBeTruthy(email, fixture, "#email-invalid-error", true);
+        });
+
+        it("Min length error message should be displayed when email value is less than 5.\n", () => {
+            emailFormControl.setValue("a@cd");
+            expectErrorMessageToBeTruthy(email, fixture, "#email-less-error", false);
+
+        });
+
+        it("Max length error message should be displayed when email value is more than 20.\n", () => {
+            emailFormControl.setValue("123@567890123456.89012345678901");
+            expectErrorMessageToBeTruthy(email, fixture, "#email-max-error", false);
+        });
+
+    });
+
+    describe("Test for email field validation.\n", () => {
+        let password: HTMLInputElement;
+        let errorMesage: HTMLElement;
+        let fieldName = "password";
+        let passwordFormControl;
+
+        beforeEach(() => {
+            password = fixture.debugElement.nativeElement.querySelector("#username");
+            passwordFormControl = component.userForm.form.get(fieldName);
+        });
+
+        it("Empty password should display error message.\n", () => {
+            passwordFormControl.setValue("");
+            expectErrorMessageToBeTruthy(password, fixture, "#password-empty-error", false);
+        });
+
+        it("Empty password should not display error message.\n", () => {
+            passwordFormControl.setValue("a@c.ed");
+            expectErrorMessageToBeTruthy(password, fixture, "#password-empty-error", true);
+        });
+
     });
 });
+
+function expectErrorMessageToBeTruthy(input, fixture, errorId, expectNull) {
+    input.dispatchEvent(new Event("input"));
+    fixture.detectChanges();
+    let errorMesage = fixture.debugElement.nativeElement.querySelector(errorId);
+    if (expectNull) {
+        expect(errorMesage).toBeNull();
+    } else {
+        expect(errorMesage).not.toBeNull();
+    }
+
+}

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularHalModule } from "angular4-hal";
 
 // Material Modules
@@ -23,6 +23,7 @@ import { UserRoutes } from "./user.route";
 @NgModule({
     imports: [
         CommonModule,
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
