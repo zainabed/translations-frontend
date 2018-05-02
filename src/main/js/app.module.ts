@@ -10,13 +10,14 @@ import { ProjectRouteNames } from './component/project/project.route';
 import { HeaderModule } from './layout/header/header.module';
 import { HeaderComponent } from './layout/header/header.component';
 
+import { UserModule } from "./component/user/user.module";
+
 import { AppComponent } from './app.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
-  ],
+    AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,6 +25,7 @@ import { AppComponent } from './app.component';
     AngularHalModule.forRoot(),
     ProjectModule,
     HeaderModule,
+    UserModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/' + ProjectRouteNames.projectHome, pathMatch: 'full' },
       { path: '', component: HeaderComponent, outlet: 'toolbar' }
