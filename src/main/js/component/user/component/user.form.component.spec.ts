@@ -1,16 +1,25 @@
 import { TestBed, ComponentFixture } from "@angular/core/testing";
 import { Observable } from 'rxjs/Observable';
-import {HttpResponse} from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpResponse } from "@angular/common/http";
+import { RouterTestingModule } from "@angular/router/testing";
+import { Router } from "@angular/router";
+import { MaterialModule } from "../../../lib/material/mareial.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserModule } from "../user.module";
 import { UserFormComponent } from "./user.form.component";
 import { Component } from "@angular/core";
 import { UserForm, UserService, User } from "../user.core";
 
+@Component({ selector: 'router-outlet', template: '' })
+class RouterOutletStubComponent { }
+
 describe("BDD test for UserFormComponent.\n", () => {
     let component: UserFormComponent;
     let fixture: ComponentFixture<UserFormComponent>;
     let userService;
+    let router;
 
     beforeEach(() => {
         userService = jasmine.createSpyObj("userService", ["save"]);
@@ -18,9 +27,19 @@ describe("BDD test for UserFormComponent.\n", () => {
         TestBed.configureTestingModule({
             providers: [
                 UserForm,
-                { provide: UserService, useValue: userService }
+                { provide: UserService, useValue: userService },
+                { provide: Router, useValue: jasmine.createSpyObj("Router", ["navigate"]) }
             ],
-            imports: [UserModule]
+            imports: [
+                RouterTestingModule,
+                MaterialModule,
+                ReactiveFormsModule,
+                BrowserAnimationsModule
+            ],
+            declarations: [
+                RouterOutletStubComponent,
+                UserFormComponent
+            ]
         }).compileComponents();
     });
 
@@ -28,17 +47,23 @@ describe("BDD test for UserFormComponent.\n", () => {
         fixture = TestBed.createComponent(UserFormComponent);
         component = fixture.componentInstance;
         userService = fixture.debugElement.injector.get(UserService);
-        userService.save.and.returnValue(new Observable<HttpResponse<User>>())
+        userService.save.and.returnValue(new Observable<HttpResponse<User>>());
+        router = fixture.debugElement.injector.get(Router);
     });
 
     it("Component should be defined.\n", () => {
         expect(component).toBeDefined();
     });
 
-    it("Save method should call save method of UserService.\n", () => {
+    it("navigateToUserList method should call navigate method of Router.\n", () => {
+        component.navigateToUserList({});
+        expect(router.navigate).toHaveBeenCalled();
+    });
+
+    /*it("Save method should call save method of UserService.\n", () => {
         component.save();
         expect(userService.save).toHaveBeenCalledWith(component.userForm.getData());
-    });
+    });*/
 
     describe("Test for username field validation.\n", () => {
         let username: HTMLInputElement;

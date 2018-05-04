@@ -12,7 +12,7 @@ import { User } from "../model/user";
 export class UserListComponent {
     private _list;
     dataSource: MatTableDataSource<User>;
-    displayedColumns = [ 'usernam', 'email'];
+    displayedColumns = [ 'username', 'email'];
 
     constructor(public userService: UserService) {
 
@@ -22,7 +22,7 @@ export class UserListComponent {
         this.userService.get().subscribe(
             (response) => {
                 this.list = response.list;
-                this.dataSource = new MatTableDataSource(this.list.users)
+                this.dataSource = new MatTableDataSource(this.list);
             });
     }
 

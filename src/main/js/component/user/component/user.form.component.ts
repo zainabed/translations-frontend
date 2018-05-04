@@ -1,9 +1,13 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+
+
 import { UserForm } from "../form/user.form";
 import { UserService } from "../model/user.service";
 
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,11 +24,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class UserFormComponent {
 
     matcher = new MyErrorStateMatcher();
+    public apiError = false;
 
-    constructor(public userForm: UserForm, private userService: UserService) {
+    constructor(public userForm: UserForm, private userService: UserService, private router: Router) {
     }
 
     save() {
-        this.userService.save(this.userForm.getData());
+        this.userService.save(this.userForm.getData()).subscribe(this.navigateToUserList, this.serviceError);
+    }
+
+    navigateToUserList(response) {
+        this.router.navigate(['/users']);
+    }
+
+    serviceError(error) {
+        this.apiError = true;
     }
 }
