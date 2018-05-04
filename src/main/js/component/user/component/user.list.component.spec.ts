@@ -14,6 +14,9 @@ import { MaterialModule } from "../../../lib/material/mareial.module";
 import { UserListComponent, UserService, User } from "../user.core";
 import { UserModule } from "../user.module";
 import { USER_GET_ALL_RESPONSE } from "../model/user.mock.data";
+import { AppResourceData } from "../../../app.resource.data";
+import { ResourceMockData } from "../../../lib/http/mock/resource.mock.data";
+import { ResourceListService } from "../../../lib/http/resource.list.service";
 
 @Directive({
     selector: '[routerLink]',
@@ -31,22 +34,26 @@ export class RouterLinkDirectiveStub {
 describe("BDD test for UserListComponent.\n", () => {
     let component: UserListComponent;
     let fixture: ComponentFixture<UserListComponent>;
-    let userService;
+    let appResourceData: AppResourceData;
+    let service;
+    let mockData: ResourceMockData;
 
     beforeEach(() => {
-        userService = jasmine.createSpyObj("UserService", ["get"]);
+        service = jasmine.createSpyObj("UserService", ["get"]);
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
                 MaterialModule
             ],
             providers: [
-                { provide: UserService, useValue: userService }
-
+                { provide: ResourceListService, useValue: service },
+                { provide: AppResourceData, useValue: jasmine.createSpyObj("AppResourceData", ["getResourceListUrlFor"]) },
+                ResourceMockData
             ],
             declarations: [
                 RouterLinkDirectiveStub
-                , UserListComponent],
+                , UserListComponent
+            ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     });
@@ -54,12 +61,22 @@ describe("BDD test for UserListComponent.\n", () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(UserListComponent);
         component = fixture.componentInstance;
-        userService = fixture.debugElement.injector.get(UserService);
-        userService.get.and.returnValue(Observable.of({ "list": USER_GET_ALL_RESPONSE._embedded.users }));
+
+        mockData = TestBed.get(ResourceMockData);
+        appResourceData = TestBed.get(AppResourceData);
+        appResourceData.getResourceListUrlFor(component.resourceName).and.returnValue(mockData.PROJECT_RESOURCE_RESPONSE["_links"][component.resourceName]["href"]);
+
+        service = fixture.debugElement.injector.get(ResourceListService);
+        service.get.and.returnValue(Observable.of(USER_GET_ALL_RESPONSE));
     });
 
     it("Component to be defined.\n", () => {
         expect(component).toBeDefined();
+    });
+
+    it("Component resource name should present in project resource list and return valid href value.\n", () => {
+        component.ngOnInit();
+        expect(component.apiUrl).toEqual(mockData.PROJECT_RESOURCE_RESPONSE["_links"][component.resourceName]["href"]);
     });
 
     it("On component load event service should fetch all users.\n", () => {

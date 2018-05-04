@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
 
-import { UserService } from "../model/user.service";
+//import { UserService } from "../model/user.service";
+import { ResourceListService } from "../../../lib/http/resource.list.service";
+import { ResourceList } from "../../../lib/http/resource.list";
+import { AppResourceData } from "../../../app.resource.data";
 import { User } from "../model/user";
 
 
@@ -10,18 +13,21 @@ import { User } from "../model/user";
     templateUrl: "users-list.html"
 })
 export class UserListComponent {
+    resourceName = "users";
+    apiUrl;
     private _list;
     dataSource: MatTableDataSource<User>;
-    displayedColumns = [ 'username', 'email'];
+    displayedColumns = ['username', 'email'];
 
-    constructor(public userService: UserService) {
+    constructor(public service: ResourceListService, private appData: AppResourceData) {
 
     }
 
     ngOnInit() {
-        this.userService.get().subscribe(
-            (response) => {
-                this.list = response.list;
+        this.apiUrl = this.appData.getResourceListUrlFor(this.resourceName);
+        this.service.get(this.apiUrl).subscribe(
+            (response: ResourceList) => {
+                this.list = response._embedded[this.resourceName];
                 this.dataSource = new MatTableDataSource(this.list);
             });
     }
