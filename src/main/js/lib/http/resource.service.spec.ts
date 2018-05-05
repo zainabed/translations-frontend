@@ -10,6 +10,7 @@ describe("Unit test from ResourceService.\n", () => {
     let http: HttpTestingController;
     let mockData: ResourceMockData;
     let apiUrl: string = "http://localhost:8080/projects/3";
+    let httpCall;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -33,8 +34,28 @@ describe("Unit test from ResourceService.\n", () => {
             expect(response).toEqual(mockData.RESOURCE_RESPONSE);
         });
 
-        let httpCall = http.expectOne(apiUrl);
+        httpCall = http.expectOne(apiUrl);
         expect(httpCall.request.method).toEqual("GET");
         httpCall.flush(mockData.RESOURCE_RESPONSE);
+    });
+
+    it("UPDATE method should submit the the update resource to given resource URL.\n", () => {
+        service.update(apiUrl,mockData.RESOURCE_OBJECT).subscribe((response) => {
+            expect(response).toEqual(mockData.RESOURCE_OBJECT);
+        });
+
+        httpCall = http.expectOne(apiUrl);
+        expect(httpCall.request.method).toEqual("PATCH");
+        httpCall.flush(mockData.RESOURCE_OBJECT);
+    });
+
+    it("DELETE method should delete given api resource.\n", ()=>{
+        service.delete(apiUrl).subscribe((response)=>{
+
+        });
+
+        httpCall = http.expectOne(apiUrl);
+        expect(httpCall.request.method).toEqual("DELETE");
+        httpCall.flush({});
     });
 });

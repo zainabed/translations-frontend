@@ -22,7 +22,6 @@ describe("Unit test for ProjectResourceService.\n", () => {
 
     beforeEach(() => {
         service = TestBed.get(ProjectResourceService);
-        service.apiUrl = apiUrl;
         http = TestBed.get(HttpTestingController);
         mockData = TestBed.get(ResourceMockData);
     });
@@ -32,7 +31,7 @@ describe("Unit test for ProjectResourceService.\n", () => {
     });
 
     it("getProjectResource should return HATEOP project resource response.\n", () => {
-        service.getProjectResources().subscribe((response: ProjectResource) => {
+        service.get(apiUrl).subscribe((response: ProjectResource) => {
             expect(response).toEqual(mockData.PROJECT_RESOURCE_RESPONSE);
         });
 

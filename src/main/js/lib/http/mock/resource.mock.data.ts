@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { ProjectResource } from "../project.resource";
-import { ResourceList } from "../resource.list";
+import { Resources } from "../resources";
 
 @Injectable()
 export class ResourceMockData {
@@ -36,7 +36,7 @@ export class ResourceMockData {
             }
         }
     };
-    RESOURCE_LIST_RESPONSE: ResourceList = {
+    RESOURCE_LIST_RESPONSE: Resources = {
         "_embedded": {
             "projects": [
                 {
@@ -114,4 +114,5 @@ export class ResourceMockData {
             }
         }
     };
+    RESOURCE_OBJECT = { "name": "testname", "description": "test description" };
 }

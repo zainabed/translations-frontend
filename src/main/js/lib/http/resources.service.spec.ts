@@ -3,25 +3,26 @@ import { ResourceMockModule } from "./mock/resource.mock.module";
 import { HttpTestingController } from "@angular/common/http/testing";
 import { ResourceMockData } from "./mock/resource.mock.data";
 
-import { ResourceListService } from "./resource.list.service";
+import { ResourcesService } from "./resources.service";
 
-describe("Unit test for ResourceListService.\n", () => {
+describe("Unit test for ResourcesService.\n", () => {
 
-    let service: ResourceListService;
+    let service: ResourcesService;
     let http: HttpTestingController;
     let resourceName = "users";
     let resourceListApiPath = "http://localhost:8080/" + resourceName;
-    let mockData :ResourceMockData;
-
+    let mockData: ResourceMockData;
+    let httpCall;
+   
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ResourceMockModule],
-            providers: [ResourceListService]
+            providers: [ResourcesService]
         });
     });
 
     beforeEach(() => {
-        service = TestBed.get(ResourceListService);
+        service = TestBed.get(ResourcesService);
         http = TestBed.get(HttpTestingController);
         mockData = TestBed.get(ResourceMockData);
     });
@@ -35,8 +36,18 @@ describe("Unit test for ResourceListService.\n", () => {
             expect(response).toEqual(mockData.RESOURCE_LIST_RESPONSE);
         });
 
-        let httpCall = http.expectOne(resourceListApiPath);
+        httpCall = http.expectOne(resourceListApiPath);
         expect(httpCall.request.method).toEqual("GET");
         httpCall.flush(mockData.RESOURCE_LIST_RESPONSE);
+    });
+
+    it("POST method should send resource object to resource api path .\n", () => {
+        service.post(resourceListApiPath, mockData.RESOURCE_OBJECT).subscribe((response) => {
+            expect(response).toEqual(mockData.RESOURCE_OBJECT);
+        });
+
+        httpCall = http.expectOne(resourceListApiPath);
+        expect(httpCall.request.method).toEqual("POST");
+        httpCall.flush(mockData.RESOURCE_OBJECT);
     });
 });

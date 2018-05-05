@@ -4,24 +4,27 @@ import { Observable } from "rxjs/Observable";
 
 import { ProjectResource } from "./project.resource";
 
+/**
+ * @description
+ * Class is designed to fetch HATEOS project resource using {HttpClient}
+ * service.
+ * It is angulars injectable service.
+ */
 @Injectable()
 export class ProjectResourceService {
 
-    private _apiUrl: string;
+    constructor(private http: HttpClient) { }
 
-    constructor(private http: HttpClient) {
-
-    }
-
-    set apiUrl(apirUrl) {
-        this._apiUrl = apirUrl;
-    }
-
-    get apiUrl() {
-        return this._apiUrl;
-    }
-
-    getProjectResources(): Observable<ProjectResource> {
-        return this.http.get<ProjectResource>(this.apiUrl);
+    /**
+     * @method get
+     * @description
+     * GET method to return HATEOS project resources.
+     * It accept the application api url and returns the Observable of {ProjectResource}
+     * 
+     * @param apiUrl
+     * @return {Observable<ProjectResource>} Observable of ProjectResource. 
+     */
+    get(apiUrl): Observable<ProjectResource> {
+        return this.http.get<ProjectResource>(apiUrl);
     }
 }

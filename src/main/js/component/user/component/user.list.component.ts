@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
 
 //import { UserService } from "../model/user.service";
-import { ResourceListService } from "../../../lib/http/resource.list.service";
-import { ResourceList } from "../../../lib/http/resource.list";
+//import { ResourceListService } from "../../../lib/http/resource.list.service";
+//import { ResourceList } from "../../../lib/http/resource.list";
 import { AppResourceData } from "../../../app.resource.data";
 import { User } from "../model/user";
 
@@ -13,7 +13,7 @@ import { User } from "../model/user";
     templateUrl: "users-list.html"
 })
 export class UserListComponent {
-    resourceName = "users";
+  /*  resourceName = "users";
     apiUrl;
     private _list;
     dataSource: MatTableDataSource<User>;
@@ -39,4 +39,5 @@ export class UserListComponent {
     set list(list) {
         this._list = list;
     }
+    */
 }
