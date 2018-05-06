@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatCardModule,
         MatIconModule,
         MatProgressBarModule,
+        MatProgressSpinnerModule,
         FlexLayoutModule,
     ],
     exports: [
@@ -28,6 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatCardModule,
         MatIconModule,
         MatProgressBarModule,
+        MatProgressSpinnerModule,
         FlexLayoutModule,
     ]
 })

@@ -1,43 +1,51 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
+import { ActivatedRoute } from "@angular/router";
 
-//import { UserService } from "../model/user.service";
-//import { ResourceListService } from "../../../lib/http/resource.list.service";
-//import { ResourceList } from "../../../lib/http/resource.list";
+import { ResourceListComponent } from "../../../lib/component/resource.list.component";
+import { UserService } from "../model/user.service";
+import { Resources } from "../../../lib/http/resources";
+import { ResourcesService } from "../../../lib/http/resources.service";
 import { AppResourceData } from "../../../app.resource.data";
 import { User } from "../model/user";
 
-
+/**
+ * 
+ */
 @Component({
     selector: "users-list",
     templateUrl: "users-list.html"
 })
-export class UserListComponent {
-  /*  resourceName = "users";
-    apiUrl;
-    private _list;
+export class UserListComponent extends ResourceListComponent {
+
     dataSource: MatTableDataSource<User>;
     displayedColumns = ['username', 'email'];
 
-    constructor(public service: ResourceListService, private appData: AppResourceData) {
-
+    /**
+     * 
+     * @param service 
+     * @param appData 
+     * @param route 
+     */
+    constructor(service: ResourcesService,
+        appData: AppResourceData,
+        route: ActivatedRoute) {
+        super(service, appData);
     }
 
-    ngOnInit() {
-        this.apiUrl = this.appData.getResourceListUrlFor(this.resourceName);
-        this.service.get(this.apiUrl).subscribe(
-            (response: ResourceList) => {
-                this.list = response._embedded[this.resourceName];
-                this.dataSource = new MatTableDataSource(this.list);
-            });
+    /**
+     * 
+     */
+    setResource() {
+        this.resource = "users";
     }
 
-    get list() {
-        return this._list;
+    /**
+     * 
+     * @param response 
+     */
+    onGetSuccess(response: Resources) {
+        super.onGetSuccess(response);
+        this.dataSource = new MatTableDataSource(this.list)
     }
-
-    set list(list) {
-        this._list = list;
-    }
-    */
 }

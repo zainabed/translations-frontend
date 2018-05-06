@@ -10,9 +10,19 @@ import { ProjectRouteNames } from './component/project/project.route';
 import { HeaderModule } from './layout/header/header.module';
 import { HeaderComponent } from './layout/header/header.component';
 
+import { UserRouteNames } from "./component/user/user.route";
+import { UserListComponent } from "./component/user/component/user.list.component";
+
 import { UserModule } from "./component/user/user.module";
+import { ResourceModule } from "./lib/http/resource.module";
+
 
 import { AppComponent } from './app.component';
+import { AppResourceData } from "./app.resource.data";
+import { AppResourceDataResolve } from "./app.resource.data.resolve";
+
+
+import {ResourceMockData} from "./lib/http/mock/resource.mock.data";
 
 
 @NgModule({
@@ -25,9 +35,13 @@ import { AppComponent } from './app.component';
     AngularHalModule.forRoot(),
     ProjectModule,
     HeaderModule,
+    ResourceModule,
     UserModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: '/' + ProjectRouteNames.projectHome, pathMatch: 'full' },
+      {
+        path: '', component: AppComponent,
+        resolve: { "projectResource": AppResourceDataResolve }
+      },
       { path: '', component: HeaderComponent, outlet: 'toolbar' }
     ],
       { enableTracing: false }),
@@ -36,7 +50,10 @@ import { AppComponent } from './app.component';
     FlexLayoutModule
   ],
   providers: [
-    { provide: 'ExternalConfigurationService', useClass: ExternalConfigurationService }
+    { provide: 'ExternalConfigurationService', useClass: ExternalConfigurationService },
+    AppResourceData,
+    AppResourceDataResolve,
+    ResourceMockData
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
-<mat-card flexLayout="row" fxFlex="0 0 100%" class="pad--zero">
+<mat-card flexLayout="row" fxFlex="0 0 100%" class="pad--zero" *ngIf="list">
     <div fxFlex>
-        <mat-table #table [dataSource]="dataSource">
+        <mat-table #table [dataSource]="dataSource" >
 
             <ng-container matColumnDef="username">
                 <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
@@ -17,8 +17,10 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+        
     </div>
 </mat-card>
+<!-- <div *ngIf="!list">No users are added to system. select plus button to add new user record.</div> -->
 <button mat-fab class="button__float model-path-new" routerLink="/users/new">
     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
 </button>

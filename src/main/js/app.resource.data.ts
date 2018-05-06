@@ -2,17 +2,25 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class AppResourceData {
-    private _projectRsource;
+    private _resource;
 
-    get projectRsource() {
-        return this._projectRsource;
+    get resource() {
+        return this._resource;
     }
 
-    set projectRsource(projectRsource) {
-        this._projectRsource = projectRsource;
+    set resource(resource) {
+        this._resource = resource;
     }
 
     getResourceListUrlFor(resourceName) {
-        return this.projectRsource["_links"][resourceName]["href"];
+        return this.filterHrefUrl(this.resource["_links"][resourceName]["href"]);
+    }
+
+    getResourceSelfUrl(resouce) {
+        return resouce["_links"]["self"];
+    }
+
+    filterHrefUrl(href) {
+        return href.substring(0, href.indexOf("{"));
     }
 }

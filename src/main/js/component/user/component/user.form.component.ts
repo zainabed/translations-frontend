@@ -3,41 +3,35 @@ import { Router } from "@angular/router";
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
+import { ResourceService } from "../../../lib/http/resource.service";
+import { ResourcesService } from "../../../lib/http/resources.service";
+import { AppResourceData } from "../../../app.resource.data";
 
+import { ResourceFormComponent } from "../../../lib/component/resource.form.component";
 
 import { UserForm } from "../form/user.form";
 import { UserService } from "../model/user.service";
-
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        const isSubmitted = form && form.submitted;
-        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    }
-}
+import { User } from '../model/user';
 
 @Component({
     selector: "users-form",
     templateUrl: "users-form.html"
 })
-export class UserFormComponent {
-
-    matcher = new MyErrorStateMatcher();
-    public apiError = false;
-
-    constructor(public userForm: UserForm, private userService: UserService, private router: Router) {
+export class UserFormComponent extends ResourceFormComponent<User>{
+   
+    constructor(public resourceService: ResourceService,
+        public resources: ResourcesService,
+        public userForm: UserForm,
+        public router: Router,
+        public appData: AppResourceData) {
+        super(resourceService, resources, userForm,  appData);
     }
 
-    save() {
-        this.userService.save(this.userForm.getData()).subscribe(this.navigateToUserList, this.serviceError);
+    setResource(){
+        this.resource = "users";
     }
 
-    navigateToUserList(response) {
-        this.router.navigate(['/users']);
-    }
-
-    serviceError(error) {
-        this.apiError = true;
+    onPostSuccess(response) {
+        this.router.navigate(["/" + this.resource]);
     }
 }
