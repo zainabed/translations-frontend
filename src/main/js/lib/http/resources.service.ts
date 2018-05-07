@@ -30,7 +30,7 @@ export class ResourcesService {
      * @param resource Resource resouce object to be submitted.
      * @return Observable Observable of Resource object.
      */
-    save(apiURL, resource): Observable<Resource> {
+    post(apiURL, resource): Observable<Resource> {
         return this.http.post<Resource>(apiURL, resource);
     }
 

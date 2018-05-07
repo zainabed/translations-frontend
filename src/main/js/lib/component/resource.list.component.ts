@@ -8,14 +8,16 @@ import { AppResourceData } from "../../app.resource.data";
 
 import { ResourceList } from "./resource.list";
 
+
+
 /**
  * 
  */
 export abstract class ResourceListComponent implements ResourceList {
-    resource;
+    path;
     protected apiUrl;
     protected EMBEDDED = "_embedded";
-    list;
+    resources;
 
     /**
      * 
@@ -24,17 +26,14 @@ export abstract class ResourceListComponent implements ResourceList {
      */
     constructor(public service: ResourcesService,
         protected appData: AppResourceData) {
-        this.setResource();
     }
 
-    abstract setResource();
-
+    
     /**
      * 
      */
     ngOnInit() {
-        this.apiUrl = this.appData.getResourceListUrlFor(this.resource);
-        this.get();
+        this.apiUrl = this.appData.getResourceListUrlFor(this.path);
     }
 
     /**
@@ -49,7 +48,7 @@ export abstract class ResourceListComponent implements ResourceList {
      * @param response 
      */
     onGetSuccess(response: Resources) {
-        this.list = response[this.EMBEDDED][this.resource];
+        this.resources = response[this.EMBEDDED][this.path];
     }
 
     /**

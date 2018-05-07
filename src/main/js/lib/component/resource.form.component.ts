@@ -36,7 +36,7 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
 
     post() {
         let data = this.form.getData();
-        this.resources.save(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+        this.resources.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
     }
 
     onPostSuccess(response) {

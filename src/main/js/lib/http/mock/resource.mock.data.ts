@@ -115,4 +115,5 @@ export class ResourceMockData {
         }
     };
     RESOURCE_OBJECT = { "name": "testname", "description": "test description" };
+    RESOURCE_RESPONSE_OBJECT = { "name": "testname", "description": "test description", "_links": { "self": "" } };
 }

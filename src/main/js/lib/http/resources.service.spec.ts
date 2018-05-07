@@ -43,11 +43,11 @@ describe("Unit test for ResourcesService.\n", () => {
 
     it("POST method should send resource object to resource api path .\n", () => {
         service.post(resourceListApiPath, mockData.RESOURCE_OBJECT).subscribe((response) => {
-            expect(response).toEqual(mockData.RESOURCE_OBJECT);
+            expect(response).toEqual(mockData.RESOURCE_RESPONSE_OBJECT);
         });
 
         httpCall = http.expectOne(resourceListApiPath);
         expect(httpCall.request.method).toEqual("POST");
-        httpCall.flush(mockData.RESOURCE_OBJECT);
+        httpCall.flush(mockData.RESOURCE_RESPONSE_OBJECT);
     });
 });

@@ -41,12 +41,12 @@ describe("Unit test from ResourceService.\n", () => {
 
     it("UPDATE method should submit the the update resource to given resource URL.\n", () => {
         service.update(apiUrl,mockData.RESOURCE_OBJECT).subscribe((response) => {
-            expect(response).toEqual(mockData.RESOURCE_OBJECT);
+            expect(response).toEqual(mockData.RESOURCE_RESPONSE_OBJECT);
         });
 
         httpCall = http.expectOne(apiUrl);
         expect(httpCall.request.method).toEqual("PATCH");
-        httpCall.flush(mockData.RESOURCE_OBJECT);
+        httpCall.flush(mockData.RESOURCE_RESPONSE_OBJECT);
     });
 
     it("DELETE method should delete given api resource.\n", ()=>{
