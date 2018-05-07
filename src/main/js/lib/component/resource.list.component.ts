@@ -43,19 +43,8 @@ export abstract class ResourceListComponent implements ResourceList {
         this.service.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
-    /**
-     * 
-     * @param response 
-     */
-    onGetSuccess(response: Resources) {
-        this.resourceList = response[this.EMBEDDED][this.path];
-    }
+    abstract onGetSuccess(response: any);
 
-    /**
-     * 
-     * @param error 
-     */
-    onGetFail(error) {
-        console.log(error);
-    }
+    abstract onGetFail(error: any);
+    
 }

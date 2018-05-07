@@ -6,6 +6,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ResourceService } from "../../../lib/http/resource.service";
 import { ResourcesService } from "../../../lib/http/resources.service";
 import { AppResourceData } from "../../../app.resource.data";
+import { Resources } from "../../../lib/http/resources";
 
 import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
 
@@ -31,5 +32,13 @@ export class UserFormComponent extends ResourceFormComponent<User>{
 
     onPostSuccess(response) {
         this.router.navigate(["/" + this.path]);
+    }
+
+    onGetSuccess(response: Resources){
+
+    }
+
+    onGetFail(error) {
+        
     }
 }

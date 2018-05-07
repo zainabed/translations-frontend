@@ -48,8 +48,8 @@ export class UserListComponent extends ResourceListComponent {
      * @param response 
      */
     onGetSuccess(response: Resources) {
-        super.onGetSuccess(response);
-        this.dataSource = new MatTableDataSource(this.resourceList)
+        this.resourceList = response[this.EMBEDDED][this.path];
+        this.dataSource = new MatTableDataSource(this.resourceList);
     }
 
     /**
@@ -57,9 +57,15 @@ export class UserListComponent extends ResourceListComponent {
      * @param error 
      */
     onGetFail(error) {
-        super.onGetFail(error);
         this.errorMessage = "Failed to fetch " + this.path + " list";
     }
 
 
+    edit(resource) {
+
+    }
+
+    delete(resource) {
+
+    }
 }
