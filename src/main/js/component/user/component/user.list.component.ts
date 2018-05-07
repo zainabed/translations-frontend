@@ -2,10 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from "@angular/router";
 
-import { ResourceListComponent } from "../../../lib/component/resource.list.component";
 import { UserService } from "../model/user.service";
 import { Resources } from "../../../lib/http/resources";
-import { ResourcePath } from "../../../lib/component/resource.component";
+import { ResourcePath, ResourceListComponent } from "../../../lib/component/resource.component.core";
 import { ResourcesService } from "../../../lib/http/resources.service";
 import { AppResourceData } from "../../../app.resource.data";
 import { User } from "../model/user";
@@ -19,7 +18,7 @@ import { User } from "../model/user";
     templateUrl: "users-list.html"
 })
 export class UserListComponent extends ResourceListComponent {
-
+    
     dataSource: MatTableDataSource<User>;
     displayedColumns = ['username', 'email'];
     errorMessage: string = null;
@@ -50,7 +49,7 @@ export class UserListComponent extends ResourceListComponent {
      */
     onGetSuccess(response: Resources) {
         super.onGetSuccess(response);
-        this.dataSource = new MatTableDataSource(this.resources)
+        this.dataSource = new MatTableDataSource(this.resourceList)
     }
 
     /**

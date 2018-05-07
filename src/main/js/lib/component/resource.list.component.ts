@@ -14,10 +14,10 @@ import { ResourceList } from "./resource.list";
  * 
  */
 export abstract class ResourceListComponent implements ResourceList {
-    path;
-    protected apiUrl;
-    protected EMBEDDED = "_embedded";
-    resources;
+    public path;
+    public apiUrl;
+    public EMBEDDED = "_embedded";
+    public resourceList;
 
     /**
      * 
@@ -28,7 +28,7 @@ export abstract class ResourceListComponent implements ResourceList {
         protected appData: AppResourceData) {
     }
 
-    
+
     /**
      * 
      */
@@ -48,7 +48,7 @@ export abstract class ResourceListComponent implements ResourceList {
      * @param response 
      */
     onGetSuccess(response: Resources) {
-        this.resources = response[this.EMBEDDED][this.path];
+        this.resourceList = response[this.EMBEDDED][this.path];
     }
 
     /**

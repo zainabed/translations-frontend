@@ -26,17 +26,16 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
     matcher = new MyErrorStateMatcher();
 
     constructor(public resourceService: ResourceService,
-        public resources: ResourcesService,
+        public resourcesService: ResourcesService,
         public form: ModelForm<T>,
         public appData: AppResourceData) {
-        super(resources, appData);
+        super(resourcesService, appData);
     }
 
-    abstract setResource();
-
+  
     post() {
         let data = this.form.getData();
-        this.resources.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+        this.resourcesService.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
     }
 
     onPostSuccess(response) {
@@ -48,7 +47,7 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
     patch(resource: Resource) {
         let apiUrl = this.appData.getResourceSelfUrl(resource);
         let data = this.form.getData();
-        this.resource.update(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
+        this.resourceService.update(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
     }
 
     onPatchSuccess(response) {

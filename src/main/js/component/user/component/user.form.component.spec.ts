@@ -1,4 +1,4 @@
-/*import { TestBed, ComponentFixture } from "@angular/core/testing";
+import { TestBed, ComponentFixture } from "@angular/core/testing";
 import { Observable } from 'rxjs/Observable';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpResponse } from "@angular/common/http";
@@ -12,23 +12,34 @@ import { UserFormComponent } from "./user.form.component";
 import { Component } from "@angular/core";
 import { UserForm, UserService, User } from "../user.core";
 
+import { ResourceService } from "../../../lib/http/resource.service";
+import { ResourcesService } from "../../../lib/http/resources.service";
+import { AppResourceData } from "../../../app.resource.data";
+import { ResourceMockData } from "../../../lib/http/mock/resource.mock.data";
+
 @Component({ selector: 'router-outlet', template: '' })
 class RouterOutletStubComponent { }
 
 describe("BDD test for UserFormComponent.\n", () => {
     let component: UserFormComponent;
     let fixture: ComponentFixture<UserFormComponent>;
-    let userService;
+    let resourceService;
+    let resourcesService;
     let router;
+    let mockData;
 
     beforeEach(() => {
-        userService = jasmine.createSpyObj("userService", ["save"]);
+        resourceService = jasmine.createSpyObj("ResourceService", ["get"]);
+        resourcesService = jasmine.createSpyObj("ResourcesService", ["post"]);
 
         TestBed.configureTestingModule({
             providers: [
                 UserForm,
-                { provide: UserService, useValue: userService },
-                { provide: Router, useValue: jasmine.createSpyObj("Router", ["navigate"]) }
+                { provide: ResourceService, useValue: resourceService },
+                { provide: ResourcesService, useValue: resourcesService },
+                { provide: AppResourceData, useValue: jasmine.createSpyObj("AppResourceData", ["getResourceListUrlFor"]) },
+                { provide: Router, useValue: jasmine.createSpyObj("Router", ["navigate"]) },
+                ResourceMockData
             ],
             imports: [
                 RouterTestingModule,
@@ -45,24 +56,28 @@ describe("BDD test for UserFormComponent.\n", () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(UserFormComponent);
+        
         component = fixture.componentInstance;
-        userService = fixture.debugElement.injector.get(UserService);
-        userService.save.and.returnValue(new Observable<HttpResponse<User>>());
+        mockData = fixture.debugElement.injector.get(ResourceMockData);
         router = fixture.debugElement.injector.get(Router);
+        resourcesService = fixture.debugElement.injector.get(ResourcesService);
+        
+        resourcesService.post.and.returnValue(Observable.of(mockData.RESOURCE_RESPONSE_OBJECT));
+        
     });
 
     it("Component should be defined.\n", () => {
         expect(component).toBeDefined();
     });
 
-    it("navigateToUserList method should call navigate method of Router.\n", () => {
-        component.navigateToUserList({});
+    it("onPostSuccess method should call navigate method of Router.\n", () => {
+        component.onPostSuccess({});
         expect(router.navigate).toHaveBeenCalled();
     });
 
-    it("Save method should call save method of UserService.\n", () => {
-        component.save();
-        expect(userService.save).toHaveBeenCalledWith(component.userForm.getData());
+    it("Post method should call post method of ResourcesService.\n", () => {
+        component.post();
+        expect(resourcesService.post).toHaveBeenCalledWith(component.apiUrl, component.userForm.getData());
     });
 
     describe("Test for username field validation.\n", () => {
@@ -171,4 +186,4 @@ function expectErrorMessageToBeTruthy(input, fixture, errorId, expectNull) {
         expect(errorMesage).not.toBeNull();
     }
 
-}*/
+}

@@ -7,12 +7,12 @@ import { ResourceService } from "../../../lib/http/resource.service";
 import { ResourcesService } from "../../../lib/http/resources.service";
 import { AppResourceData } from "../../../app.resource.data";
 
-import { ResourceFormComponent } from "../../../lib/component/resource.form.component";
+import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
 
 import { UserForm } from "../form/user.form";
-import { UserService } from "../model/user.service";
 import { User } from '../model/user';
 
+@ResourcePath("users")
 @Component({
     selector: "users-form",
     templateUrl: "users-form.html"
@@ -20,18 +20,16 @@ import { User } from '../model/user';
 export class UserFormComponent extends ResourceFormComponent<User>{
    
     constructor(public resourceService: ResourceService,
-        public resources: ResourcesService,
+        public resourcesService: ResourcesService,
         public userForm: UserForm,
         public router: Router,
         public appData: AppResourceData) {
-        super(resourceService, resources, userForm,  appData);
+        super(resourceService, resourcesService, userForm,  appData);
     }
 
-    setResource(){
-        this.resource = "users";
-    }
+    
 
     onPostSuccess(response) {
-        this.router.navigate(["/" + this.resource]);
+        this.router.navigate(["/" + this.path]);
     }
 }
