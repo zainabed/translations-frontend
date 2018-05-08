@@ -17,7 +17,7 @@ export class AppResourceData {
     }
 
     getResourceSelfUrl(resouce) {
-        return resouce["_links"]["self"];
+        return resouce["_links"]["self"]["href"];
     }
 
     filterHrefUrl(href) {

@@ -25,14 +25,15 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
 
     matcher = new MyErrorStateMatcher();
 
-    constructor(public resourceService: ResourceService,
+    constructor(
         public resourcesService: ResourcesService,
+        public resourceService: ResourceService,
         public form: ModelForm<T>,
         public appData: AppResourceData) {
-        super(resourcesService, appData);
+        super(resourcesService, resourceService, appData);
     }
 
-  
+
     post() {
         let data = this.form.getData();
         this.resourcesService.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));

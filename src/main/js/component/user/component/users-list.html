@@ -1,6 +1,6 @@
 <mat-card flexLayout="row" fxFlex="0 0 100%" class="pad--zero" *ngIf="resourceList">
     <div fxFlex>
-        <mat-table #table [dataSource]="dataSource" >
+        <mat-table #table [dataSource]="dataSource">
 
             <ng-container matColumnDef="username">
                 <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
@@ -12,12 +12,22 @@
                 <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
             </ng-container>
 
-
-
+            <ng-container matColumnDef="selection">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #resourceMenu="matMenu">
+                        <button mat-menu-item>Edit</button>
+                        <button mat-menu-item (click)="delete(element)">Delete</button>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-        
+
     </div>
 </mat-card>
 <!-- <div *ngIf="!list">No users are added to system. select plus button to add new user record.</div> -->

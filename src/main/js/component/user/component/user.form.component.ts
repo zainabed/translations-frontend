@@ -13,32 +13,43 @@ import { ResourcePath, ResourceFormComponent } from "../../../lib/component/reso
 import { UserForm } from "../form/user.form";
 import { User } from '../model/user';
 
-@ResourcePath("users")
+@ResourcePath({
+    path: "users",
+    route: "/users"
+})
 @Component({
     selector: "users-form",
     templateUrl: "users-form.html"
 })
 export class UserFormComponent extends ResourceFormComponent<User>{
-   
+
     constructor(public resourceService: ResourceService,
         public resourcesService: ResourcesService,
         public userForm: UserForm,
         public router: Router,
         public appData: AppResourceData) {
-        super(resourceService, resourcesService, userForm,  appData);
+        super(resourcesService, resourceService, userForm, appData);
     }
 
-    
+
 
     onPostSuccess(response) {
         this.router.navigate(["/" + this.path]);
     }
 
-    onGetSuccess(response: Resources){
+    onGetSuccess(response: Resources) {
 
     }
 
     onGetFail(error) {
-        
+
+    }
+
+    onDeleteSuccess(response) {
+        this.router.navigate(this.route);
+    }
+
+    onDeleteFail(error) {
+
     }
 }
