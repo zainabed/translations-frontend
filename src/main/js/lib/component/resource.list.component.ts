@@ -1,6 +1,6 @@
 import { OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute , Router} from "@angular/router";
 
 import { ResourcesService } from "../http/resources.service";
 import { ResourceService } from "../http/resource.service";
@@ -15,12 +15,11 @@ import { ResourceList } from "./resource.list";
  * 
  */
 export abstract class ResourceListComponent implements ResourceList {
-    protected path;
-    protected route;
+    protected _path;
+    protected _route;
     public apiUrl;
     public EMBEDDED = "_embedded";
-    public resourceList;
-
+   
     /**
      * 
      * @param service 
@@ -28,7 +27,8 @@ export abstract class ResourceListComponent implements ResourceList {
      */
     constructor(public resourcesService: ResourcesService,
         public resourceService: ResourceService,
-        protected appData: AppResourceData) {
+        protected appData: AppResourceData,
+        public router: Router) {
     }
 
 
@@ -36,7 +36,15 @@ export abstract class ResourceListComponent implements ResourceList {
      * 
      */
     ngOnInit() {
-        this.apiUrl = this.appData.getResourceListUrlFor(this.path);
+        this.apiUrl = this.appData.getResourceListUrlFor(this._path);
+    }
+
+    /**
+     * 
+     * @param response 
+     */
+    getEmbeddedResource(response) {
+        return response[this.EMBEDDED][this._path];
     }
 
     /**
@@ -57,5 +65,10 @@ export abstract class ResourceListComponent implements ResourceList {
 
     abstract onDeleteSuccess(response: any);
     abstract onDeleteFail(error: any);
+
+    edit(resource) {
+        let id = this.appData.getResourceId(resource);
+        this.router.navigate([this._route, id]);
+    }
 
 }

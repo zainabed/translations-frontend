@@ -1,4 +1,4 @@
-//import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -24,26 +24,36 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export abstract class ResourceFormComponent<T> extends ResourceListComponent implements ResourceForm {
 
     matcher = new MyErrorStateMatcher();
+    private id: any;
+    protected isForUpdate: boolean = false;
 
     constructor(
         public resourcesService: ResourcesService,
         public resourceService: ResourceService,
         public form: ModelForm<T>,
-        public appData: AppResourceData) {
-        super(resourcesService, resourceService, appData);
+        public appData: AppResourceData,
+        public router: Router,
+        public route: ActivatedRoute) {
+        super(resourcesService, resourceService, appData, router);
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+        this.id = this.route.snapshot.paramMap.get("id");
+        if (this.id) {
+            this.isForUpdate = true;
+            this.apiUrl += "/" + this.id;
+            this.get();
+        }
+    }
 
     post() {
         let data = this.form.getData();
         this.resourcesService.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
     }
 
-    onPostSuccess(response) {
-    }
-
-    onPostFail(error) {
-    }
+    abstract onPostSuccess(response);
+    abstract onPostFail(error);
 
     patch(resource: Resource) {
         let apiUrl = this.appData.getResourceSelfUrl(resource);
@@ -51,9 +61,10 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
         this.resourceService.update(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
     }
 
-    onPatchSuccess(response) {
-    }
+    abstract onPatchSuccess(response);
+    abstract onPatchFail(error);
 
-    onPatchFail(error) {
+    navigateToList() {
+        this.router.navigate([this._route]);
     }
 }

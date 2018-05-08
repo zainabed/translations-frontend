@@ -20,6 +20,13 @@ export class AppResourceData {
         return resouce["_links"]["self"]["href"];
     }
 
+    getResourceId(resouce) {
+        return this.filterId(this.getResourceSelfUrl(resouce));
+    }
+
+    filterId(href) {
+        return href.substring(href.lastIndexOf("/") + 1);
+    }
     filterHrefUrl(href) {
         return href.substring(0, href.indexOf("{"));
     }

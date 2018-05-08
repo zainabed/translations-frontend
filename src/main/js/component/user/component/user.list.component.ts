@@ -41,17 +41,18 @@ export class UserListComponent extends ResourceListComponent {
     dataSource: MatTableDataSource<User>;
     displayedColumns = ['username', 'email', 'selection'];
     errorMessage: string = null;
+    resourceList;
 
     /**
      * 
      * @param service 
      * @param route 
      */
-    constructor(resourcesService: ResourcesService,
+    constructor(public resourcesService: ResourcesService,
         public resourceService: ResourceService,
-        appData: AppResourceData,
-        protected router: Router) {
-        super(resourcesService, resourceService, appData);
+        public appData: AppResourceData,
+        public router: Router) {
+        super(resourcesService, resourceService, appData, router);
     }
 
     /**
@@ -68,7 +69,7 @@ export class UserListComponent extends ResourceListComponent {
      * @param response 
      */
     onGetSuccess(response: Resources) {
-        this.resourceList = response[this.EMBEDDED][this.path];
+        this.resourceList = this.getEmbeddedResource(response);
         this.dataSource = new MatTableDataSource(this.resourceList);
     }
 
@@ -77,13 +78,10 @@ export class UserListComponent extends ResourceListComponent {
      * @param error 
      */
     onGetFail(error) {
-        this.errorMessage = "Failed to fetch " + this.path + " list";
+        this.errorMessage = "Failed to fetch list";
     }
 
 
-    edit(resource) {
-
-    }
 
     onDeleteSuccess(response) {
         this.get();
@@ -92,5 +90,5 @@ export class UserListComponent extends ResourceListComponent {
     onDeleteFail(error) {
 
     }
-    
+
 }

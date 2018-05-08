@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 import { ResourceService } from "../../../lib/http/resource.service";
 import { ResourcesService } from "../../../lib/http/resources.service";
+import { Resource } from "../../../lib/http/resource";
 import { AppResourceData } from "../../../app.resource.data";
 import { Resources } from "../../../lib/http/resources";
 
@@ -22,34 +23,50 @@ import { User } from '../model/user';
     templateUrl: "users-form.html"
 })
 export class UserFormComponent extends ResourceFormComponent<User>{
+    private resource: Resource;
 
     constructor(public resourceService: ResourceService,
         public resourcesService: ResourcesService,
         public userForm: UserForm,
+        public appData: AppResourceData,
         public router: Router,
-        public appData: AppResourceData) {
-        super(resourcesService, resourceService, userForm, appData);
+        public route: ActivatedRoute) {
+        super(resourcesService, resourceService, userForm, appData, router, route);
     }
 
 
 
     onPostSuccess(response) {
-        this.router.navigate(["/" + this.path]);
+        this.navigateToList();
+    }
+
+    onPostFail(error) {
+
     }
 
     onGetSuccess(response: Resources) {
-
+        this.resource = response;
+        this.userForm.form.patchValue(response);
     }
 
     onGetFail(error) {
+        console.log("Get error");
+    }
 
+
+    onPatchSuccess(response) {
+        this.navigateToList();
+    }
+
+    onPatchFail(error) {
+        console.log("Patch error");
     }
 
     onDeleteSuccess(response) {
-        this.router.navigate(this.route);
+        this.navigateToList();
     }
 
     onDeleteFail(error) {
-
+        console.log("Delete error");
     }
 }

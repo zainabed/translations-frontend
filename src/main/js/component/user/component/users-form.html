@@ -44,6 +44,9 @@
                 </mat-error>
             </ng-container>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="post()">Save</button>
+        <button mat-raised-button color="primary" *ngIf=!isForUpdate (click)="post()">Save</button>
+        <button mat-raised-button color="primary" *ngIf=isForUpdate (click)="patch(resource)">Update</button>
+        <button mat-raised-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">delete</button>
+        <button mat-raised-button (click)="navigateToList()">Cancel</button>
     </div>
 </form>
