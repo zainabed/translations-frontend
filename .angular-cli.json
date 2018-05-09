@@ -20,6 +20,7 @@
       "prefix": "main/js",
       "styles": [
         "styles.css",
+        "assets/css/layout.css",
         "styles.scss"
       ],
       "scripts": [],

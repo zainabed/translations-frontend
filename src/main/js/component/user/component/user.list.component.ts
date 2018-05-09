@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Injector } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router, NavigationExtras } from "@angular/router";
 
@@ -34,7 +34,10 @@ export class ResourceRouter {
 })
 @Component({
     selector: "users-list",
-    templateUrl: "users-list.html"
+    templateUrl: "users-list.html",
+    host: {
+        class: "column__xdt--12"
+    }
 })
 export class UserListComponent extends ResourceListComponent {
 
@@ -48,11 +51,8 @@ export class UserListComponent extends ResourceListComponent {
      * @param service 
      * @param route 
      */
-    constructor(public resourcesService: ResourcesService,
-        public resourceService: ResourceService,
-        public appData: AppResourceData,
-        public router: Router) {
-        super(resourcesService, resourceService, appData, router);
+    constructor(injector: Injector) {
+        super(injector);
     }
 
     /**

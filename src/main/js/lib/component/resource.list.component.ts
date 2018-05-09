@@ -1,6 +1,6 @@
-import { OnInit } from "@angular/core";
+import { OnInit, Injector } from "@angular/core";
 import { MatTableDataSource } from '@angular/material';
-import { ActivatedRoute , Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { ResourcesService } from "../http/resources.service";
 import { ResourceService } from "../http/resource.service";
@@ -19,16 +19,22 @@ export abstract class ResourceListComponent implements ResourceList {
     protected _route;
     public apiUrl;
     public EMBEDDED = "_embedded";
-   
+
+    resourcesService: ResourcesService;
+    resourceService: ResourceService;
+    appData: AppResourceData;
+    router: Router;
+
     /**
      * 
      * @param service 
      * @param appData 
      */
-    constructor(public resourcesService: ResourcesService,
-        public resourceService: ResourceService,
-        protected appData: AppResourceData,
-        public router: Router) {
+    constructor(injector: Injector) {
+        this.resourcesService = injector.get(ResourcesService);
+        this.resourceService = injector.get(ResourceService);
+        this.appData = injector.get(AppResourceData);
+        this.router = injector.get(Router);
     }
 
 

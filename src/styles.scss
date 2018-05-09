@@ -118,3 +118,10 @@ button.button__float{
     font-size: 13px;
     animation: inherit;
 }
+
+.mat-raised-button{
+  &::first-of-type {
+    margin-left: 0;
+  }
+  margin-left: 24px;
+}

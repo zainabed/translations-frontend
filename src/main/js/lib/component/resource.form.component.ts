@@ -1,3 +1,4 @@
+import { Injector } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -26,15 +27,11 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
     matcher = new MyErrorStateMatcher();
     private id: any;
     protected isForUpdate: boolean = false;
+    route: ActivatedRoute;
 
-    constructor(
-        public resourcesService: ResourcesService,
-        public resourceService: ResourceService,
-        public form: ModelForm<T>,
-        public appData: AppResourceData,
-        public router: Router,
-        public route: ActivatedRoute) {
-        super(resourcesService, resourceService, appData, router);
+    constructor(public form: ModelForm<T>, injector: Injector) {
+        super(injector);
+        this.route = injector.get(ActivatedRoute);
     }
 
     ngOnInit() {

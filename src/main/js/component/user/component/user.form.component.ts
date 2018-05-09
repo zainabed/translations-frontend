@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Injector } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -20,18 +20,17 @@ import { User } from '../model/user';
 })
 @Component({
     selector: "users-form",
-    templateUrl: "users-form.html"
+    templateUrl: "users-form.html",
+    host: {
+        class: "column__xdt--6"
+    }
 })
 export class UserFormComponent extends ResourceFormComponent<User>{
     private resource: Resource;
 
-    constructor(public resourceService: ResourceService,
-        public resourcesService: ResourcesService,
-        public userForm: UserForm,
-        public appData: AppResourceData,
-        public router: Router,
-        public route: ActivatedRoute) {
-        super(resourcesService, resourceService, userForm, appData, router, route);
+    constructor(
+        public userForm: UserForm, injector: Injector) {
+        super(userForm, injector);
     }
 
 
