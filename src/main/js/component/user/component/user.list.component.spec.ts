@@ -1,8 +1,10 @@
 import { TestBed, ComponentFixture } from "@angular/core/testing";
 import { Observable } from "rxjs/Observable";
+import { Router } from "@angular/router";
 
 import { AppResourceData } from "../../../app.resource.data";
 import { ResourcesService } from "../../../lib/http/resources.service";
+import { ResourceService } from "../../../lib/http/resource.service";
 import { Resources } from "../../../lib/http/resources";
 import { ResourceMockData } from "../../../lib/http/mock/resource.mock.data";
 
@@ -14,14 +16,19 @@ describe("BDD test for UserListComponent.\n", () => {
     let fixture: ComponentFixture<UserListComponent>;
     let service;
     let mockData: ResourceMockData;
+    let resourceService: ResourceService;
 
     beforeEach(() => {
+        resourceService = jasmine.createSpyObj("ResourceService", ["get", "patch", "delete"]);
+
         TestBed.configureTestingModule({
             imports: [UserRquireModule],
             declarations: [UserListComponent],
             providers: [
+                { provide: ResourceService, useValue: resourceService },
                 { provide: AppResourceData, useValue: jasmine.createSpyObj("AppResourceData", ["getResourceListUrlFor"]) },
                 { provide: ResourcesService, useValue: jasmine.createSpyObj("ResourcesService", ["get"]) },
+                { provide: Router, useValue: jasmine.createSpyObj("Router", ["navigate"]) },
                 ResourceMockData
             ]
         }).compileComponents();
@@ -47,7 +54,7 @@ describe("BDD test for UserListComponent.\n", () => {
         expect(service.get).toHaveBeenCalled();
     });
 
-    it("onGetFail method should set custome error message.\n",()=>{
+    it("onGetFail method should set custome error message.\n", () => {
         component.onGetFail({});
         expect(component.errorMessage).not.toBeNull();
     });

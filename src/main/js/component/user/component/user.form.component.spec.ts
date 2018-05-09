@@ -1,9 +1,10 @@
 import { TestBed, ComponentFixture } from "@angular/core/testing";
+import { Injector } from "@angular/core";
 import { Observable } from 'rxjs/Observable';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpResponse } from "@angular/common/http";
 import { RouterTestingModule } from "@angular/router/testing";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { MaterialModule } from "../../../lib/material/mareial.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,16 +30,18 @@ describe("BDD test for UserFormComponent.\n", () => {
     let mockData;
 
     beforeEach(() => {
-        resourceService = jasmine.createSpyObj("ResourceService", ["get"]);
-        resourcesService = jasmine.createSpyObj("ResourcesService", ["post"]);
+        resourceService = jasmine.createSpyObj("ResourceService", ["get", "patch", "delete"]);
+        resourcesService = jasmine.createSpyObj("ResourcesService", ["post", "get"]);
 
         TestBed.configureTestingModule({
             providers: [
                 UserForm,
+                Injector,
                 { provide: ResourceService, useValue: resourceService },
                 { provide: ResourcesService, useValue: resourcesService },
                 { provide: AppResourceData, useValue: jasmine.createSpyObj("AppResourceData", ["getResourceListUrlFor"]) },
                 { provide: Router, useValue: jasmine.createSpyObj("Router", ["navigate"]) },
+                { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: function get() { return 1 } } } } },
                 ResourceMockData
             ],
             imports: [
@@ -56,14 +59,15 @@ describe("BDD test for UserFormComponent.\n", () => {
 
     beforeEach(() => {
         fixture = TestBed.createComponent(UserFormComponent);
-        
+
         component = fixture.componentInstance;
         mockData = fixture.debugElement.injector.get(ResourceMockData);
         router = fixture.debugElement.injector.get(Router);
         resourcesService = fixture.debugElement.injector.get(ResourcesService);
-        
+
+        resourcesService.get.and.returnValue(Observable.of(mockData.RESOURCE_LIST_RESPONSE));
         resourcesService.post.and.returnValue(Observable.of(mockData.RESOURCE_RESPONSE_OBJECT));
-        
+
     });
 
     it("Component should be defined.\n", () => {
