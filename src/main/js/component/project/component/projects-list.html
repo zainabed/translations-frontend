@@ -1,6 +1,6 @@
-<mat-card flexLayout="row" fxFlex="0 0 100%" class="pad--zero">
+<mat-card class="row" class="pad--zero" *ngIf="projects">
     <div fxFlex>
-        <mat-table #table [dataSource]="dataSource">
+        <mat-table #table [dataSource]="projectsTableData">
 
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -11,7 +11,18 @@
                 <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
             </ng-container>
-
+            <ng-container matColumnDef="selection">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #resourceMenu="matMenu">
+                        <button mat-menu-item (click)="edit(element)">Edit</button>
+                        <button mat-menu-item (click)="delete(element)">Delete</button>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
 
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

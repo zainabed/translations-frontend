@@ -1,5 +1,5 @@
 <form [formGroup]="projectForm.form" fxLayout="column" fxLayoutGap="20px">
-    <h2 fxFlex fxFlexAlign="center">New Project</h2>
+    <h2 fxFlex fxFlexAlign="center">{{title}}</h2>
     <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="login__form">
         <mat-progress-bar mode="indeterminate" *ngIf="inProgress"></mat-progress-bar>
         <mat-form-field>
@@ -8,7 +8,11 @@
         <mat-form-field>
             <input matInput type="description" formControlName="description" placeholder="Description" id="description" />
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="create()">Save</button>
-
+        <div class="row">
+            <button mat-raised-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">Save</button>
+            <button mat-raised-button color="primary" *ngIf=isForUpdate (click)="patch(project)" type="submit">Update</button>
+            <button mat-raised-button color="warn" *ngIf=isForUpdate (click)="delete(project)">delete</button>
+            <button mat-raised-button (click)="navigateToList()">Cancel</button>
+        </div>
     </div>
 </form>

@@ -27,12 +27,21 @@ import { User } from '../model/user';
 })
 export class UserFormComponent extends ResourceFormComponent<User>{
     private resource: Resource;
+    private title: string;
 
     constructor(public userForm: UserForm, injector: Injector) {
         super(userForm, injector);
+        
     }
 
-
+    ngOnInit(){
+        super.ngOnInit();
+        if(this.isForUpdate){
+            this.title = "Update User";
+        }else{
+            this.title = "Add New User";
+        }
+    }
 
     onPostSuccess(response) {
         this.navigateToList();

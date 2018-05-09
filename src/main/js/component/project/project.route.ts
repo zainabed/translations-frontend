@@ -11,7 +11,8 @@ export const ProjectRoutes: Routes = [
         path: ProjectRouteNames.projectHome, component: ProjectComponent,
         children: [
             { path: '', component: ProjectListComponent },
-            { path: 'new', component: ProjectFormComponent }
+            { path: 'new', component: ProjectFormComponent },
+            { path: ':id', component: ProjectFormComponent }
         ],
 
     }

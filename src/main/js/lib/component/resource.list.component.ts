@@ -15,8 +15,8 @@ import { ResourceList } from "./resource.list";
  * 
  */
 export abstract class ResourceListComponent implements ResourceList {
-    protected _path;
-    protected _route;
+    public _path;
+    public _route;
     public apiUrl;
     public EMBEDDED = "_embedded";
 
@@ -37,11 +37,17 @@ export abstract class ResourceListComponent implements ResourceList {
         this.router = injector.get(Router);
     }
 
+    getComponentPath(){
+        return this._path;
+    }
 
     /**
      * 
      */
     ngOnInit() {
+        if(!this._path) {
+            throw new Error("Path property is not set for this component.");
+        }
         this.apiUrl = this.appData.getResourceListUrlFor(this._path);
     }
 

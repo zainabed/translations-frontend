@@ -1,35 +1,50 @@
-import {Component , OnInit, HostBinding} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { Component, Injector } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 
-import {Project} from '../model/project';
-import {ProjectService} from '../model/project.service';
+import { Project } from '../model/project';
+import { ProjectService } from '../model/project.service';
 
-@Component({
-    selector: "project-list-component",
-    templateUrl: './projects-list.html',
+import { ResourcePath, ResourceListComponent } from "../../../lib/component/resource.component.core";
+
+@ResourcePath({
+    path: "projects",
+    route: "/projects"
 })
-export class ProjectListComponent implements OnInit {
+@Component({
+    selector: "project-list",
+    templateUrl: './projects-list.html',
+    host: {
+        class: "column__xdt--12"
+    }
+})
+export class ProjectListComponent extends ResourceListComponent {
 
-    projects: Project[];
-    dataSource: MatTableDataSource<Project>;
-    displayedColumns = [ 'name', 'description'];
-    @HostBinding('class.flexBox') flex: boolean = false;
+    private projects;
+    projectsTableData: MatTableDataSource<Project>;
+    displayedColumns = ['name', 'description', "selection"];
 
-    constructor(private projectService: ProjectService) {
+    constructor(injector: Injector) {
+        super(injector);
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+        this.get();
+    }
+
+    onGetSuccess(response) {
+        this.projects = this.getEmbeddedResource(response);
+        this.projectsTableData = new MatTableDataSource(this.projects);
+    }
+
+    onGetFail(error) {
 
     }
 
-    ngOnInit(): void {
-        this.flex = true;
-        this.findAllProjects();
-        
-    }
+    onDeleteSuccess(response) {
+        this.get();
+     }
 
-    findAllProjects() {
-        this.projectService.getAll().subscribe((projects: Project[])=> {
-            this.projects = projects;
-            this.dataSource = new MatTableDataSource(this.projects)
-            console.log(this.projects);
-        });
-    }
+    onDeleteFail(error) { }
+
 }

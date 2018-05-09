@@ -6,7 +6,9 @@ interface ResourcePathConfig {
 export function ResourcePath(config: ResourcePathConfig) {
     return function (target) {
         var parentTarget = Object.getPrototypeOf(target.prototype);
-        parentTarget._path = target._path = config.path;
-        parentTarget._route = target._route = config.route;
+        // parentTarget._path = 
+        target.prototype._path = config.path;
+        // parentTarget._route = 
+        target.prototype._route = config.route;
     }
 }

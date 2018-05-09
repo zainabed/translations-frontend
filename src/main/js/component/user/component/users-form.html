@@ -1,5 +1,5 @@
 <form [formGroup]="userForm.form" fxLayout="column" fxLayoutGap="20px">
-    <h2 fxFlex fxFlexAlign="center">New User</h2>
+    <h2 fxFlex fxFlexAlign="center">{{title}}</h2>
     <div id="api-error" *ngIf="apiError">
         Unable to connet application server.
     </div>
