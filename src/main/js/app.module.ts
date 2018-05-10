@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AngularHalModule } from 'angular4-hal';
 import { ExternalConfigurationService } from "./lib/external.configuration.service";
-import { ProjectModule } from './component/project/project.module';
+
 import { ProjectRouteNames } from './component/project/project.route';
 import { HeaderModule } from './layout/header/header.module';
 import { HeaderComponent } from './layout/header/header.component';
@@ -14,6 +14,8 @@ import { UserRouteNames } from "./component/user/user.route";
 import { UserListComponent } from "./component/user/component/user.list.component";
 
 import { UserModule } from "./component/user/user.module";
+import { LocaleModule } from "./component/locale/locale.module";
+import { ProjectModule } from './component/project/project.module';
 import { ResourceModule } from "./lib/http/resource.module";
 
 
@@ -22,7 +24,7 @@ import { AppResourceData } from "./app.resource.data";
 import { AppResourceDataResolve } from "./app.resource.data.resolve";
 
 
-import {ResourceMockData} from "./lib/http/mock/resource.mock.data";
+import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import {ResourceMockData} from "./lib/http/mock/resource.mock.data";
     HeaderModule,
     ResourceModule,
     UserModule,
+    LocaleModule,
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,

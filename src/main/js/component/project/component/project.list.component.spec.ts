@@ -41,4 +41,29 @@ describe("BDD for ProjectListComponent.\n", () => {
     it("Component path name should match.\n", () => {
         expect(component.getComponentPath()).toEqual("projects");
     });
+
+    it("ngOnInit method should call get method of component.\n", () => {
+        spyOn(component, "get");
+        component.ngOnInit();
+        expect(component.get).toHaveBeenCalled();
+    });
+
+    it("onDeleteSuccess method should call get method of component.\n", () => {
+        spyOn(component, "get");
+        component.onDeleteSuccess({});
+        expect(component.get).toHaveBeenCalled();
+    });
+
+    it("getEmbeddedResource method should return valid value.\n", () => {
+        let validValue = "test";
+        let response = { "_embedded": { "projects": validValue } };
+        expect(component.getEmbeddedResource(response)).toEqual(validValue);
+    });
+
+    it("onGetSuccess should call getEmbeddedResource method of component.\n", ()=>{
+        let response = {};
+        spyOn(component, "getEmbeddedResource");
+        component.onGetSuccess(response);
+        expect(component.getEmbeddedResource).toHaveBeenCalledWith(response);
+    })
 });

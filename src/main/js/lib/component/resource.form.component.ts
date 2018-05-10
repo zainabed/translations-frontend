@@ -22,7 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 
-export abstract class ResourceFormComponent<T> extends ResourceListComponent implements ResourceForm {
+export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> implements ResourceForm {
 
     matcher = new MyErrorStateMatcher();
     private id: any;
@@ -45,23 +45,48 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent imp
     }
 
     post() {
-        let data = this.form.getData();
-        this.resourcesService.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+        if (this.form.form.valid) {
+            let data = this.form.getData();
+            this.resourcesService.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+        }
     }
 
-    abstract onPostSuccess(response);
-    abstract onPostFail(error);
+    onPostSuccess(response) {
+        this.navigateToList();
+    }
+
+    onPostFail(error) {
+        this.error = error;
+    }
 
     patch(resource: Resource) {
-        let apiUrl = this.appData.getResourceSelfUrl(resource);
-        let data = this.form.getData();
-        this.resourceService.update(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
+        if (this.form.form.valid) {
+            let apiUrl = this.appData.getResourceSelfUrl(resource);
+            let data = this.form.getData();
+            this.resourceService.update(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
+        }
     }
 
-    abstract onPatchSuccess(response);
-    abstract onPatchFail(error);
+
+    onPatchSuccess(reponse) {
+        this.navigateToList();
+    }
+
+    onPatchFail(error) {
+        this.error = error;
+    }
 
     navigateToList() {
         this.router.navigate([this._route]);
     }
+
+    onGetSuccess(response) {
+        this.resource = response;
+        this.form.form.patchValue(response);
+    }
+
+    onDeleteSuccess(response: any) {
+        this.navigateToList();
+    }
+
 }

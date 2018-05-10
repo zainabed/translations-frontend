@@ -14,11 +14,13 @@ import { ResourceList } from "./resource.list";
 /**
  * 
  */
-export abstract class ResourceListComponent implements ResourceList {
+export abstract class ResourceListComponent<T> implements ResourceList {
     public _path;
     public _route;
     public apiUrl;
     public EMBEDDED = "_embedded";
+    public error;
+    public resource: T;
 
     resourcesService: ResourcesService;
     resourceService: ResourceService;
@@ -37,7 +39,7 @@ export abstract class ResourceListComponent implements ResourceList {
         this.router = injector.get(Router);
     }
 
-    getComponentPath(){
+    getComponentPath() {
         return this._path;
     }
 
@@ -45,7 +47,7 @@ export abstract class ResourceListComponent implements ResourceList {
      * 
      */
     ngOnInit() {
-        if(!this._path) {
+        if (!this._path) {
             throw new Error("Path property is not set for this component.");
         }
         this.apiUrl = this.appData.getResourceListUrlFor(this._path);
@@ -66,17 +68,26 @@ export abstract class ResourceListComponent implements ResourceList {
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
-    abstract onGetSuccess(response: any);
+    onGetSuccess(response) {
+        this.resource = this.getEmbeddedResource(response);
+    }
 
-    abstract onGetFail(error: any);
+    onGetFail(error) {
+        this.error = error;
+    }
 
     delete(resource) {
         let apiUrl = this.appData.getResourceSelfUrl(resource);
         this.resourceService.delete(apiUrl).subscribe(this.onDeleteSuccess.bind(this), this.onDeleteFail.bind(this));
     }
 
-    abstract onDeleteSuccess(response: any);
-    abstract onDeleteFail(error: any);
+    onDeleteSuccess(response: any) {
+        this.get();
+    }
+
+    onDeleteFail(error: any) {
+        this.error = error;
+    }
 
     edit(resource) {
         let id = this.appData.getResourceId(resource);

@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -22,6 +24,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatMenuModule,
+        MatListModule,
+        MatDividerModule,
         FlexLayoutModule,
     ],
     exports: [
@@ -34,6 +38,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatMenuModule,
+        MatListModule,
+        MatDividerModule,
         FlexLayoutModule,
     ]
 })

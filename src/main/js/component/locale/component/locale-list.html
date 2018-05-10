@@ -1,0 +1,24 @@
+<mat-card class="column__xdt--12">
+    <mat-card-title>Locales</mat-card-title>
+    <mat-list class="row">
+        <mat-list-item *ngFor="let locale of resource">
+            <mat-icon mat-list-icon>folder</mat-icon>
+            <div mat-line>{{locale.name}}</div>
+            <div mat-line>{{locale.code}}</div>
+
+            <div>
+                <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #resourceMenu="matMenu">
+                    <button mat-menu-item (click)="edit(locale)">Edit</button>
+                    <button mat-menu-item (click)="delete(locale)">Delete</button>
+                </mat-menu>
+            </div>
+        </mat-list-item>
+        
+    </mat-list>
+</mat-card>
+<button mat-fab class="button__float model-path-new" routerLink="/locales/new">
+    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+</button>
