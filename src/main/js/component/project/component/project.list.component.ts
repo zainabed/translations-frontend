@@ -1,10 +1,13 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, AfterContentInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+
+import { SidebarService } from "../../../layout/sidebar/sidebar.service";
+import { ResourcePath, ResourceListComponent } from "../../../lib/component/resource.component.core";
 
 import { Project } from '../model/project';
 import { ProjectService } from '../model/project.service';
 
-import { ResourcePath, ResourceListComponent } from "../../../lib/component/resource.component.core";
+
 
 @ResourcePath({
     path: "projects",
@@ -14,37 +17,34 @@ import { ResourcePath, ResourceListComponent } from "../../../lib/component/reso
     selector: "project-list",
     templateUrl: './projects-list.html',
     host: {
-        class: "column__xdt--12"
+        class: "component column__xdt--10"
     }
 })
-export class ProjectListComponent extends ResourceListComponent {
+export class ProjectListComponent extends ResourceListComponent<Project> implements AfterContentInit {
 
     private projects;
     projectsTableData: MatTableDataSource<Project>;
     displayedColumns = ['name', 'description', "selection"];
 
-    constructor(injector: Injector) {
+    constructor(injector: Injector, private sidebarService: SidebarService) {
         super(injector);
+       
     }
 
     ngOnInit() {
         super.ngOnInit();
         this.get();
+   //     this.sidebarService.resource = null;
+    }
+
+    ngAfterContentInit(){
+        console.log("change");
+       // this.sidebarService.resource = null;
     }
 
     onGetSuccess(response) {
-        this.projects = this.getEmbeddedResource(response);
-        this.projectsTableData = new MatTableDataSource(this.projects);
+        super.onGetSuccess(response);
+        this.projectsTableData = new MatTableDataSource(this.resourceList);
     }
-
-    onGetFail(error) {
-
-    }
-
-    onDeleteSuccess(response) {
-        this.get();
-     }
-
-    onDeleteFail(error) { }
 
 }

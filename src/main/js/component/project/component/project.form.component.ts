@@ -18,7 +18,6 @@ import { ResourcePath, ResourceFormComponent } from "../../../lib/component/reso
 export class ProjectFormComponent extends ResourceFormComponent<Project>{
 
     inProgress: Boolean = false;
-    project: Project;
     title: string;
 
     constructor(private projectForm: ProjectForm, injector: Injector) {
@@ -33,37 +32,4 @@ export class ProjectFormComponent extends ResourceFormComponent<Project>{
             this.title = "Add New Project";
         }
     }
-
-    onGetSuccess(response) {
-        this.project = response;
-        this.projectForm.form.patchValue(response);
-    }
-
-    onGetFail(error) {
-
-    }
-
-    onPostSuccess(response) {
-        this.navigateToList();
-    }
-
-    onPostFail(eror) {
-
-    }
-
-    onPatchSuccess(response) {
-        this.navigateToList();
-    }
-
-    onPatchFail(error) { }
-
-    onDeleteSuccess(response) {
-        this.navigateToList();
-    }
-
-    onDeleteFail(error) {
-
-    }
-
-
 }

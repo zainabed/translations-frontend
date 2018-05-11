@@ -1,4 +1,4 @@
-<mat-card class="row" class="pad--zero" *ngIf="projects">
+<mat-card class="row" class="pad--zero" *ngIf="resourceList">
     <div fxFlex>
         <mat-table #table [dataSource]="projectsTableData">
 
@@ -18,6 +18,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #resourceMenu="matMenu">
+                        <button mat-menu-item (click)="open(element)">Open</button>
                         <button mat-menu-item (click)="edit(element)">Edit</button>
                         <button mat-menu-item (click)="delete(element)">Delete</button>
                     </mat-menu>

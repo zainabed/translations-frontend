@@ -21,6 +21,8 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     public EMBEDDED = "_embedded";
     public error;
     public resource: T;
+    public resourceList;
+    public httpProgress: boolean = false;
 
     resourcesService: ResourcesService;
     resourceService: ResourceService;
@@ -65,15 +67,18 @@ export abstract class ResourceListComponent<T> implements ResourceList {
      * 
      */
     get() {
+        this.httpProgress = true;
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
     onGetSuccess(response) {
-        this.resource = this.getEmbeddedResource(response);
+        this.resourceList = this.getEmbeddedResource(response);
+        this.httpProgress = false;
     }
 
     onGetFail(error) {
         this.error = error;
+        this.httpProgress = false;
     }
 
     delete(resource) {
@@ -90,6 +95,11 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     }
 
     edit(resource) {
+        let id = this.appData.getResourceId(resource);
+        this.router.navigate([this._route, id, "edit"]);
+    }
+
+    open(resource) {
         let id = this.appData.getResourceId(resource);
         this.router.navigate([this._route, id]);
     }

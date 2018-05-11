@@ -8,7 +8,7 @@ import { ProjectService } from '../model/project.service';
     selector: "project-component",
     templateUrl: './projects.html',
     host: {
-        class: "row gutter__column--xdt"
+        class: "row center-center"
     }
 })
 export class ProjectComponent {

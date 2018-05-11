@@ -1,0 +1,14 @@
+<mat-sidenav-container class="sidebar-container">
+    <mat-sidenav mode="side" [(opened)]="sidebar.active">
+        <mat-list *ngIf="sidebar.active">
+            <h3 mat-subheader>Project</h3>
+            <mat-list-item *ngFor="let resource of sidebar.resource" routerLink="{{resource.href}}">
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>{{resource.name}}</h4>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="page">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

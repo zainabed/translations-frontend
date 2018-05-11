@@ -22,6 +22,9 @@ import { ResourceModule } from "./lib/http/resource.module";
 import { AppComponent } from './app.component';
 import { AppResourceData } from "./app.resource.data";
 import { AppResourceDataResolve } from "./app.resource.data.resolve";
+import { SidebarService } from "./layout/sidebar/sidebar.service";
+import { SidebarComponent } from "./layout/sidebar/sidebar.component";
+import { SidebarModule } from "./layout/sidebar/sidebar.module";
 
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
@@ -29,7 +32,8 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 
 @NgModule({
   declarations: [
-    AppComponent],
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,6 +41,7 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     AngularHalModule.forRoot(),
     ProjectModule,
     HeaderModule,
+    SidebarModule,
     ResourceModule,
     UserModule,
     LocaleModule,
@@ -45,7 +50,8 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
         path: '', component: AppComponent,
         resolve: { "projectResource": AppResourceDataResolve }
       },
-      { path: '', component: HeaderComponent, outlet: 'toolbar' }
+      { path: '', component: HeaderComponent, outlet: 'toolbar' },
+      { path: '', component: SidebarComponent, outlet: 'sidebar' }
     ],
       { enableTracing: false }),
   ],
@@ -56,6 +62,7 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     { provide: 'ExternalConfigurationService', useClass: ExternalConfigurationService },
     AppResourceData,
     AppResourceDataResolve,
+    SidebarService,
     ResourceMockData
   ],
   bootstrap: [AppComponent]

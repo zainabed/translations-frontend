@@ -10,8 +10,8 @@
         </mat-form-field>
         <div class="row">
             <button mat-raised-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">Save</button>
-            <button mat-raised-button color="primary" *ngIf=isForUpdate (click)="patch(project)" type="submit">Update</button>
-            <button mat-raised-button color="warn" *ngIf=isForUpdate (click)="delete(project)">delete</button>
+            <button mat-raised-button color="primary" *ngIf=isForUpdate (click)="patch(resource)" type="submit">Update</button>
+            <button mat-raised-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">delete</button>
             <button mat-raised-button (click)="navigateToList()">Cancel</button>
         </div>
     </div>

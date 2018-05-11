@@ -11,19 +11,6 @@ import { AppResourceData } from "../../../app.resource.data";
 import { User } from "../model/user";
 
 
-export class ActivatedResource {
-    snapshot: any;
-}
-
-export class ResourceRouter {
-
-    constructor(private activatedResource: ActivatedResource, private router: Router) { }
-
-    navigate(resource, commands: any[], extras?: NavigationExtras) {
-        this.activatedResource.snapshot = resource;
-        this.router.navigate(resource._path);
-    }
-}
 
 /**
  * 
@@ -39,7 +26,7 @@ export class ResourceRouter {
         class: "column__xdt--12"
     }
 })
-export class UserListComponent extends ResourceListComponent {
+export class UserListComponent extends ResourceListComponent<User> {
 
     dataSource: MatTableDataSource<User>;
     displayedColumns = ['username', 'email', 'selection'];
@@ -63,32 +50,13 @@ export class UserListComponent extends ResourceListComponent {
         this.get();
     }
 
-
     /**
      * 
      * @param response 
      */
     onGetSuccess(response: Resources) {
-        this.resourceList = this.getEmbeddedResource(response);
+        super.onGetSuccess(response);
         this.dataSource = new MatTableDataSource(this.resourceList);
-    }
-
-    /**
-     * 
-     * @param error 
-     */
-    onGetFail(error) {
-        this.errorMessage = "Failed to fetch list";
-    }
-
-
-
-    onDeleteSuccess(response) {
-        this.get();
-    }
-
-    onDeleteFail(error) {
-
     }
 
 }

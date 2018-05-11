@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatMenuModule,
         MatListModule,
         MatDividerModule,
+        MatSidenavModule,
         FlexLayoutModule,
     ],
     exports: [
@@ -40,6 +42,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatMenuModule,
         MatListModule,
         MatDividerModule,
+        MatSidenavModule,
         FlexLayoutModule,
     ]
 })

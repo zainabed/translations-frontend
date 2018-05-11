@@ -9,7 +9,7 @@ import { ProjectRquiredModule } from "./project.required.module";
 // Projects Component and Services
 import {
     ProjectComponent, ProjectFormComponent, ProjectListComponent,
-    ProjectService, ProjectForm
+    ProjectDashboardComponent, ProjectService, ProjectForm
 } from './project.core';
 import { ProjectRoutes } from './project.route';
 
@@ -21,7 +21,8 @@ import { ProjectRoutes } from './project.route';
     declarations: [
         ProjectComponent,
         ProjectFormComponent,
-        ProjectListComponent
+        ProjectListComponent,
+        ProjectDashboardComponent
     ],
     providers: [
         ProjectService,

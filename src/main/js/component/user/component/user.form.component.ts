@@ -26,54 +26,21 @@ import { User } from '../model/user';
     }
 })
 export class UserFormComponent extends ResourceFormComponent<User>{
-    private resource: Resource;
     private title: string;
 
     constructor(public userForm: UserForm, injector: Injector) {
         super(userForm, injector);
-        
+
     }
 
-    ngOnInit(){
+    ngOnInit() {
         super.ngOnInit();
-        if(this.isForUpdate){
+        if (this.isForUpdate) {
             this.title = "Update User";
-        }else{
+        } else {
             this.title = "Add New User";
         }
     }
 
-    onPostSuccess(response) {
-        this.navigateToList();
-    }
 
-    onPostFail(error) {
-
-    }
-
-    onGetSuccess(response: Resources) {
-        this.resource = response;
-        this.userForm.form.patchValue(response);
-    }
-
-    onGetFail(error) {
-        console.log("Get error");
-    }
-
-
-    onPatchSuccess(response) {
-        this.navigateToList();
-    }
-
-    onPatchFail(error) {
-        console.log("Patch error");
-    }
-
-    onDeleteSuccess(response) {
-        this.navigateToList();
-    }
-
-    onDeleteFail(error) {
-        console.log("Delete error");
-    }
 }

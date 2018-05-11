@@ -11,7 +11,7 @@ import { Locale } from "../model/locale";
     selector: "locale-list",
     templateUrl: "./locale-list.html",
     host: {
-        class: "row"
+        class: "column__xdt--10 component"
     }
 })
 export class LocaleListComponent extends ResourceListComponent<Locale> {

@@ -129,3 +129,19 @@ button.button__float{
   }
   margin-left: 24px;
 }
+
+.component{
+  padding: 1px 1px 12px 1px;
+}
+
+.sidebar-container{
+  position: absolute !important;
+  left: 0;
+  right: 0;
+  top: 64px;
+  bottom: 0;
+}
+
+.mat-drawer-content{
+  display: flex;
+}
