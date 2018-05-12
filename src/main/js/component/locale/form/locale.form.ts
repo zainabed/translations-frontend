@@ -15,7 +15,8 @@ export class LocaleForm extends ModelForm<Locale> {
     buildForm(fb: FormBuilder): FormGroup {
         return fb.group({
             name: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
-            code: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(6)]]
+            code: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(6)]],
+            projects: ["", [Validators.required]]
         });
     }
 

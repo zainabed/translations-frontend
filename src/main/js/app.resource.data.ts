@@ -12,8 +12,14 @@ export class AppResourceData {
         this._resource = resource;
     }
 
-    getResourceListUrlFor(resourceName) {
-        return this.filterHrefUrl(this.resource["_links"][resourceName]["href"]);
+    getResourceListUrlFor(resource, resourceName) {
+        let href = resource["_links"][resourceName]["href"];
+        if (href.indexOf("{") > 0) {
+            return this.filterHrefUrl(href);
+        }
+        console.log(href);
+        
+        return href;
     }
 
     getResourceSelfUrl(resouce) {

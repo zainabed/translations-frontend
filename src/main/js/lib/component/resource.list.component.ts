@@ -52,7 +52,10 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         if (!this._path) {
             throw new Error("Path property is not set for this component.");
         }
-        this.apiUrl = this.appData.getResourceListUrlFor(this._path);
+        this.apiUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
+        console.log(this._path);
+        console.log(this.appData.resource);
+        console.log(this.apiUrl);
     }
 
     /**
