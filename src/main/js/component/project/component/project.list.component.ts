@@ -18,7 +18,7 @@ import { ProjectService } from '../model/project.service';
     selector: "project-list",
     templateUrl: './projects-list.html',
     host: {
-        class: "component column__xdt--10"
+        class: "component column__xdt--10 column__dt--10"
     }
 })
 export class ProjectListComponent extends ResourceListComponent<Project> implements AfterContentInit {
@@ -46,6 +46,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     onGetSuccess(response) {
         super.onGetSuccess(response);
         this.projectsTableData = new MatTableDataSource(this.resourceList);
+        console.log(this.resourceList);
     }
 
 }

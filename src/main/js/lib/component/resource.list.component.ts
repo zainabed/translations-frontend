@@ -80,6 +80,7 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     }
 
     onGetFail(error) {
+        this.resourceList = null;
         this.error = error;
         this.httpProgress = false;
     }

@@ -5,12 +5,13 @@ import { environment } from "../../../../environments/environment";
 export class SidebarService {
     private _resource = null;
     private active: boolean = false;
+    private title: string;
 
     set resource(resource) {
         this._resource = [];
 
         if (resource) {
-
+            this.title = resource.name;
             let self = this;
 
             let links = resource["_links"];

@@ -145,3 +145,23 @@ button.button__float{
 .mat-drawer-content{
   display: flex;
 }
+
+.self__center{
+  text-align: center;
+}
+
+.icon--large{
+  width: 64px !important;
+  height: 64px !important;
+  font-size: 64px;
+}
+
+.sidebar{
+  width: 224px;
+  text-transform: capitalize;
+  border-right: 1px solid #eee;
+}
+
+mat-divider{
+  margin: 8px 0 !important;
+}

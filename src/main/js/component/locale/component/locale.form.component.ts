@@ -15,7 +15,7 @@ import { ResourceFormComponent, ResourcePath } from "../../../lib/component/reso
     selector: "locale-form",
     templateUrl: "locale-form.html",
     host: {
-        class: "row component"
+        class: "column__xdt--6 column__dt--6 component"
     }
 })
 export class LocaleFormComponent extends ResourceFormComponent<Locale> {

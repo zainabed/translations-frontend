@@ -1,11 +1,12 @@
-<mat-card class="column__xdt--12">
-    <mat-card-title>Locales</mat-card-title>
+<mat-card class="column__xdt--12 column__dt--12">
+    <mat-card-title *ngIf="resourceList && resourceList.length">Locales</mat-card-title>
 
     <mat-card-content>
         <mat-spinner *ngIf="httpProgress"></mat-spinner>
         <mat-list class="row" *ngIf="!httpProgress">
             <mat-list-item *ngFor="let locale of resourceList">
-                <mat-icon mat-list-icon>folder</mat-icon>
+                <!-- <mat-icon mat-list-icon>language</mat-icon> -->
+                <img matListAvatar src="assets/images/flags/{{locale.code}}.png" alt="...">
                 <div mat-line>{{locale.name}}</div>
                 <div mat-line>{{locale.code}}</div>
 
@@ -21,9 +22,16 @@
             </mat-list-item>
 
         </mat-list>
+        <div class="row center-center" *ngIf="!resourceList || !resourceList.length">
+            <div class="column__dt--12 column__xdt--12 self__center">
+                <mat-icon class="icon--large">language</mat-icon>
+            </div>
+            <p class="column__dt--12 column__xdt--12 mat-h2 self__center">No locales found.</p>
+            <button mat-raised-button color="primary" (click)="add()">Add New</button>
+        </div>
     </mat-card-content>
 
 </mat-card>
-<button mat-fab class="button__float model-path-new" (click)="add()">
+<button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">
     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
 </button>
