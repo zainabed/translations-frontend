@@ -1,12 +1,10 @@
 <mat-card class="column__xdt--12 column__dt--12">
-    <mat-card-title *ngIf="resourceList && resourceList.length">keys</mat-card-title>
+    <mat-card-title *ngIf="resourceList && resourceList.length">Keys</mat-card-title>
 
     <mat-card-content>
         <mat-spinner *ngIf="httpProgress"></mat-spinner>
         <mat-list class="row" *ngIf="!httpProgress">
             <mat-list-item *ngFor="let key of resourceList">
-                <!-- <mat-icon mat-list-icon>language</mat-icon> -->
-                <img matListAvatar src="assets/images/flags/{{key.code}}.png" alt="...">
                 <div mat-line>{{key.name}}</div>
                 <div mat-line>{{key.description}}</div>
 

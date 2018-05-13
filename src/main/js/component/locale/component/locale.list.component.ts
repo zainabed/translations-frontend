@@ -1,7 +1,7 @@
 import { Component, Injector } from "@angular/core";
 
 import { ResourceListComponent, ResourcePath } from "../../../lib/component/resource.component.core";
-import { ProjectService } from "../../project/model/project.service";
+import { ProjectService , ProjectResourceListComponent} from "../../project/project.core";
 import { Locale } from "../model/locale";
 
 @ResourcePath({
@@ -16,30 +16,9 @@ import { Locale } from "../model/locale";
         class: "column__xdt--10 column__dt--10 component"
     }
 })
-export class LocaleListComponent extends ResourceListComponent<Locale> {
-    projectService: ProjectService;
-    projectId: string;
-
+export class LocaleListComponent extends ProjectResourceListComponent<Locale> {
+  
     constructor(injector: Injector) {
         super(injector);
-        this.projectService = injector.get(ProjectService);
     }
-
-    ngOnInit() {
-        super.ngOnInit();
-        this.apiUrl = this.appData.getResourceListUrlFor(this.projectService.resource, this._path);
-        this.projectId = this.route.snapshot.paramMap.get(this.projectService.projectId);
-        this.get();
-    }
-
-    edit(resource) {
-        //super.edit(resource);
-        let localeId = this.appData.getResourceId(resource);
-        this.router.navigate(["projects", this.projectId, "locales", localeId]);
-    }
-
-    add() {
-        this.router.navigate(["projects", this.projectId, "locales", "new"]);
-    }
-
 }
