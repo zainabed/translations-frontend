@@ -1,0 +1,37 @@
+<mat-card class="column__xdt--12 column__dt--12">
+    <mat-card-title *ngIf="resourceList && resourceList.length">keys</mat-card-title>
+
+    <mat-card-content>
+        <mat-spinner *ngIf="httpProgress"></mat-spinner>
+        <mat-list class="row" *ngIf="!httpProgress">
+            <mat-list-item *ngFor="let key of resourceList">
+                <!-- <mat-icon mat-list-icon>language</mat-icon> -->
+                <img matListAvatar src="assets/images/flags/{{key.code}}.png" alt="...">
+                <div mat-line>{{key.name}}</div>
+                <div mat-line>{{key.description}}</div>
+
+                <div>
+                    <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #resourceMenu="matMenu">
+                        <button mat-menu-item (click)="edit(key)">Edit</button>
+                        <button mat-menu-item (click)="delete(key)">Delete</button>
+                    </mat-menu>
+                </div>
+            </mat-list-item>
+
+        </mat-list>
+        <div class="row center-center" *ngIf="!resourceList || !resourceList.length">
+            <div class="column__dt--12 column__xdt--12 self__center">
+                <mat-icon class="icon--large">language</mat-icon>
+            </div>
+            <p class="column__dt--12 column__xdt--12 mat-h2 self__center">No keys found.</p>
+            <button mat-raised-button color="primary" (click)="add()">Add New</button>
+        </div>
+    </mat-card-content>
+
+</mat-card>
+<button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">
+    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+</button>

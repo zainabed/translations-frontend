@@ -15,6 +15,7 @@ import { UserListComponent } from "./component/user/component/user.list.componen
 
 import { UserModule } from "./component/user/user.module";
 import { LocaleModule } from "./component/locale/locale.module";
+import { KeyModule } from "./component/key/key.module";
 import { ProjectModule } from './component/project/project.module';
 import { ResourceModule } from "./lib/http/resource.module";
 
@@ -45,6 +46,7 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     ResourceModule,
     UserModule,
     LocaleModule,
+    KeyModule,
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,

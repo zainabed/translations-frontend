@@ -16,7 +16,7 @@ export class SidebarService {
 
             let links = resource["_links"];
             Object.keys(links).forEach(function (key) {
-                if (key !== "self" && key !== "projects") {
+                if (key !== "self" && key !== "project") {
                     let link = links[key];
                     let href = link["href"];
                     let hrefValue = href.replace(environment.apiUrl, "");

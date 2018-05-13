@@ -19,8 +19,8 @@ export class ResourceMockData {
                 "href": "http://localhost:8080/translations{?page,size,sort}",
                 "templated": true
             },
-            "key": {
-                "href": "http://localhost:8080/key{?page,size,sort}",
+            "keys": {
+                "href": "http://localhost:8080/keys{?page,size,sort}",
                 "templated": true
             },
             "locales": {

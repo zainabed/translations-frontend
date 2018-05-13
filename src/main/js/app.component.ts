@@ -24,7 +24,8 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   ngOnInit(){
     this.resourceData.resource = this.route.snapshot.data.projectResource;
-    this.resourceData.resource = this.mockData.PROJECT_RESOURCE_RESPONSE;
+    console.log(this.resourceData.resource);
+ //   this.resourceData.resource = this.mockData.PROJECT_RESOURCE_RESPONSE;
  //   this.router.navigate(["/" + UserRouteNames.UserHome]);
   }
   ngAfterContentInit() {
