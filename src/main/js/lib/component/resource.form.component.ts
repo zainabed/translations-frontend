@@ -27,16 +27,15 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     matcher = new MyErrorStateMatcher();
     private id: any;
     protected isForUpdate: boolean = false;
-    route: ActivatedRoute;
-
+    
     constructor(public form: ModelForm<T>, injector: Injector) {
         super(injector);
-        this.route = injector.get(ActivatedRoute);
+        
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.id = this.route.snapshot.paramMap.get("id");
+        this.id = this.route.snapshot.paramMap.get(this._id);
         if (this.id) {
             this.isForUpdate = true;
             this.apiUrl += "/" + this.id;

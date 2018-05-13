@@ -9,7 +9,8 @@ import { ResourcePath, ResourceFormComponent } from "../../../lib/component/reso
 
 @ResourcePath({
     path: "projects",
-    route: "/projects"
+    route: "/projects",
+    id: "projectId"
 })
 @Component({
     selector: "project-form-component",

@@ -16,7 +16,7 @@ export abstract class ResourceComponent<T> extends ResourceListComponent<T>  {
 
     ngOnInit() {
         super.ngOnInit();
-        this.id = this.route.snapshot.paramMap.get("id");
+        this.id = this.route.snapshot.paramMap.get(this._id);
         if (this.id) {
             this.isForUpdate = true;
             this.apiUrl += "/" + this.id;

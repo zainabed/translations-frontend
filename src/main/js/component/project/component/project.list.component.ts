@@ -11,7 +11,8 @@ import { ProjectService } from '../model/project.service';
 
 @ResourcePath({
     path: "projects",
-    route: "/projects"
+    route: "/projects",
+    id: "projectId"
 })
 @Component({
     selector: "project-list",

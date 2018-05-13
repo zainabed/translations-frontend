@@ -17,7 +17,8 @@ import { User } from "../model/user";
  */
 @ResourcePath({
     path: "users",
-    route: "/users"
+    route: "/users",
+    id: "project"
 })
 @Component({
     selector: "users-list",

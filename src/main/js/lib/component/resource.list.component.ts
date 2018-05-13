@@ -17,6 +17,7 @@ import { ResourceList } from "./resource.list";
 export abstract class ResourceListComponent<T> implements ResourceList {
     public _path;
     public _route;
+    public _id;
     public apiUrl;
     public EMBEDDED = "_embedded";
     public error;
@@ -28,6 +29,7 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     resourceService: ResourceService;
     appData: AppResourceData;
     router: Router;
+    route: ActivatedRoute;
 
     /**
      * 
@@ -39,6 +41,7 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.resourceService = injector.get(ResourceService);
         this.appData = injector.get(AppResourceData);
         this.router = injector.get(Router);
+        this.route = injector.get(ActivatedRoute);
     }
 
     getComponentPath() {
@@ -53,9 +56,6 @@ export abstract class ResourceListComponent<T> implements ResourceList {
             throw new Error("Path property is not set for this component.");
         }
         this.apiUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
-        console.log(this._path);
-        console.log(this.appData.resource);
-        console.log(this.apiUrl);
     }
 
     /**

@@ -13,11 +13,11 @@ export const ProjectRoutes: Routes = [
         children: [
             { path: '', component: ProjectListComponent },
             { path: 'new', component: ProjectFormComponent },
-            { path: ':id', component: ProjectDashboardComponent },
-            { path: ':id/edit', component: ProjectFormComponent },
-            { path: ':id/locales', component: LocaleListComponent },
-            { path: ':id/locales/new', component: LocaleFormComponent },
-            { path: ':id/locales/:id', component: LocaleFormComponent },
+            { path: ':projectId', component: ProjectDashboardComponent },
+            { path: ':projectId/edit', component: ProjectFormComponent },
+            { path: ':projectId/locales', component: LocaleListComponent },
+            { path: ':projectId/locales/new', component: LocaleFormComponent },
+            { path: ':projectId/locales/:localeId', component: LocaleFormComponent },
         ],
 
     }
