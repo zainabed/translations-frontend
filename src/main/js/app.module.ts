@@ -20,6 +20,7 @@ import { ProjectModule } from './component/project/project.module';
 import { TranslationModule } from './component/translation/translation.module';
 import { ResourceModule } from "./lib/http/resource.module";
 
+import {ProjectRoutes} from "./component/project/project.route";
 
 import { AppComponent } from './app.component';
 import { AppResourceData } from "./app.resource.data";
@@ -52,7 +53,8 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,
-        resolve: { "projectResource": AppResourceDataResolve }
+        resolve: { "projectResource": AppResourceDataResolve },
+     //   children: ProjectRoutes
       },
       { path: '', component: HeaderComponent, outlet: 'toolbar' },
       { path: '', component: SidebarComponent, outlet: 'sidebar' }

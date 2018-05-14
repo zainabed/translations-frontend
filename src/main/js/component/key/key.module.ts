@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 
 
 // key Component and Services
-import { KeyComponent, KeyListComponent, KeyFormComponent, KeyForm } from "./key.core";
+import { KeyComponent, KeyListComponent, KeyFormComponent, KeyForm, KeyService } from "./key.core";
 import { KeyRoutes } from "./key.route";
 
 @NgModule({
@@ -18,7 +18,7 @@ import { KeyRoutes } from "./key.route";
         KeyListComponent,
         KeyFormComponent
     ],
-    providers: [KeyForm]
+    providers: [KeyForm, KeyService]
 })
 export class KeyModule {
 

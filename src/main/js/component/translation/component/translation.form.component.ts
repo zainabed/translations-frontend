@@ -5,6 +5,8 @@ import { Translation } from "../model/translation";
 import { TranslationForm } from "../form/translation.form";
 import { ProjectService, ProjectResourceFormComponent } from "../../project/project.core";
 import { ResourceFormComponent, ResourcePath } from "../../../lib/component/resource.component.core";
+import { KeyService } from "../../key/model/key.service";
+
 
 @ResourcePath({
     path: "translations",
@@ -21,14 +23,17 @@ import { ResourceFormComponent, ResourcePath } from "../../../lib/component/reso
 export class TranslationFormComponent extends ProjectResourceFormComponent<Translation> {
 
     private locales;
+    private keyService: KeyService;
 
     constructor(injector: Injector, public translationForm: TranslationForm) {
         super(translationForm, injector);
+        this.keyService = injector.get(KeyService);
     }
 
     ngOnInit() {
         super.ngOnInit();
         this.getLocales();
+        this.form.form.get("keys").setValue(this.appData.getResourceSelfUrl(this.keyService.resource));
 
         if (this.isForUpdate) {
             this.title = "Update translation";

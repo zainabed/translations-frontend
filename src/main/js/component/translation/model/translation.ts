@@ -5,11 +5,13 @@ export class Translation{
     verified: string;
     locales: string;
     keys: string;
+    projects: string;
 
     constructor(fb: FormGroup) {
         this.content = fb.get("content").value;
         this.verified = fb.get("verified").value;
         this.locales = fb.get("locales").value;
         this.keys = fb.get("keys").value;
+        this.projects = fb.get("projects").value;
     }
 }
