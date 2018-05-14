@@ -2,6 +2,7 @@ import { Routes } from '@angular/router'
 import { ProjectComponent, ProjectFormComponent, ProjectListComponent, ProjectDashboardComponent } from './project.core';
 import { LocaleFormComponent, LocaleListComponent, LocaleComponent } from '../locale/locale.core';
 import { KeyFormComponent, KeyListComponent, KeyComponent } from '../key/key.core';
+import { TranslationListComponent, TranslationFormComponent } from "../translation/translation.core";
 
 export const ProjectRouteNames = {
     projectHome: 'projects',
@@ -18,10 +19,17 @@ export const ProjectRoutes: Routes = [
             { path: ':projectId/edit', component: ProjectFormComponent },
             { path: ':projectId/locales', component: LocaleListComponent },
             { path: ':projectId/locales/new', component: LocaleFormComponent },
-            { path: ':projectId/locales/:localeId', component: LocaleFormComponent },
+            { path: ':projectId/locales/:localeId/edit', component: LocaleFormComponent },
             { path: ':projectId/keys', component: KeyListComponent },
             { path: ':projectId/keys/new', component: KeyFormComponent },
-            { path: ':projectId/keys/:keyId', component: KeyFormComponent },
+            { path: ':projectId/keys/:keyId/edit', component: KeyFormComponent },
+            {
+                path: ':projectId/translations', component: TranslationListComponent,
+                children: [
+                    { path: 'keys/:keyId', component: TranslationFormComponent }
+                ]
+            }
+
         ],
 
     }

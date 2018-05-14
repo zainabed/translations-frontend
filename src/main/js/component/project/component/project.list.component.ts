@@ -18,7 +18,7 @@ import { ProjectService } from '../model/project.service';
     selector: "project-list",
     templateUrl: './projects-list.html',
     host: {
-        class: "component column__xdt--10 column__dt--10"
+        class: "column__xdt--10 column__dt--10"
     }
 })
 export class ProjectListComponent extends ResourceListComponent<Project> implements AfterContentInit {

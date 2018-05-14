@@ -22,7 +22,7 @@ export class ProjectResourceListComponent<T> extends ResourceListComponent<T> {
 
     edit(resource) {
         let localeId = this.appData.getResourceId(resource);
-        this.router.navigate(["projects", this.projectId, this._path, localeId]);
+        this.router.navigate(["projects", this.projectId, this._path, localeId, "edit"]);
     }
 
     add() {

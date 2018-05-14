@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatDividerModule,
         MatSidenavModule,
         MatToolbarModule,
+        MatSelectModule,
         FlexLayoutModule,
     ],
     exports: [
@@ -46,6 +48,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatDividerModule,
         MatSidenavModule,
         MatToolbarModule,
+        MatSelectModule,
         FlexLayoutModule,
     ]
 })
