@@ -62,10 +62,9 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
         if (this.form.form.valid) {
             let apiUrl = this.appData.getResourceSelfUrl(resource);
             let data = this.form.getData();
-            this.resourceService.update(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
+            this.resourceService.patch(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
         }
     }
-
 
     onPatchSuccess(reponse) {
         this.navigateToList();
@@ -74,6 +73,23 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     onPatchFail(error) {
         this.error = error;
     }
+
+    put(resource) {
+        if (this.form.form.valid) {
+            let apiUrl = this.appData.getResourceSelfUrl(resource);
+            let data = this.form.getData();
+            this.resourceService.put(apiUrl, data).subscribe(this.onPutSuccess.bind(this), this.onPutFail.bind(this));
+        }
+    }
+
+    onPutSuccess(reponse) {
+        this.navigateToList();
+    }
+
+    onPutFail(error) {
+        this.error = error;
+    }
+    
 
     navigateToList() {
         this.router.navigate([this._route]);

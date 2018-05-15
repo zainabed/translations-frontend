@@ -6,5 +6,5 @@ import {Project} from './project';
 @Injectable()
 export class ProjectService {
     resource;
-    projectId: string = "projectId";
+    projectId: string;
 }

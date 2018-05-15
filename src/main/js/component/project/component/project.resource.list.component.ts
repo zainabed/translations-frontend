@@ -16,7 +16,7 @@ export class ProjectResourceListComponent<T> extends ResourceListComponent<T> {
     ngOnInit() {
         super.ngOnInit();
         this.apiUrl = this.appData.getResourceListUrlFor(this.projectService.resource, this._path);
-        this.projectId = this.route.snapshot.paramMap.get(this.projectService.projectId);
+        this.projectId = this.projectService.projectId;
         this.get();
     }
 

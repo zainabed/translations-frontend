@@ -24,8 +24,17 @@ export class ResourceService {
      * @param url 
      * @param resource 
      */
-    update(url, resource): Observable<Resource> {
+    patch(url, resource): Observable<Resource> {
         return this.http.patch<Resource>(url, resource);
+    }
+
+    /**
+     * 
+     * @param url 
+     * @param resource 
+     */
+    put(url, resource): Observable<Resource> {
+        return this.http.put<Resource>(url, resource);
     }
 
     /**

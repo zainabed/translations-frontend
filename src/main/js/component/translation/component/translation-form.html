@@ -4,7 +4,7 @@
         <mat-card-title>{{title}}</mat-card-title>
         <mat-card-content class="">
             <mat-form-field class="row">
-                <mat-select formControlName="locales">
+                <mat-select formControlName="locales" (selectionChange)="onLocalesChange()">
                     <mat-option *ngFor="let locale of locales" [value]="locale._links.self.href">{{locale.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -29,9 +29,8 @@
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">SAVE</button>
-            <button mat-button color="primary" *ngIf=isForUpdate (click)="patch(resource)" class="">UPDATE</button>
-            <button mat-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">DELETE</button>
+            <button mat-button color="primary" *ngIf=!resource (click)="post()" type="submit">SAVE</button>
+            <button mat-button color="primary" *ngIf=resource (click)="put(resource)" class="">UPDATE</button>
             <button mat-button (click)="navigateToList()">CANCEL</button>
         </mat-card-actions>
 

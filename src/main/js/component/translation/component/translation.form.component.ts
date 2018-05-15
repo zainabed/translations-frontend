@@ -1,4 +1,4 @@
-import { Component, Injector } from "@angular/core";
+import { Component, Injector, OnChanges, OnDestroy } from "@angular/core";
 
 
 import { Translation } from "../model/translation";
@@ -20,10 +20,13 @@ import { KeyService } from "../../key/model/key.service";
         class: "column__xdt--6 column__dt--6"
     }
 })
-export class TranslationFormComponent extends ProjectResourceFormComponent<Translation> {
+export class TranslationFormComponent extends ProjectResourceFormComponent<Translation> implements OnChanges, OnDestroy {
 
     private locales;
     private keyService: KeyService;
+    private searchUrl: string;
+    private postUrl: string;
+    sub: any;
 
     constructor(injector: Injector, public translationForm: TranslationForm) {
         super(translationForm, injector);
@@ -32,15 +35,68 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
 
     ngOnInit() {
         super.ngOnInit();
-        this.getLocales();
-        this.form.form.get("keys").setValue(this.appData.getResourceSelfUrl(this.keyService.resource));
+        this.sub = this.route.params.subscribe((params) => {
+            this.projectId = this.projectService.projectId;
+            this.postUrl = this.apiUrl;
+            this.setSearchUrl("");
+            this.getLocales();
 
-        if (this.isForUpdate) {
-            this.title = "Update translation";
-        } else {
-            this.title = "Add New translation";
-        }
+            this.configureForm();
+        });
+
+
     }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    ngOnChanges() {
+        this.configureForm();
+    }
+
+    configureForm() {
+        this.translationForm.form.get("content").setValue("");
+        this.setKeys();
+        this.setProject();
+    }
+
+    get() {
+        this.apiUrl = this.searchUrl;
+        super.get();
+    }
+
+    onGetFail(error) {
+        super.onGetFail(error);
+        this.resource = null;
+        this.configureForm();
+    }
+
+    post() {
+        this.apiUrl = this.postUrl;
+        super.post();
+    }
+
+    setKeys() {
+        let keyHref = this.appData.getResourceSelfUrl(this.keyService.resource);
+        this.form.form.get("keys").setValue(keyHref);
+    }
+
+
+    onLocalesChange() {
+        let localesId = this.appData.filterId(this.translationForm.form.get("locales").value);
+        this.setSearchUrl(localesId);
+        this.get();
+    }
+
+
+
+    setSearchUrl(localeId) {
+        this.searchUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
+        this.searchUrl += "/search/get_one?projects=" + this.projectId + "&locales=" + localeId + "&keys=" + this.keyService.keyId;
+    }
+
+
 
     getLocales() {
         let localesApiPath = this.appData.getResourceListUrlFor(this.projectService.resource, "locales");

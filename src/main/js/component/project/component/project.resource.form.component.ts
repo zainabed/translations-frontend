@@ -19,14 +19,14 @@ export class ProjectResourceFormComponent<T> extends ResourceFormComponent<T> {
     ngOnInit() {
         super.ngOnInit();
         this.setProject();
-        this.projectId = this.route.snapshot.paramMap.get(this.projectService.projectId);
+        
     }
 
     setProject() {
         let projectResource = this.projectService.resource;
-        let projectHref = this.appData.getResourceListUrlFor(projectResource, "self");
+        let projectHref = this.appData.getResourceSelfUrl(projectResource);
         this.form.form.get("projects").setValue(projectHref);
-
+        this.projectId = this.projectService.projectId;
     }
 
     navigateToList() {

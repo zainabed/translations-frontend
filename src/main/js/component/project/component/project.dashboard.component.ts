@@ -26,6 +26,7 @@ export class ProjectDashboardComponent extends ResourceComponent<Project>{
     onGetSuccess(response) {
         super.onGetSuccess(response);
         this.projectService.resource = response;
+        this.projectService.projectId = this.appData.getResourceId(response);
         console.log(this.resource);
         this.sidebarService.resource = this.resource;
     }
