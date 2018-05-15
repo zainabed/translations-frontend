@@ -1,19 +1,28 @@
 <mat-sidenav-container class="sidebar-container">
     <mat-sidenav mode="side" [(opened)]="sidebar.active" class="sidebar">
         <mat-list>
-            <h3 mat-subheader>Project</h3>
+            <h3 mat-subheader>Selected Project</h3>
             <mat-list-item>
-                <mat-icon matListIcon >business_center</mat-icon>
-                <h3 matLine> {{sidebar.title}} </h3>
+                <mat-icon matListIcon>business_center</mat-icon>
+                <h2 matLine> {{sidebar.title}} </h2>
             </mat-list-item>
         </mat-list>
         <mat-divider></mat-divider>
         <mat-list *ngIf="sidebar.active">
-            <mat-list-item *ngFor="let resource of sidebar.resource" routerLink="{{resource.href}}">
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <h4 mat-line>{{resource.name}}</h4>
+            <h3 mat-subheader>Actions</h3>
+            <mat-list-item *ngFor="let action of actionList" routerLink="{{getResourceHref(action.title)}}">
+                <mat-icon  mat-list-icon >{{action.icon}}</mat-icon>
+                <h4 mat-line>{{action.title}}</h4>
             </mat-list-item>
         </mat-list>
+        <mat-divider></mat-divider>
+        <mat-list *ngIf="sidebar.active">
+                <h3 mat-subheader>Settings</h3>
+                <mat-list-item *ngFor="let setting of settingList" routerLink="{{getResourceHref(setting.title)}}">
+                    <mat-icon mat-list-icon>{{setting.icon}}</mat-icon>
+                    <h4 mat-line>{{setting.title}}</h4>
+                </mat-list-item>
+            </mat-list>
     </mat-sidenav>
     <mat-sidenav-content class="page">
         <router-outlet></router-outlet>

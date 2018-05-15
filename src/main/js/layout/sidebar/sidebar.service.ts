@@ -8,7 +8,7 @@ export class SidebarService {
     private title: string;
 
     set resource(resource) {
-        this._resource = [];
+        this._resource = {};
 
         if (resource) {
             this.title = resource.name;
@@ -20,7 +20,7 @@ export class SidebarService {
                     let link = links[key];
                     let href = link["href"];
                     let hrefValue = href.replace(environment.apiUrl, "");
-                    self._resource.push({ name: key, href: hrefValue });
+                    self._resource[key] = { name: key, href: hrefValue };
                 }
 
             });

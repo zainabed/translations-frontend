@@ -35,12 +35,13 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
 
     ngOnInit() {
         super.ngOnInit();
+        this.postUrl = this.apiUrl;
+        this.projectId = this.projectService.projectId;
+              
         this.sub = this.route.params.subscribe((params) => {
-            this.projectId = this.projectService.projectId;
-            this.postUrl = this.apiUrl;
             this.setSearchUrl("");
             this.getLocales();
-
+            this.translationForm.form.get("locales").setValue("");
             this.configureForm();
         });
 
@@ -77,6 +78,13 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
         super.post();
     }
 
+    onPostSuccess(response) {
+        this.resource = response;
+    }
+
+    onPutSuccess(reponse) {
+    }
+
     setKeys() {
         let keyHref = this.appData.getResourceSelfUrl(this.keyService.resource);
         this.form.form.get("keys").setValue(keyHref);
@@ -105,6 +113,11 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
 
     onLocaleGetSuccess(response) {
         this.locales = response[this.EMBEDDED]["locales"];
+        if(this.locales.length){
+            let locale = this.locales[0];
+            this.translationForm.form.get("locales").setValue(this.appData.getResourceSelfUrl(locale));
+            this.onLocalesChange();
+        }
         console.log(response);
         console.log(this.locales);
     }

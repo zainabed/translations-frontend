@@ -15,7 +15,7 @@
             <mat-spinner *ngIf="httpProgress"></mat-spinner>
             <mat-list class="row" *ngIf="!httpProgress">
                 <mat-list-item *ngFor="let key of resourceList" (click)="open(key)">
-                    <div mat-line>{{key.name}}</div>
+                    <div mat-line class="color--darkorange">{{key.name}}</div>
                     <div mat-line>{{key.description}}</div>
 
                     <div>

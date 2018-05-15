@@ -156,6 +156,13 @@ button.button__float{
   font-size: 64px;
 }
 
+.icon__list{
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 0% !important;
+  margin-right: 8px;
+}
+
 .sidebar{
   width: 224px;
   text-transform: capitalize;
@@ -164,4 +171,16 @@ button.button__float{
 
 mat-divider{
   margin: 8px 0 !important;
+}
+
+$color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
+
+@each $color in $color-map {
+  .color--#{$color} {
+    color: #{$color};
+  }
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle, .mat-card-title {
+ // display: flex !important;
 }

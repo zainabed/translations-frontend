@@ -6,8 +6,8 @@
         <mat-list class="row" *ngIf="!httpProgress">
             <mat-list-item *ngFor="let locale of resourceList">
                 <!-- <mat-icon mat-list-icon>language</mat-icon> -->
-                <img matListAvatar src="assets/images/flags/{{locale.code}}.png" alt="...">
-                <div mat-line>{{locale.name}}</div>
+                <img matListAvatar src="assets/images/flags/{{locale.code}}.png" alt="..." class="icon__list">
+                <div mat-line class="color--darkcyan">{{locale.name}}</div>
                 <div mat-line>{{locale.code}}</div>
 
                 <div>
