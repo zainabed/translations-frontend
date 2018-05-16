@@ -211,3 +211,50 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 .padding--zero {
   padding: 0 !important;
 }
+
+.action_box{
+  display: flex;
+
+  butt{
+    margin-left: 8px;
+  }
+}
+
+.toolbar{
+  .left{
+    flex:0 1 0;
+    text-align: left;
+    padding-right: 16px;
+  }
+
+  .center{
+    flex: 2;
+  }
+
+  .right{
+    flex:1;
+    text-align: right
+  }
+}
+.footer{
+  padding: 24px;
+  z-index: 100;
+  background: #eee;
+  color: darkcyan;
+  text-align: center; 
+  position: absolute;
+  bottom: 0;
+}
+
+.breadcrumb{
+  z-index: 1000;
+  position: relative;
+  display: block;
+  left: 30%;
+  display: flex;
+}
+
+.breadcrumb__item{
+  flex: 0 1 0;
+  color: darkcyan;
+}

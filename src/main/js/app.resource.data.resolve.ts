@@ -14,7 +14,6 @@ export class AppResourceDataResolve implements Resolve<Observable<ProjectResourc
     }
 
     resolve() {
-        console.log(environment.apiUrl);
         return this.projectService.get(environment.apiUrl);
 
     }

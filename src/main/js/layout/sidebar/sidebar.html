@@ -11,18 +11,18 @@
         <mat-list *ngIf="sidebar.active">
             <h3 mat-subheader>Actions</h3>
             <mat-list-item *ngFor="let action of actionList" routerLink="{{getResourceHref(action.title)}}">
-                <mat-icon  mat-list-icon >{{action.icon}}</mat-icon>
+                <mat-icon mat-list-icon>{{action.icon}}</mat-icon>
                 <h4 mat-line>{{action.title}}</h4>
             </mat-list-item>
         </mat-list>
         <mat-divider></mat-divider>
         <mat-list *ngIf="sidebar.active">
-                <h3 mat-subheader>Settings</h3>
-                <mat-list-item *ngFor="let setting of settingList" routerLink="{{getResourceHref(setting.title)}}">
-                    <mat-icon mat-list-icon>{{setting.icon}}</mat-icon>
-                    <h4 mat-line>{{setting.title}}</h4>
-                </mat-list-item>
-            </mat-list>
+            <h3 mat-subheader>Settings</h3>
+            <mat-list-item *ngFor="let setting of settingList" routerLink="{{getResourceHref(setting.title)}}">
+                <mat-icon mat-list-icon>{{setting.icon}}</mat-icon>
+                <h4 mat-line>{{setting.title}}</h4>
+            </mat-list-item>
+        </mat-list>
     </mat-sidenav>
     <mat-sidenav-content class="page">
         <router-outlet></router-outlet>

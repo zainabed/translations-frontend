@@ -28,14 +28,15 @@ import { AppResourceDataResolve } from "./app.resource.data.resolve";
 import { SidebarService } from "./layout/sidebar/sidebar.service";
 import { SidebarComponent } from "./layout/sidebar/sidebar.component";
 import { SidebarModule } from "./layout/sidebar/sidebar.module";
-
+import { BreadcrumbModule } from "./layout/breadcrumb/breadcrumb.module";
+import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +46,7 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     ProjectModule,
     HeaderModule,
     SidebarModule,
+    BreadcrumbModule,
     ResourceModule,
     UserModule,
     LocaleModule,
@@ -57,12 +59,14 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
      //   children: ProjectRoutes
       },
       { path: '', component: HeaderComponent, outlet: 'toolbar' },
-      { path: '', component: SidebarComponent, outlet: 'sidebar' }
+      { path: '', component: SidebarComponent, outlet: 'sidebar' },
+     // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }
     ],
       { enableTracing: false }),
   ],
   exports: [
-    FlexLayoutModule
+    FlexLayoutModule, 
+    BreadcrumbComponent
   ],
   providers: [
     { provide: 'ExternalConfigurationService', useClass: ExternalConfigurationService },
