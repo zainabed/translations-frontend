@@ -18,12 +18,12 @@ export class AppResourceData {
             return this.filterHrefUrl(href);
         }
         console.log(href);
-        
+
         return href;
     }
 
     getResourceSelfUrl(resouce) {
-        return resouce["_links"]["self"]["href"];
+        return this.filterHrefUrl(resouce["_links"]["self"]["href"]);
     }
 
     getResourceId(resouce) {
@@ -34,6 +34,10 @@ export class AppResourceData {
         return href.substring(href.lastIndexOf("/") + 1);
     }
     filterHrefUrl(href) {
-        return href.substring(0, href.indexOf("{"));
+        let position = href.indexOf("{");
+        if (position > 0) {
+            return href.substring(0, position);
+        }
+        return href;
     }
 }

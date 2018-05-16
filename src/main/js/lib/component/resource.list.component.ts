@@ -1,5 +1,5 @@
 import { OnInit, Injector } from "@angular/core";
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { ResourcesService } from "../http/resources.service";
@@ -24,6 +24,8 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     public resource: T;
     public resourceList;
     public httpProgress: boolean = false;
+    public snackBar: MatSnackBar;
+    public snackBarDuration = 5000;
 
     resourcesService: ResourcesService;
     resourceService: ResourceService;
@@ -42,6 +44,7 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.appData = injector.get(AppResourceData);
         this.router = injector.get(Router);
         this.route = injector.get(ActivatedRoute);
+        this.snackBar = injector.get(MatSnackBar);
     }
 
     getComponentPath() {
@@ -83,6 +86,7 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.resourceList = null;
         this.error = error;
         this.httpProgress = false;
+        this.showNotification("Unable to fetch record. please try after some time.");
     }
 
     delete(resource) {
@@ -91,11 +95,13 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     }
 
     onDeleteSuccess(response: any) {
+        this.showNotification("Deleted record successfully.");
         this.get();
     }
 
     onDeleteFail(error: any) {
         this.error = error;
+        this.showNotification("Unable to delete record. please delete all related record associated wit it.");
     }
 
     edit(resource) {
@@ -108,4 +114,9 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.router.navigate([this._route, id]);
     }
 
+    showNotification(message) {
+        this.snackBar.open(message, null, {
+            duration: this.snackBarDuration
+        });
+    }
 }

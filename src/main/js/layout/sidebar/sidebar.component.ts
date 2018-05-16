@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from "@angular/core";
 
 import { SidebarService } from "./sidebar.service";
+import {AppResourceData} from "../../app.resource.data";
 
 @Component({
     selector: "sidebar",
@@ -17,7 +18,7 @@ export class SidebarComponent implements OnInit, AfterContentInit {
         { title: 'users', icon: "person", color: 'color--cornflowerblue' }
     ];
 
-    constructor(private sidebar: SidebarService) {
+    constructor(private sidebar: SidebarService, private appData: AppResourceData ) {
     }
 
     ngOnInit() {
@@ -31,7 +32,7 @@ export class SidebarComponent implements OnInit, AfterContentInit {
     getResourceHref(name) {
         console.log(name);
         console.log(this.sidebar.resource);
-        return this.sidebar.resource[name].href;
+        return this.appData.filterHrefUrl(this.sidebar.resource[name].href);
     }
 
 }

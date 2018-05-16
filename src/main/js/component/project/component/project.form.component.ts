@@ -34,6 +34,7 @@ export class ProjectFormComponent extends ResourceFormComponent<Project>{
             this.title = "Update Project";
         }else{
             this.title = "Add New Project";
+            this.projectForm.form.reset();
         }
     }
 }

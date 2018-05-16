@@ -1,9 +1,8 @@
-<mat-card class="column__xdt--12 column__dt--12">
-    <mat-card-title *ngIf="resourceList && resourceList.length">Keys</mat-card-title>
+<mat-card class="column__xdt--12 column__dt--12" *ngIf="resourceList && resourceList.length">
+    <mat-card-title >Keys</mat-card-title>
 
     <mat-card-content>
-        <mat-spinner *ngIf="httpProgress"></mat-spinner>
-        <mat-list class="row" *ngIf="!httpProgress">
+        <mat-list class="row" >
             <mat-list-item *ngFor="let key of resourceList">
                 <div mat-line class="color--darkorange">{{key.name}}</div>
                 <div mat-line>{{key.description}}</div>
@@ -20,16 +19,23 @@
             </mat-list-item>
 
         </mat-list>
-        <div class="row center-center" *ngIf="!resourceList || !resourceList.length">
-            <div class="column__dt--12 column__xdt--12 self__center">
-                <mat-icon class="icon--large">language</mat-icon>
-            </div>
-            <p class="column__dt--12 column__xdt--12 mat-h2 self__center">No keys found.</p>
-            <button mat-raised-button color="primary" (click)="add()">Add New</button>
-        </div>
+        
     </mat-card-content>
 
 </mat-card>
 <button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">
     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
 </button>
+
+<div class="row center-center" *ngIf="httpProgress">
+        <mat-spinner ></mat-spinner>
+</div>
+
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">
+    <div class="column__dt--12 column__xdt--12 self__center empty__image">
+        <img src="assets/images/empty_records.png">
+    </div>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
+    <button mat-raised-button color="primary" (click)="add()">Add New</button>
+</div>

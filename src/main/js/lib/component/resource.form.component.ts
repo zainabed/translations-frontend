@@ -46,48 +46,63 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     post() {
         if (this.form.form.valid) {
             let data = this.form.getData();
+            this.httpProgress = true;
             this.resourcesService.post(this.apiUrl, data).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
         }
     }
 
     onPostSuccess(response) {
+        this.httpProgress = false;
+        this.showNotification("Added record successfully.");
         this.navigateToList();
     }
 
     onPostFail(error) {
+        this.httpProgress = false;
         this.error = error;
+        this.showNotification("Unable to add record. please try after some time.");
     }
 
     patch(resource: Resource) {
         if (this.form.form.valid) {
             let apiUrl = this.appData.getResourceSelfUrl(resource);
             let data = this.form.getData();
+            this.httpProgress = true;
             this.resourceService.patch(apiUrl, data).subscribe(this.onPatchSuccess.bind(this), this.onPatchFail.bind(this));
         }
     }
 
     onPatchSuccess(reponse) {
+        this.httpProgress = false;
+        this.showNotification("Update record successfully.");
         this.navigateToList();
     }
 
     onPatchFail(error) {
+        this.httpProgress = false;
         this.error = error;
+        this.showNotification("Unable to update record. please try after some time.");
     }
 
     put(resource) {
         if (this.form.form.valid) {
             let apiUrl = this.appData.getResourceSelfUrl(resource);
             let data = this.form.getData();
+            this.httpProgress = true;
             this.resourceService.put(apiUrl, data).subscribe(this.onPutSuccess.bind(this), this.onPutFail.bind(this));
         }
     }
 
     onPutSuccess(reponse) {
+        this.httpProgress = false;
+        this.showNotification("Update record successfully.");
         this.navigateToList();
     }
 
     onPutFail(error) {
+        this.httpProgress = false;
         this.error = error;
+        this.showNotification("Unable to update record. please try after some time.");
     }
     
 
@@ -96,6 +111,7 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     }
 
     onGetSuccess(response) {
+        this.httpProgress = false;
         this.resource = response;
         this.form.form.patchValue(response);
     }

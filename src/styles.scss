@@ -118,7 +118,7 @@ button.button__float{
 
 .mat-error {
     position: absolute;
-    top: 34px;
+    bottom: -16px;
     font-size: 13px;
     animation: inherit;
 }
@@ -140,6 +140,7 @@ button.button__float{
   right: 0;
   top: 64px;
   bottom: 0;
+  padding-bottom: 64px;
 }
 
 .mat-drawer-content{
@@ -183,4 +184,14 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 
 .mat-card-actions, .mat-card-content, .mat-card-subtitle, .mat-card-title {
  // display: flex !important;
+}
+
+.translation-form {
+  position: fixed;
+  left: 60%;
+  max-width: 30%;
+}
+
+.empty__image{
+  padding-bottom: 32px;
 }

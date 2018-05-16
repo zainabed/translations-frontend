@@ -12,8 +12,8 @@ export class KeyForm extends ModelForm<Key>{
 
     buildForm(fb: FormBuilder): FormGroup {
         return fb.group({
-            name: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
-            description: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(50)]],
+            name: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+            description: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
             projects: ["", [Validators.required]]
         });
     }

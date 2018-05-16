@@ -1,5 +1,5 @@
 <form [formGroup]="keyForm.form" class="column__xdt--12">
-
+    <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
     <mat-card class="row">
         <mat-card-title>{{title}}</mat-card-title>
         <mat-card-content class="">
@@ -14,14 +14,14 @@
                         Please enter at least 5 characters
                     </mat-error>
                     <mat-error id="name-max-error" *ngIf="keyForm.form.get('name').hasError('maxlength')">
-                        Maximum characters limit of name is 20
+                        Maximum characters limit of name is 100
                     </mat-error>
 
                 </ng-container>
             </mat-form-field>
 
             <mat-form-field class="row">
-                <input matInput placeholder="Description" formControlName="description" id="description" [errorStateMatcher]="matcher">
+                <textarea matInput placeholder="Description" formControlName="description" id="description" [errorStateMatcher]="matcher"></textarea>
                 <ng-container>
                     <mat-error id="description-empty-error" *ngIf="keyForm.form.get('description').hasError('required')">
                         description can't be empty
@@ -30,7 +30,7 @@
                         Please enter at least 5 characters
                     </mat-error>
                     <mat-error id="description-max-error" *ngIf="keyForm.form.get('description').hasError('maxlength')">
-                        Maximum characters limit of name is 6
+                        Maximum characters limit of name is 200
                     </mat-error>
 
                 </ng-container>

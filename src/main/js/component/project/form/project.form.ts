@@ -15,7 +15,7 @@ export class ProjectForm extends ModelForm<Project>{
     buildForm(builder) {
         return builder.group({
             name: ['', [Validators.required, Validators.min(5), Validators.max(50)]],
-            description: ['', [Validators.required, Validators.min(10), Validators.max(200)]],
+            description: ['', [Validators.required, Validators.min(10), Validators.max(500)]],
             imageUri: ['']
         });
     }

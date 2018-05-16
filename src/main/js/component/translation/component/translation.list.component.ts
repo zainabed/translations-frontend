@@ -22,11 +22,13 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
     keyService: KeyService;
     keyForm: KeyForm;
     searchUrl : string;
+    isSearched: boolean;
 
     constructor(injector: Injector) {
         super(injector);
         this.keyService = injector.get(KeyService);
         this.keyForm = injector.get(KeyForm);
+        this.isSearched = false;
     }
 
     ngOnInit(){
@@ -38,6 +40,7 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
     search(){
         let key = this.keyForm.getData();
         this.apiUrl = this.searchUrl +  key.name;
+        this.isSearched = true;
         this.get();
     }
 

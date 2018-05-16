@@ -1,19 +1,18 @@
-<div class="row gutter__column--dt gutter__column--xdt component">
+<div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">
     <mat-card class="column__xdt--6 column__dt--6">
-        <mat-card-title *ngIf="resourceList && resourceList.length">Translations</mat-card-title>
+        <mat-card-title>Translations</mat-card-title>
 
         <mat-card-content>
             <form [formGroup]="keyForm.form" class="column__xdt--12">
                 <mat-form-field class="row">
                     <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
-                   
+
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="search()">Search</button>
-                
+
             </form>
             <mat-divider></mat-divider>
-            <mat-spinner *ngIf="httpProgress"></mat-spinner>
-            <mat-list class="row" *ngIf="!httpProgress">
+            <mat-list class="row">
                 <mat-list-item *ngFor="let key of resourceList" (click)="open(key)">
                     <div mat-line class="color--darkorange">{{key.name}}</div>
                     <div mat-line>{{key.description}}</div>
@@ -30,13 +29,11 @@
                 </mat-list-item>
 
             </mat-list>
-            <div class="row center-center" *ngIf="!resourceList || !resourceList.length">
-                <div class="column__dt--12 column__xdt--12 self__center">
-                    <mat-icon class="icon--large">language</mat-icon>
-                </div>
-                <p class="column__dt--12 column__xdt--12 mat-h2 self__center">No key found.</p>
-                <button mat-raised-button color="primary" (click)="add()">Add New</button>
+
+            <div *ngIf="!resourceList || !resourceList.length">
+                <p>No result found for given search value.</p>
             </div>
+
         </mat-card-content>
 
     </mat-card>
@@ -44,4 +41,17 @@
         <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
     </button>
     <router-outlet></router-outlet>
+</div>
+
+<div class="row center-center" *ngIf="httpProgress">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress && !isSearched">
+    <div class="column__dt--12 column__xdt--12 self__center empty__image">
+        <img src="assets/images/empty_records.png">
+    </div>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
+    <button mat-raised-button color="primary" (click)="add()">Add New</button>
 </div>
