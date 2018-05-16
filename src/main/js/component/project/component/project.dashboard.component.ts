@@ -14,7 +14,10 @@ import { ProjectService } from "../model/project.service";
 })
 @Component({
     selector: "project-dashboard",
-    templateUrl: "project-dashboard.html"
+    templateUrl: "project-dashboard.html",
+    host: {
+        class: "column__xdt--7 column__dt--7 center-center"
+    }
 })
 export class ProjectDashboardComponent extends ResourceComponent<Project>{
     appData: AppResourceData;
@@ -27,7 +30,6 @@ export class ProjectDashboardComponent extends ResourceComponent<Project>{
         super.onGetSuccess(response);
         this.projectService.resource = response;
         this.projectService.projectId = this.appData.getResourceId(response);
-        console.log(this.resource);
         this.sidebarService.resource = this.resource;
     }
 }

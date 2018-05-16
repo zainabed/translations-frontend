@@ -23,6 +23,7 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
     keyForm: KeyForm;
     searchUrl : string;
     isSearched: boolean;
+    onSearch: boolean = false;
 
     constructor(injector: Injector) {
         super(injector);
@@ -42,6 +43,16 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
         this.apiUrl = this.searchUrl +  key.name;
         this.isSearched = true;
         this.get();
+    }
+
+    openSearchBox(){
+        this.onSearch = true;
+    }
+
+    closeSearchBox(){
+        this.onSearch = false;
+        this.keyForm.form.get("name").setValue("");
+        this.search();
     }
 
     open(resource) {

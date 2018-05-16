@@ -195,3 +195,19 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 .empty__image{
   padding-bottom: 32px;
 }
+
+.flex {
+  display: flex !important;
+}
+
+.searchbox{
+  font-size: 16px !important;
+}
+
+.hide {
+  display:  none !important;
+}
+
+.padding--zero {
+  padding: 0 !important;
+}

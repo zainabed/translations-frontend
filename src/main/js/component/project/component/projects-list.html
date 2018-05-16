@@ -1,4 +1,4 @@
-<div class="row component gutter__column--dt gutter__column--xdt" *ngIf="resourceList && resourceList.length">
+<div class="row component gutter__column--dt gutter__column--xdt"  *ngIf="resourceList && resourceList.length">
     <div *ngFor="let project of resourceList" class="column__xdt--4 column__dt--4">
         <mat-card>
             <mat-card-title>{{project.name}}</mat-card-title>
@@ -16,13 +16,20 @@
 
 </div>
 
-<div class="row center-center" *ngIf="!resourceList || !resourceList.length">
-    <div class="column__dt--12 column__xdt--12 self__center">
-        <mat-icon class="icon--large">business_center</mat-icon>
-    </div>
-    <p class="column__dt--12 column__xdt--12 mat-h2 self__center">No projects found.</p>
-    <button mat-raised-button color="primary" routerLink="/projects/new">Add New</button>
-</div>
+
 <button mat-fab class="button__float" routerLink="/projects/new" *ngIf="resourceList && resourceList.length">
     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
 </button>
+
+<div class="row center-center" *ngIf="httpProgress">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">
+    <div class="column__dt--12 column__xdt--12 self__center empty__image">
+        <img src="assets/images/empty_records.png">
+    </div>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
+    <button mat-raised-button color="primary" routerLink="/projects/new">Add New</button>
+</div>

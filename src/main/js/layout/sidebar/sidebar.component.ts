@@ -30,8 +30,6 @@ export class SidebarComponent implements OnInit, AfterContentInit {
     }
 
     getResourceHref(name) {
-        console.log(name);
-        console.log(this.sidebar.resource);
         return this.appData.filterHrefUrl(this.sidebar.resource[name].href);
     }
 

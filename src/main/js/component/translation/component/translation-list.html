@@ -1,17 +1,31 @@
 <div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">
     <mat-card class="column__xdt--6 column__dt--6">
-        <mat-card-title>Translations</mat-card-title>
-
-        <mat-card-content>
-            <form [formGroup]="keyForm.form" class="column__xdt--12">
+        <mat-card-title class="row flex" *ngIf="!onSearch">
+            <div class="column__xdt--10 column__dt--10 padding--zero">Translations</div>
+            <div class="column__xdt--2 column__dt--2 padding--zero">
+                <button mat-icon-button (click)="openSearchBox()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </mat-card-title>
+        <mat-card-title class="row flex" *ngIf="onSearch">
+            <div class="column__xdt--2 column__dt--2 padding--zero">
+                <button mat-icon-button (click)="closeSearchBox()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+            <form [formGroup]="keyForm.form" class="column__xdt--10 column__dt--10 padding--zero searchbox">
                 <mat-form-field class="row">
-                    <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
-
+                    <input matInput formControlName="name" id="name">
+                    
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="search()">Search</button>
+                <button mat-raised-button color="primary" (click)="search()" class="hide">Search</button>
 
             </form>
-            <mat-divider></mat-divider>
+        </mat-card-title>
+
+        <mat-card-content>
+
             <mat-list class="row">
                 <mat-list-item *ngFor="let key of resourceList" (click)="open(key)">
                     <div mat-line class="color--darkorange">{{key.name}}</div>
