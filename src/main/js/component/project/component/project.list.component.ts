@@ -1,35 +1,50 @@
-import {Component , OnInit, HostBinding} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { Component, Injector, AfterContentInit} from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 
-import {Project} from '../model/project';
-import {ProjectService} from '../model/project.service';
+import { SidebarService } from "../../../layout/sidebar/sidebar.service";
+import { ResourcePath, ResourceListComponent } from "../../../lib/component/resource.component.core";
 
-@Component({
-    selector: "project-list-component",
-    templateUrl: './projects-list.html',
+import { Project } from '../model/project';
+import { ProjectService } from '../model/project.service';
+
+
+
+@ResourcePath({
+    path: "projects",
+    route: "/projects",
+    id: "projectId"
 })
-export class ProjectListComponent implements OnInit {
+@Component({
+    selector: "project-list",
+    templateUrl: './projects-list.html',
+    host: {
+        class: "column__xdt--10 column__dt--10"
+    }
+})
+export class ProjectListComponent extends ResourceListComponent<Project> implements AfterContentInit {
 
-    projects: Project[];
-    dataSource: MatTableDataSource<Project>;
-    displayedColumns = [ 'name', 'description'];
-    @HostBinding('class.flexBox') flex: boolean = false;
+    private projects;
+    projectsTableData: MatTableDataSource<Project>;
+    displayedColumns = ['name', 'description', "selection"];
 
-    constructor(private projectService: ProjectService) {
-
+    constructor(injector: Injector, private sidebarService: SidebarService) {
+        super(injector);
+       
     }
 
-    ngOnInit(): void {
-        this.flex = true;
-        this.findAllProjects();
-        
+    ngOnInit() {
+        super.ngOnInit();
+        this.get();
+   //     this.sidebarService.resource = null;
     }
 
-    findAllProjects() {
-        this.projectService.getAll().subscribe((projects: Project[])=> {
-            this.projects = projects;
-            this.dataSource = new MatTableDataSource(this.projects)
-            console.log(this.projects);
-        });
+    ngAfterContentInit(){
+       // this.sidebarService.resource = null;
     }
+
+    onGetSuccess(response) {
+        super.onGetSuccess(response);
+        this.projectsTableData = new MatTableDataSource(this.resourceList);
+    }
+
 }

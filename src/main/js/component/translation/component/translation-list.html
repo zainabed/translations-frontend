@@ -1,0 +1,71 @@
+<div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">
+    <mat-card class="column__xdt--6 column__dt--6">
+        <mat-card-title class="row flex" *ngIf="!onSearch">
+            <div class="column__xdt--10 column__dt--10 padding--zero">Translations</div>
+            <div class="column__xdt--2 column__dt--2 padding--zero">
+                <button mat-icon-button (click)="openSearchBox()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </mat-card-title>
+        <mat-card-title class="row flex" *ngIf="onSearch">
+            <div class="column__xdt--2 column__dt--2 padding--zero">
+                <button mat-icon-button (click)="closeSearchBox()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+            <form [formGroup]="keyForm.form" class="column__xdt--10 column__dt--10 padding--zero searchbox" autocomplete="off">
+                <mat-form-field class="row">
+                    <input matInput formControlName="name" id="name">
+                    
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="search()" class="hide">Search</button>
+
+            </form>
+        </mat-card-title>
+
+        <mat-card-content>
+
+            <mat-list class="row">
+                <mat-list-item *ngFor="let key of resourceList" (click)="open(key)">
+                    <div mat-line class="color--darkorange">{{key.name}}</div>
+                    <div mat-line>{{key.description}}</div>
+
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #resourceMenu="matMenu">
+                            <button mat-menu-item (click)="edit(key)">Edit</button>
+                            <button mat-menu-item (click)="delete(key)">Delete</button>
+                        </mat-menu>
+                    </div>
+                </mat-list-item>
+
+            </mat-list>
+
+            <div *ngIf="!resourceList || !resourceList.length">
+                <p>No result found for given search value.</p>
+            </div>
+
+        </mat-card-content>
+
+    </mat-card>
+    <button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+    </button>
+    <router-outlet></router-outlet>
+</div>
+
+<div class="row center-center" *ngIf="httpProgress">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress && !isSearched">
+    <div class="column__dt--12 column__xdt--12 self__center empty__image">
+        <img src="assets/images/empty_records.png">
+    </div>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
+    <button mat-raised-button color="primary" (click)="add()">Add New</button>
+</div>

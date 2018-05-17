@@ -1,24 +1,35 @@
-<mat-card flexLayout="row" fxFlex="0 0 100%" class="pad--zero">
-    <div fxFlex>
-        <mat-table #table [dataSource]="dataSource">
-
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
-            </ng-container>
-
-
-
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+<div class="row component gutter__column--dt gutter__column--xdt"  *ngIf="resourceList && resourceList.length">
+    <div *ngFor="let project of resourceList" class="column__xdt--4 column__dt--4">
+        <mat-card>
+            <mat-card-title>{{project.name}}</mat-card-title>
+            <mat-card-content>
+                <img mat-card-image>
+                <p>{{project.description}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="open(project)">Open</button>
+                <button mat-button (click)="edit(project)">Edit</button>
+                <button mat-button color="warn" (click)="delete(project)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
     </div>
-</mat-card>
-<button mat-fab class="button__float" routerLink="/projects/new">
+
+</div>
+
+
+<button mat-fab class="button__float" routerLink="/projects/new" *ngIf="resourceList && resourceList.length">
     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
 </button>
+
+<div class="row center-center" *ngIf="httpProgress">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">
+    <div class="column__dt--12 column__xdt--12 self__center empty__image">
+        <img src="assets/images/empty_records.png">
+    </div>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
+    <button mat-raised-button color="primary" routerLink="/projects/new">Add New</button>
+</div>

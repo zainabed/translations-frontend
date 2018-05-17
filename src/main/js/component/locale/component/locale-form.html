@@ -1,0 +1,39 @@
+<form [formGroup]="localeForm.form" class="column__xdt--12" autocomplete="off">
+    <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
+    <mat-card class="row">
+        <mat-card-title>{{title}}</mat-card-title>
+        <mat-card-content class="">
+
+            <mat-form-field class="row">
+
+                <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
+                <ng-container>
+                    <mat-error id="name-empty-error" *ngIf="localeForm.form.get('name').hasError('required')">
+                        name can't be empty
+                    </mat-error>
+                    <mat-error id="name-less-error" *ngIf="localeForm.form.get('name').hasError('minlength')">
+                        Please enter at least 5 characters
+                    </mat-error>
+                    <mat-error id="name-max-error" *ngIf="localeForm.form.get('name').hasError('maxlength')">
+                        Maximum characters limit of name is 20
+                    </mat-error>
+
+                </ng-container>
+            </mat-form-field>
+
+            <mat-form-field class="row">
+                <mat-select formControlName="code">
+                    <mat-option *ngFor="let code of codeList" [value]="code">{{code}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">SAVE</button>
+            <button mat-button color="primary" *ngIf=isForUpdate (click)="patch(resource)" class="">UPDATE</button>
+            <button mat-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">DELETE</button>
+            <button mat-button (click)="navigateToList()">CANCEL</button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>

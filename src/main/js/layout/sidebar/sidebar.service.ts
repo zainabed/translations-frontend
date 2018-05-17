@@ -1,0 +1,42 @@
+import { Injectable } from "@angular/core";
+import { environment } from "../../../../environments/environment";
+
+@Injectable()
+export class SidebarService {
+    private _resource = null;
+    private active: boolean = false;
+    private title: string;
+
+    set resource(resource) {
+        this._resource = {};
+
+        if (resource) {
+            this.title = resource.name;
+            let self = this;
+
+            let links = resource["_links"];
+            Object.keys(links).forEach(function (key) {
+                if (key !== "self" && key !== "project") {
+                    let link = links[key];
+                    let href = link["href"];
+                    let hrefValue = href.replace(environment.apiUrl, "");
+                    self._resource[key] = { name: key, href: hrefValue };
+                }
+
+            });
+        }
+        this.setActive(this._resource);
+    }
+
+    get resource() {
+        return this._resource;
+    }
+
+    setActive(active: Array<any>) {
+        this.active = true;
+        if (active && active.length) {
+            this.active = true;
+        }
+    }
+
+}

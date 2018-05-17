@@ -12,6 +12,7 @@ export const UserRoutes: Routes = [
         children: [
             { path: '', component: UserListComponent },
             { path: 'new', component: UserFormComponent },
+            { path: ':id', component: UserFormComponent },
         ],
 
     }

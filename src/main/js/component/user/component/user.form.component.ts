@@ -1,43 +1,47 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, Injector } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
+import { ResourceService } from "../../../lib/http/resource.service";
+import { ResourcesService } from "../../../lib/http/resources.service";
+import { Resource } from "../../../lib/http/resource";
+import { AppResourceData } from "../../../app.resource.data";
+import { Resources } from "../../../lib/http/resources";
 
+import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
 
 import { UserForm } from "../form/user.form";
-import { UserService } from "../model/user.service";
+import { User } from '../model/user';
 
-
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        const isSubmitted = form && form.submitted;
-        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    }
-}
-
+@ResourcePath({
+    path: "users",
+    route: "/users",
+    id: "project"
+})
 @Component({
     selector: "users-form",
-    templateUrl: "users-form.html"
+    templateUrl: "users-form.html",
+    host: {
+        class: "column__xdt--6"
+    }
 })
-export class UserFormComponent {
+export class UserFormComponent extends ResourceFormComponent<User>{
+    private title: string;
 
-    matcher = new MyErrorStateMatcher();
-    public apiError = false;
+    constructor(public userForm: UserForm, injector: Injector) {
+        super(userForm, injector);
 
-    constructor(public userForm: UserForm, private userService: UserService, private router: Router) {
     }
 
-    save() {
-        this.userService.save(this.userForm.getData()).subscribe(this.navigateToUserList, this.serviceError);
+    ngOnInit() {
+        super.ngOnInit();
+        if (this.isForUpdate) {
+            this.title = "Update User";
+        } else {
+            this.title = "Add New User";
+        }
     }
 
-    navigateToUserList(response) {
-        this.router.navigate(['/users']);
-    }
 
-    serviceError(error) {
-        this.apiError = true;
-    }
 }

@@ -1,0 +1,47 @@
+<mat-card class="column__xdt--12 column__dt--12" *ngIf="resourceList && resourceList.length">
+    <mat-card-title class="toolbar">
+        <div class="left">Locales</div>
+        <div class="right">
+            <mat-icon matTooltip="FC Phrase supports all Nordic languages. adding locales is easy, Just click the plus icon button in the locale overview. After adding the locale it will be immediately listed in Locale overview.">live_help</mat-icon>
+        </div>
+    </mat-card-title>
+    <mat-card-content>
+        <mat-list class="row" *ngIf="!httpProgress">
+            <mat-list-item *ngFor="let locale of resourceList">
+                <!-- <mat-icon mat-list-icon>language</mat-icon> -->
+                <img matListAvatar src="assets/images/flags/{{locale.code}}.png" alt="..." class="icon__list">
+                <div mat-line class="color--darkcyan">{{locale.name}}</div>
+                <div mat-line>{{locale.code}}</div>
+
+                <div>
+                    <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #resourceMenu="matMenu">
+                        <button mat-menu-item (click)="edit(locale)">Edit</button>
+                        <button mat-menu-item (click)="delete(locale)">Delete</button>
+                    </mat-menu>
+                </div>
+            </mat-list-item>
+
+        </mat-list>
+
+    </mat-card-content>
+
+</mat-card>
+<button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">
+    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+</button>
+
+<div class="row center-center" *ngIf="httpProgress">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">
+    <div class="column__dt--12 column__xdt--12 self__center empty__image">
+        <img src="assets/images/empty_records.png">
+    </div>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in locales</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a language locale and it will show up here.</p>
+    <button mat-raised-button color="primary" (click)="add()">Add New</button>
+</div>

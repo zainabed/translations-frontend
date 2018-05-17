@@ -1,0 +1,11 @@
+<div class="breadcrumb row">
+    <div class="breadcrumb__item">
+            <button mat-button>Home</button>
+            <mat-icon>chevron_right</mat-icon>
+    </div>
+    
+    <div *ngFor="let breadcrumb of breadcrumbs" class="breadcrumb__item">
+        <button mat-button>{{ breadcrumb }}</button>
+        <mat-icon>chevron_right</mat-icon>
+    </div>
+</div>
