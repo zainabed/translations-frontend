@@ -1,5 +1,5 @@
 <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
-<form [formGroup]="translationForm.form" class="row component">
+<form [formGroup]="translationForm.form" class="row component" autocomplete="off">
 
     <mat-card class="column__xdt--12 column__dt--12">
         <mat-card-title class="color--darkorange">{{keyService.resource.name}}</mat-card-title>

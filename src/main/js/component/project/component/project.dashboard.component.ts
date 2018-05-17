@@ -16,7 +16,7 @@ import { ProjectService } from "../model/project.service";
     selector: "project-dashboard",
     templateUrl: "project-dashboard.html",
     host: {
-        class: "column__xdt--7 column__dt--7 center-center"
+        class: "column__xdt--10 column__dt--10 center-center"
     }
 })
 export class ProjectDashboardComponent extends ResourceComponent<Project>{

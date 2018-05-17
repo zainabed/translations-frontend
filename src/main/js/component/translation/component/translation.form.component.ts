@@ -68,8 +68,11 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
     }
 
     onGetFail(error) {
-        super.onGetFail(error);
+        //super.onGetFail(error);
         this.resource = null;
+        this.resourceList = null;
+        this.error = error;
+        this.httpProgress = false;
         this.configureForm();
     }
 

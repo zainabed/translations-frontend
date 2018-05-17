@@ -180,6 +180,18 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
   .color--#{$color} {
     color: #{$color};
   }
+
+  .bc--#{$color} {
+    background: #{$color}
+  }
+}
+
+.project__holder{
+  height: 175px;
+}
+
+.project--card{
+  padding: 8px;
 }
 
 .mat-card-actions, .mat-card-content, .mat-card-subtitle, .mat-card-title {
@@ -221,6 +233,8 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 }
 
 .toolbar{
+  display: flex !important;
+  
   .left{
     flex:0 1 0;
     text-align: left;

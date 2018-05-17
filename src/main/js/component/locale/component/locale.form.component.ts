@@ -20,6 +20,8 @@ import { ResourceFormComponent, ResourcePath } from "../../../lib/component/reso
 })
 export class LocaleFormComponent extends ProjectResourceFormComponent<Locale> {
   
+    codeList = [ 'sv-SE', 'en-SE', 'da-DK', 'en-DK', 'fi-FI', 'fi-SV', 'en-FI', 'no-NO', 'en-NO'];
+
     constructor(injector: Injector,  public localeForm: LocaleForm) {
         super(localeForm, injector);
     }
@@ -31,6 +33,8 @@ export class LocaleFormComponent extends ProjectResourceFormComponent<Locale> {
             this.title = "Update Locale";
         } else {
             this.title = "Add New Locale";
+            this.localeForm.form.reset();
+            this.setProject();
         }
     }
 

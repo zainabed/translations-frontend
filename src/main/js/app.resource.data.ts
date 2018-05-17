@@ -17,8 +17,6 @@ export class AppResourceData {
         if (href.indexOf("{") > 0) {
             return this.filterHrefUrl(href);
         }
-        console.log(href);
-
         return href;
     }
 

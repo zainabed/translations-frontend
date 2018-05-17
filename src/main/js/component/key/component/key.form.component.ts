@@ -31,6 +31,8 @@ export class KeyFormComponent extends ProjectResourceFormComponent<Key> {
             this.title = "Update key";
         } else {
             this.title = "Add New key";
+            this.keyForm.form.reset();
+            this.setProject();
         }
     }
 

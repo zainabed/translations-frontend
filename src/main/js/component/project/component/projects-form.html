@@ -1,6 +1,6 @@
 <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
 <mat-card>
-    <form [formGroup]="projectForm.form">
+    <form [formGroup]="projectForm.form" autocomplete="off">
         <mat-card-title>
             <h4>{{title}}</h4>
         </mat-card-title>

@@ -1,8 +1,13 @@
 <mat-card class="column__xdt--12 column__dt--12" *ngIf="resourceList && resourceList.length">
-    <mat-card-title >Keys</mat-card-title>
+    <mat-card-title class="toolbar">
+        <div class="left">Keys</div>
+        <div class="right">
+            <mat-icon matTooltip="Keys are imporatant element in adding translation to any Nordic language. adding keys is easy, Just click the plus icon button in the Keys overview. After adding the key it will be immediately listed in Keys overview.">live_help</mat-icon>
+        </div>
+    </mat-card-title>
 
     <mat-card-content>
-        <mat-list class="row" >
+        <mat-list class="row">
             <mat-list-item *ngFor="let key of resourceList">
                 <div mat-line class="color--darkorange">{{key.name}}</div>
                 <div mat-line>{{key.description}}</div>
@@ -19,7 +24,7 @@
             </mat-list-item>
 
         </mat-list>
-        
+
     </mat-card-content>
 
 </mat-card>
@@ -28,7 +33,7 @@
 </button>
 
 <div class="row center-center" *ngIf="httpProgress">
-        <mat-spinner ></mat-spinner>
+    <mat-spinner></mat-spinner>
 </div>
 
 <div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">

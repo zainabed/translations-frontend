@@ -117,6 +117,7 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     }
 
     onDeleteSuccess(response: any) {
+        this.showNotification("Deleted record successfully.");
         this.navigateToList();
     }
 
