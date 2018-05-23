@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,9 +19,10 @@ import { LocaleModule } from "./component/locale/locale.module";
 import { KeyModule } from "./component/key/key.module";
 import { ProjectModule } from './component/project/project.module';
 import { TranslationModule } from './component/translation/translation.module';
+import { LoginModule } from './component/login/login.module';
 import { ResourceModule } from "./lib/http/resource.module";
 
-import {ProjectRoutes} from "./component/project/project.route";
+import { ProjectRoutes } from "./component/project/project.route";
 
 import { AppComponent } from './app.component';
 import { AppResourceData } from "./app.resource.data";
@@ -30,8 +32,11 @@ import { SidebarComponent } from "./layout/sidebar/sidebar.component";
 import { SidebarModule } from "./layout/sidebar/sidebar.module";
 import { BreadcrumbModule } from "./layout/breadcrumb/breadcrumb.module";
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
+import { LoginComponent } from "./component/login/component/login.component";
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
+import { AuthorizedInterceptor } from "./lib/http/authorized.interceptor";
+import { AuthService } from "./lib/http/auth.service";
 
 
 @NgModule({
@@ -50,22 +55,24 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     ResourceModule,
     UserModule,
     LocaleModule,
+    LoginModule,
     KeyModule,
     TranslationModule,
     RouterModule.forRoot([
+      { path: "login", component: LoginComponent },
       {
         path: '', component: AppComponent,
         resolve: { "projectResource": AppResourceDataResolve },
-     //   children: ProjectRoutes
+        //   children: ProjectRoutes
       },
       { path: '', component: HeaderComponent, outlet: 'toolbar' },
       { path: '', component: SidebarComponent, outlet: 'sidebar' },
-     // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }
+      // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }
     ],
       { enableTracing: false }),
   ],
   exports: [
-    FlexLayoutModule, 
+    FlexLayoutModule,
     BreadcrumbComponent
   ],
   providers: [
@@ -73,7 +80,9 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     AppResourceData,
     AppResourceDataResolve,
     SidebarService,
-    ResourceMockData
+    ResourceMockData,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizedInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

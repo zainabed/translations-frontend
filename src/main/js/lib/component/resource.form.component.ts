@@ -27,10 +27,10 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     matcher = new MyErrorStateMatcher();
     private id: any;
     protected isForUpdate: boolean = false;
-    
+
     constructor(public form: ModelForm<T>, injector: Injector) {
         super(injector);
-        
+
     }
 
     ngOnInit() {
@@ -60,7 +60,7 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     onPostFail(error) {
         this.httpProgress = false;
         this.error = error;
-        this.showNotification("Unable to add record. please try after some time.");
+        this.showErrorMessage(error, "Unable to add record. please try after some time.");
     }
 
     patch(resource: Resource) {
@@ -81,7 +81,7 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     onPatchFail(error) {
         this.httpProgress = false;
         this.error = error;
-        this.showNotification("Unable to update record. please try after some time.");
+        this.showErrorMessage(error, "Unable to update record. please try after some time.");
     }
 
     put(resource) {
@@ -102,9 +102,9 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     onPutFail(error) {
         this.httpProgress = false;
         this.error = error;
-        this.showNotification("Unable to update record. please try after some time.");
+        this.showErrorMessage(error, "Unable to update record. please try after some time.");
     }
-    
+
 
     navigateToList() {
         this.router.navigate([this._route]);

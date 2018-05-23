@@ -101,7 +101,8 @@ export abstract class ResourceListComponent<T> implements ResourceList {
 
     onDeleteFail(error: any) {
         this.error = error;
-        this.showNotification("Unable to delete record. please delete all related record associated wit it.");
+        this.showErrorMessage(error, "Unable to delete record. please delete all related record associated wit it.");
+        //this.showNotification("Unable to delete record. please delete all related record associated wit it.");
     }
 
     edit(resource) {
@@ -114,6 +115,16 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.router.navigate([this._route, id]);
     }
 
+    showErrorMessage(error, message?: string) {
+        switch (error.status) {
+            case 403:
+                this.showNotification("You are not authorized");
+                break;
+            default:
+                if (message)
+                    this.showNotification(message);
+        }
+    }
     showNotification(message) {
         this.snackBar.open(message, null, {
             duration: this.snackBarDuration

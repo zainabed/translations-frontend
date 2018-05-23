@@ -1,0 +1,45 @@
+<form [formGroup]="loginForm.form" class="column__xdt--6 column__dt--6" autocomplete="off">
+    <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
+    <mat-card class="row">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content class="">
+            <mat-form-field class="row">
+
+                <input matInput placeholder="Name" formControlName="username" id="username" [errorStateMatcher]="matcher">
+                <ng-container>
+                    <mat-error id="username-empty-error" *ngIf="loginForm.form.get('username').hasError('required')">
+                        username can't be empty
+                    </mat-error>
+                    <mat-error id="username-less-error" *ngIf="loginForm.form.get('username').hasError('minlength')">
+                        Please enter at least 5 characters
+                    </mat-error>
+                    <mat-error id="username-max-error" *ngIf="loginForm.form.get('username').hasError('maxlength')">
+                        Maximum characters limit of username is 50
+                    </mat-error>
+
+                </ng-container>
+            </mat-form-field>
+
+            <mat-form-field class="row">
+                <input matInput type="password" formControlName="password" id="password" [errorStateMatcher]="matcher"/>
+                <ng-container>
+                    <mat-error id="password-empty-error" *ngIf="loginForm.form.get('password').hasError('required')">
+                        password can't be empty
+                    </mat-error>
+                    <mat-error id="password-less-error" *ngIf="loginForm.form.get('password').hasError('minlength')">
+                        Please enter at least 5 characters
+                    </mat-error>
+                    <mat-error id="password-max-error" *ngIf="loginForm.form.get('password').hasError('maxlength')">
+                        Maximum characters limit of username is 50
+                    </mat-error>
+
+                </ng-container>
+            </mat-form-field>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-button color="primary" (click)="login()">Login</button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>
