@@ -5,5 +5,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:8080"
+  apiUrl: "http://localhost:8080/api/v1",
+  oauthUrl: "http://localhost:8080/oauth/token",
+  clientId: "admin-tool",
+  clientSecret: "password"
 };

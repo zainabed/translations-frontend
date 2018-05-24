@@ -8,6 +8,7 @@ import { MaterialModule } from "../../lib/material/mareial.module";
 
 import { LoginComponent } from "./component/login.component";
 import { LoginForm } from "./form/login.form";
+import { LoginResource } from "./http/login.resource";
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { LoginForm } from "./form/login.form";
     declarations: [
         LoginComponent
     ],
-    providers: [LoginForm]
+    providers: [LoginForm, LoginResource]
 })
 export class LoginModule {
 

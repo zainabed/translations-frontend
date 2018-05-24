@@ -35,8 +35,8 @@ import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 import { LoginComponent } from "./component/login/component/login.component";
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
-import { AuthorizedInterceptor } from "./lib/http/authorized.interceptor";
-import { AuthService } from "./lib/http/auth.service";
+import { AuthorizedInterceptor } from "./lib/oauth/authorized.interceptor";
+import { AuthService } from "./lib/oauth/auth.service";
 
 
 @NgModule({
