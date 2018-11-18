@@ -7,6 +7,10 @@ import { Router, RouterModule } from '@angular/router';
 // User Component and Services
 import { UserForm, UserFormComponent, UserComponent, UserService, UserListComponent } from "./user.core";
 import { UserRoutes } from "./user.route";
+import { UserLoginComponent } from "./component/user.login.component";
+import { LoginForm } from "./form/login.form";
+import { LoginHttpService } from "./http/login.http.service";
+import { JwtToken } from "./model/jwt.token";
 
 @NgModule({
     imports: [
@@ -16,9 +20,10 @@ import { UserRoutes } from "./user.route";
     declarations: [
         UserComponent,
         UserFormComponent,
-        UserListComponent
+        UserListComponent,
+        UserLoginComponent
     ],
-    providers: [UserForm, UserService]
+    providers: [UserForm, UserService, LoginForm, LoginHttpService, JwtToken]
 })
 export class UserModule {
 

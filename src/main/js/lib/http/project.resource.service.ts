@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { ProjectResource } from "./project.resource";
+import { JwtToken } from "../../component/user/model/jwt.token";
 
 /**
  * @description
@@ -13,7 +14,7 @@ import { ProjectResource } from "./project.resource";
 @Injectable()
 export class ProjectResourceService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private jwt: JwtToken) { }
 
     /**
      * @method get
@@ -25,6 +26,10 @@ export class ProjectResourceService {
      * @return {Observable<ProjectResource>} Observable of ProjectResource. 
      */
     get(apiUrl): Observable<ProjectResource> {
-        return this.http.get<ProjectResource>(apiUrl);
+        return this.http.get<ProjectResource>(apiUrl, {
+            headers: {
+                Authorization: this.jwt.type + " " + this.jwt.token
+            }
+        });
     }
 }
