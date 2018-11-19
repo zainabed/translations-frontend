@@ -57,10 +57,10 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
         this.navigateToList();
     }
 
-    onPostFail(error) {
+    onPostFail(response) {
         this.httpProgress = false;
-        this.error = error;
-        this.showNotification("Unable to add record. please try after some time.");
+        this.error = response;
+        this.showNotification(response.error.message);
     }
 
     patch(resource: Resource) {

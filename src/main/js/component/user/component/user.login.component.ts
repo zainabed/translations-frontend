@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
     selector: "user-login-component",
     templateUrl: "login-form.html",
     host: {
-        class: "row"
+        class: "row center-center"
     }
 })
 export class UserLoginComponent {
