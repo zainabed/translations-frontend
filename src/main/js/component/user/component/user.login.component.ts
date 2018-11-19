@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
     selector: "user-login-component",
     templateUrl: "login-form.html",
     host: {
-        class: "column__xdt--6"
+        class: "row"
     }
 })
 export class UserLoginComponent {
