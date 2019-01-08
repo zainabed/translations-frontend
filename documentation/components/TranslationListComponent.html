@@ -1,0 +1,1133 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>translation-frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">translation-frontend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>TranslationListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/main/js/component/translation/component/translation.list.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code><a href="../interfaces/ResourceList.html" target="_self" >ProjectResourceListComponent</a></code>
+    </p>
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>}</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>translation-list</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./translation-list.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isSearched">isSearched</a>
+                            </li>
+                            <li>
+                                <a href="#keyForm">keyForm</a>
+                            </li>
+                            <li>
+                                <a href="#keyService">keyService</a>
+                            </li>
+                            <li>
+                                <a href="#onSearch">onSearch</a>
+                            </li>
+                            <li>
+                                <a href="#searchUrl">searchUrl</a>
+                            </li>
+                            <li>
+                                <a href="#projectId">projectId</a>
+                            </li>
+                            <li>
+                                <a href="#projectService">projectService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeSearchBox">closeSearchBox</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#open">open</a>
+                            </li>
+                            <li>
+                                <a href="#openSearchBox">openSearchBox</a>
+                            </li>
+                            <li>
+                                <a href="#search">search</a>
+                            </li>
+                            <li>
+                                <a href="#add">add</a>
+                            </li>
+                            <li>
+                                <a href="#edit">edit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(injector: <a href="https://angular.io/api/core/Injector" target="_blank">Injector</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>injector</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeSearchBox"></a>
+                        <span class="name">
+                            <b>
+                            closeSearchBox
+                            </b>
+                            <a href="#closeSearchBox"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>closeSearchBox()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="open"></a>
+                        <span class="name">
+                            <b>
+                            open
+                            </b>
+                            <a href="#open"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>open(resource)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:58</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>resource</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="openSearchBox"></a>
+                        <span class="name">
+                            <b>
+                            openSearchBox
+                            </b>
+                            <a href="#openSearchBox"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>openSearchBox()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="search"></a>
+                        <span class="name">
+                            <b>
+                            search
+                            </b>
+                            <a href="#search"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>search()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="add"></a>
+                        <span class="name">
+                            <b>
+                            add
+                            </b>
+                            <a href="#add"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>add()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../interfaces/ResourceList.html" target="_self" >ProjectResourceListComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in ProjectResourceListComponent:28</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="edit"></a>
+                        <span class="name">
+                            <b>
+                            edit
+                            </b>
+                            <a href="#edit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>edit(resource)</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../interfaces/ResourceList.html" target="_self" >ProjectResourceListComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in ProjectResourceListComponent:23</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>resource</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngOnInit"></a>
+                        <span class="name">
+                            <b>
+                            ngOnInit
+                            </b>
+                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngOnInit()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../interfaces/ResourceList.html" target="_self" >ProjectResourceListComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in ProjectResourceListComponent:16</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isSearched"></a>
+                        <span class="name">
+                            <b>
+                            isSearched
+                            </b>
+                            <a href="#isSearched"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>isSearched:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="keyForm"></a>
+                        <span class="name">
+                            <b>
+                            keyForm
+                            </b>
+                            <a href="#keyForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>keyForm:     <code><a href="../injectables/KeyForm.html" target="_self" >KeyForm</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../injectables/KeyForm.html" target="_self" >KeyForm</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="keyService"></a>
+                        <span class="name">
+                            <b>
+                            keyService
+                            </b>
+                            <a href="#keyService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>keyService:     <code><a href="../injectables/KeyService.html" target="_self" >KeyService</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../injectables/KeyService.html" target="_self" >KeyService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onSearch"></a>
+                        <span class="name">
+                            <b>
+                            onSearch
+                            </b>
+                            <a href="#onSearch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>onSearch:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchUrl"></a>
+                        <span class="name">
+                            <b>
+                            searchUrl
+                            </b>
+                            <a href="#searchUrl"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>searchUrl:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/main/js/component/translation/component/translation.list.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="projectId"></a>
+                        <span class="name">
+                            <b>
+                            projectId
+                            </b>
+                            <a href="#projectId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>projectId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../interfaces/ResourceList.html" target="_self" >ProjectResourceListComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in ProjectResourceListComponent:9</div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="projectService"></a>
+                        <span class="name">
+                            <b>
+                            projectService
+                            </b>
+                            <a href="#projectService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>projectService:     <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../injectables/ProjectService.html" target="_self" >ProjectService</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../interfaces/ResourceList.html" target="_self" >ProjectResourceListComponent</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in ProjectResourceListComponent:8</div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Injector } from &quot;@angular/core&quot;;
+
+import { ResourceListComponent, ResourcePath } from &quot;../../../lib/component/resource.component.core&quot;;
+import { ProjectService, ProjectResourceListComponent } from &quot;../../project/project.core&quot;;
+import { Translation } from &quot;../model/translation&quot;;
+import { KeyService } from &quot;../../key/model/key.service&quot;;
+import { KeyForm } from &quot;../../key/form/key.form&quot;;
+
+@ResourcePath({
+    path: &quot;keys&quot;,
+    route: &quot;/translations&quot;,
+    id: &quot;projectId&quot;
+})
+@Component({
+    selector: &quot;translation-list&quot;,
+    templateUrl: &quot;./translation-list.html&quot;,
+    host: {
+        class: &quot;column__xdt--10 column__dt--10 component&quot;
+    }
+})
+export class TranslationListComponent extends ProjectResourceListComponent&lt;Translation&gt; {
+    keyService: KeyService;
+    keyForm: KeyForm;
+    searchUrl : string;
+    isSearched: boolean;
+    onSearch: boolean &#x3D; false;
+
+    constructor(injector: Injector) {
+        super(injector);
+        this.keyService &#x3D; injector.get(KeyService);
+        this.keyForm &#x3D; injector.get(KeyForm);
+        this.isSearched &#x3D; false;
+    }
+
+    ngOnInit(){
+        super.ngOnInit();
+        this.searchUrl &#x3D; this.appData.getResourceListUrlFor(this.appData.resource, this._path);
+        this.searchUrl +&#x3D; &quot;/search/name?projects&#x3D;&quot; + this.projectId + &quot;&amp;name&#x3D;&quot;; 
+    }
+
+    search(){
+        let key &#x3D; this.keyForm.getData();
+        this.apiUrl &#x3D; this.searchUrl +  key.name;
+        this.isSearched &#x3D; true;
+        this.get();
+    }
+
+    openSearchBox(){
+        this.onSearch &#x3D; true;
+    }
+
+    closeSearchBox(){
+        this.onSearch &#x3D; false;
+        this.keyForm.form.get(&quot;name&quot;).setValue(&quot;&quot;);
+        this.search();
+    }
+
+    open(resource) {
+        this.keyService.resource &#x3D; resource;
+        this.keyService.keyId &#x3D; this.appData.getResourceId(resource);
+        this.router.navigate([&quot;projects&quot;, this.projectId, &quot;translations&quot;, &quot;keys&quot;, this.keyService.keyId]);
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;row gutter__column--dt gutter__column--xdt component&quot; *ngIf&#x3D;&quot;(resourceList &amp;&amp; resourceList.length) || isSearched&quot;&gt;
+    &lt;mat-card class&#x3D;&quot;column__xdt--6 column__dt--6&quot;&gt;
+        &lt;mat-card-title class&#x3D;&quot;row flex&quot; *ngIf&#x3D;&quot;!onSearch&quot;&gt;
+            &lt;div class&#x3D;&quot;column__xdt--10 column__dt--10 padding--zero&quot;&gt;Translations&lt;/div&gt;
+            &lt;div class&#x3D;&quot;column__xdt--2 column__dt--2 padding--zero&quot;&gt;
+                &lt;button mat-icon-button (click)&#x3D;&quot;openSearchBox()&quot;&gt;
+                    &lt;mat-icon&gt;search&lt;/mat-icon&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/mat-card-title&gt;
+        &lt;mat-card-title class&#x3D;&quot;row flex&quot; *ngIf&#x3D;&quot;onSearch&quot;&gt;
+            &lt;div class&#x3D;&quot;column__xdt--2 column__dt--2 padding--zero&quot;&gt;
+                &lt;button mat-icon-button (click)&#x3D;&quot;closeSearchBox()&quot;&gt;
+                    &lt;mat-icon&gt;arrow_back&lt;/mat-icon&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;form [formGroup]&#x3D;&quot;keyForm.form&quot; class&#x3D;&quot;column__xdt--10 column__dt--10 padding--zero searchbox&quot; autocomplete&#x3D;&quot;off&quot;&gt;
+                &lt;mat-form-field class&#x3D;&quot;row&quot;&gt;
+                    &lt;input matInput formControlName&#x3D;&quot;name&quot; id&#x3D;&quot;name&quot;&gt;
+                    
+                &lt;/mat-form-field&gt;
+                &lt;button mat-raised-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;search()&quot; class&#x3D;&quot;hide&quot;&gt;Search&lt;/button&gt;
+
+            &lt;/form&gt;
+        &lt;/mat-card-title&gt;
+
+        &lt;mat-card-content&gt;
+
+            &lt;mat-list class&#x3D;&quot;row&quot;&gt;
+                &lt;mat-list-item *ngFor&#x3D;&quot;let key of resourceList&quot; (click)&#x3D;&quot;open(key)&quot;&gt;
+                    &lt;div mat-line class&#x3D;&quot;color--darkorange&quot;&gt;{{key.name}}&lt;/div&gt;
+                    &lt;div mat-line&gt;{{key.description}}&lt;/div&gt;
+
+                    &lt;div&gt;
+                        &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;resourceMenu&quot;&gt;
+                            &lt;mat-icon&gt;more_vert&lt;/mat-icon&gt;
+                        &lt;/button&gt;
+                        &lt;mat-menu #resourceMenu&#x3D;&quot;matMenu&quot;&gt;
+                            &lt;button mat-menu-item (click)&#x3D;&quot;edit(key)&quot;&gt;Edit&lt;/button&gt;
+                            &lt;button mat-menu-item (click)&#x3D;&quot;delete(key)&quot;&gt;Delete&lt;/button&gt;
+                        &lt;/mat-menu&gt;
+                    &lt;/div&gt;
+                &lt;/mat-list-item&gt;
+
+            &lt;/mat-list&gt;
+
+            &lt;div *ngIf&#x3D;&quot;!resourceList || !resourceList.length&quot;&gt;
+                &lt;p&gt;No result found for given search value.&lt;/p&gt;
+            &lt;/div&gt;
+
+        &lt;/mat-card-content&gt;
+
+    &lt;/mat-card&gt;
+    &lt;button mat-fab class&#x3D;&quot;button__float model-path-new&quot; (click)&#x3D;&quot;add()&quot; *ngIf&#x3D;&quot;resourceList &amp;&amp; resourceList.length&quot;&gt;
+        &lt;mat-icon aria-label&#x3D;&quot;Example icon-button with a heart icon&quot;&gt;add&lt;/mat-icon&gt;
+    &lt;/button&gt;
+    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;row center-center&quot; *ngIf&#x3D;&quot;httpProgress&quot;&gt;
+    &lt;mat-spinner&gt;&lt;/mat-spinner&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;row center-center&quot; *ngIf&#x3D;&quot;(!resourceList || !resourceList.length) &amp;&amp; !httpProgress &amp;&amp; !isSearched&quot;&gt;
+    &lt;div class&#x3D;&quot;column__dt--12 column__xdt--12 self__center empty__image&quot;&gt;
+        &lt;img src&#x3D;&quot;assets/images/empty_records.png&quot;&gt;
+    &lt;/div&gt;
+    &lt;p class&#x3D;&quot;column__dt--12 column__xdt--12 mat-h1 self__center&quot;&gt;Empty in keys&lt;/p&gt;
+    &lt;p class&#x3D;&quot;column__dt--12 column__xdt--12 mat-title self__center&quot;&gt;Save a translation key and it will show up here.&lt;/p&gt;
+    &lt;button mat-raised-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;add()&quot;&gt;Add New&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">    <mat-card class="column__xdt--6 column__dt--6">        <mat-card-title class="row flex" *ngIf="!onSearch">            <div class="column__xdt--10 column__dt--10 padding--zero">Translations</div>            <div class="column__xdt--2 column__dt--2 padding--zero">                <button mat-icon-button (click)="openSearchBox()">                    <mat-icon>search</mat-icon>                </button>            </div>        </mat-card-title>        <mat-card-title class="row flex" *ngIf="onSearch">            <div class="column__xdt--2 column__dt--2 padding--zero">                <button mat-icon-button (click)="closeSearchBox()">                    <mat-icon>arrow_back</mat-icon>                </button>            </div>            <form [formGroup]="keyForm.form" class="column__xdt--10 column__dt--10 padding--zero searchbox" autocomplete="off">                <mat-form-field class="row">                    <input matInput formControlName="name" id="name">                                    </mat-form-field>                <button mat-raised-button color="primary" (click)="search()" class="hide">Search</button>            </form>        </mat-card-title>        <mat-card-content>            <mat-list class="row">                <mat-list-item *ngFor="let key of resourceList" (click)="open(key)">                    <div mat-line class="color--darkorange">{{key.name}}</div>                    <div mat-line>{{key.description}}</div>                    <div>                        <button mat-icon-button [matMenuTriggerFor]="resourceMenu">                            <mat-icon>more_vert</mat-icon>                        </button>                        <mat-menu #resourceMenu="matMenu">                            <button mat-menu-item (click)="edit(key)">Edit</button>                            <button mat-menu-item (click)="delete(key)">Delete</button>                        </mat-menu>                    </div>                </mat-list-item>            </mat-list>            <div *ngIf="!resourceList || !resourceList.length">                <p>No result found for given search value.</p>            </div>        </mat-card-content>    </mat-card>    <button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>    </button>    <router-outlet></router-outlet></div><div class="row center-center" *ngIf="httpProgress">    <mat-spinner></mat-spinner></div><div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress && !isSearched">    <div class="column__dt--12 column__xdt--12 self__center empty__image">        <img src="assets/images/empty_records.png">    </div>    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>    <button mat-raised-button color="primary" (click)="add()">Add New</button></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'breadcrumb'},{'name': 'HeaderComponent', 'selector': ''},{'name': 'KeyComponent', 'selector': 'key'},{'name': 'KeyFormComponent', 'selector': 'key-form'},{'name': 'KeyListComponent', 'selector': 'key-list'},{'name': 'LocaleComponent', 'selector': 'locale'},{'name': 'LocaleFormComponent', 'selector': 'locale-form'},{'name': 'LocaleListComponent', 'selector': 'locale-list'},{'name': 'ProjectComponent', 'selector': 'project-component'},{'name': 'ProjectDashboardComponent', 'selector': 'project-dashboard'},{'name': 'ProjectFormComponent', 'selector': 'project-form-component'},{'name': 'ProjectListComponent', 'selector': 'project-list'},{'name': 'SidebarComponent', 'selector': 'sidebar'},{'name': 'TranslationComponent', 'selector': 'translation'},{'name': 'TranslationFormComponent', 'selector': 'translation-form'},{'name': 'TranslationListComponent', 'selector': 'translation-list'},{'name': 'UserComponent', 'selector': ''},{'name': 'UserFormComponent', 'selector': 'users-form'},{'name': 'UserListComponent', 'selector': 'users-list'},{'name': 'UserLoginComponent', 'selector': 'user-login-component'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TranslationListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TranslationListComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -47,4 +47,6 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         this.projectsTableData = new MatTableDataSource(this.resourceList);
     }
 
+    
+
 }

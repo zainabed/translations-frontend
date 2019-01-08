@@ -3,8 +3,9 @@
         <mat-card>
             <mat-card-title>{{project.name}}</mat-card-title>
             <mat-card-content>
-                <img mat-card-image>
+                <img mat-card-image src="assets/images/project_background.png">
                 <p>{{project.description}}</p>
+                <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-button color="primary" (click)="open(project)">Open</button>

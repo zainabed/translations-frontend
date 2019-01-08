@@ -1,50 +1,56 @@
-<div class="column__xdt--6">
+<div class="login-background">
+</div>
+<div class="column__xdt--4 column__dt--6">
+    <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
     <mat-card>
-        <form [formGroup]="loginForm.form" fxLayout="column" fxLayoutGap="20px">
-            <h2 fxFlex fxFlexAlign="center">{{title}}</h2>
-            <div id="api-error" *ngIf="apiError">
-                Unable to connet application server.
-            </div>
-            <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="">
-                <mat-form-field class="example-full-width">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="loginForm.form" fxLayout="column" fxLayoutGap="20px">
+                <div id="api-error" *ngIf="apiError">
+                    Unable to connet application server.
+                </div>
+                <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="">
+                    <mat-form-field class="example-full-width">
 
-                    <input matInput placeholder="Username" formControlName="username" id="username" [errorStateMatcher]="matcher">
-                    <ng-container>
-                        <mat-error id="username-empty-error" *ngIf="loginForm.form.get('username').hasError('required')">
-                            Username can't be empty
-                        </mat-error>
-                        <mat-error id="username-less-error" *ngIf="loginForm.form.get('username').hasError('minlength')">
-                            Please enter at least 5 characters
-                        </mat-error>
-                        <mat-error id="username-max-error" *ngIf="loginForm.form.get('username').hasError('maxlength')">
-                            Maximum characters limit of username is 20
-                        </mat-error>
+                        <input matInput placeholder="Username" formControlName="username" id="username" [errorStateMatcher]="matcher">
+                        <ng-container>
+                            <mat-error id="username-empty-error" *ngIf="loginForm.form.get('username').hasError('required')">
+                                Username can't be empty
+                            </mat-error>
+                            <mat-error id="username-less-error" *ngIf="loginForm.form.get('username').hasError('minlength')">
+                                Please enter at least 5 characters
+                            </mat-error>
+                            <mat-error id="username-max-error" *ngIf="loginForm.form.get('username').hasError('maxlength')">
+                                Maximum characters limit of username is 20
+                            </mat-error>
 
-                    </ng-container>
-                </mat-form-field>
+                        </ng-container>
+                    </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Password" type="password" formControlName="password" id="password" [errorStateMatcher]="matcher">
-                    <ng-container>
-                        <mat-error id="password-invalid-error" *ngIf="loginForm.form.get('password').hasError('password')">
-                            Email can't be empty
-                        </mat-error>
-                        <mat-error id="password-less-error" *ngIf="loginForm.form.get('password').hasError('minlength')">
-                            Please enter at least 5 characters
-                        </mat-error>
-                        <mat-error id="password-max-error" *ngIf="loginForm.form.get('password').hasError('maxlength')">
-                            Maximum characters limit of username is 30
-                        </mat-error>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Password" type="password" formControlName="password" id="password" [errorStateMatcher]="matcher">
+                        <ng-container>
+                            <mat-error id="password-invalid-error" *ngIf="loginForm.form.get('password').hasError('password')">
+                                Email can't be empty
+                            </mat-error>
+                            <mat-error id="password-less-error" *ngIf="loginForm.form.get('password').hasError('minlength')">
+                                Please enter at least 5 characters
+                            </mat-error>
+                            <mat-error id="password-max-error" *ngIf="loginForm.form.get('password').hasError('maxlength')">
+                                Maximum characters limit of username is 30
+                            </mat-error>
 
-                    </ng-container>
-                </mat-form-field>
+                        </ng-container>
+                    </mat-form-field>
 
-                <div class="row">
-                    <button mat-raised-button color="primary" (click)="login()">Login</button>
+                    <div class="row">
+                        <button mat-raised-button color="primary" (click)="login()">Login</button>
+
+                    </div>
 
                 </div>
-
-            </div>
-        </form>
+            </form>
+            <h4 class="row"><span>No account? &nbsp;</span><a href="#">Create one!</a></h4>
+        </mat-card-content>
     </mat-card>
 </div>

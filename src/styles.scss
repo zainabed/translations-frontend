@@ -272,3 +272,31 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
   flex: 0 1 0;
   color: darkcyan;
 }
+
+.mat-card-image{
+  width: 95% !important;
+  margin: auto  !important;
+}
+
+.login-background {
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+  overflow: hidden;
+  background-color: #000040;
+  background-image: url(/assets/images/login_background.png);
+  position: fixed;
+  z-index: -1;
+  box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.toolbar__fixed{
+  position: fixed;
+  z-index: 1000;
+}
+
+.background__transparent{
+  background: transparent !important;
+}

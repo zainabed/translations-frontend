@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
+import { MatSnackBar } from '@angular/material';
 import { LoginHttpService } from "../http/login.http.service";
 import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
@@ -19,16 +20,19 @@ import { Router } from "@angular/router";
     }
 })
 export class UserLoginComponent {
+    snackBarDuration = 2000;
+    httpProgress: boolean;
 
-    constructor(private loginService: LoginHttpService, 
-        private loginForm: LoginForm, 
+    constructor(private loginService: LoginHttpService,
+        private loginForm: LoginForm,
         private jwtToken: JwtToken,
-    private router: Router) {
+        private router: Router, private snackBar: MatSnackBar) {
 
     }
 
     login() {
         let login: Login = this.loginForm.getData();
+        this.httpProgress = true;
         this.loginService.authenticate(login.username, login.password).subscribe(this.onSuccess.bind(this),
             this.onError.bind(this));
     }
@@ -36,10 +40,18 @@ export class UserLoginComponent {
     onSuccess(response) {
         this.jwtToken.type = response.type;
         this.jwtToken.token = response.token;
+        let tokenValues = response.token.split(".");
+        this.jwtToken.user = JSON.parse(atob(tokenValues[1]));
+        
+        this.httpProgress = false;
         this.router.navigate(["/"]);
     }
 
     onError(error) {
+        this.httpProgress = false;
         console.log(error);
+        this.snackBar.open(error.error.message, null, {
+            duration: this.snackBarDuration
+        });
     }
 }
