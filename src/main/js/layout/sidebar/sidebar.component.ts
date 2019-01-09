@@ -10,7 +10,7 @@ import {AppResourceData} from "../../app.resource.data";
 export class SidebarComponent implements OnInit, AfterContentInit {
     private actionList = [
         { title: 'locales', icon: "language", color: 'color--darkcyan' },
-        { title: 'keys', icon: "vpn_key", color: 'color--darkorange' },
+        //{ title: 'keys', icon: "vpn_key", color: 'color--darkorange' },
         { title: 'translations', icon: "translate", color: 'color--darkblue' }
     ];
 

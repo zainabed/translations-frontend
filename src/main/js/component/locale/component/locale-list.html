@@ -1,10 +1,12 @@
+<div class="heading__content"></div>
+<h1 class="mat-h1">Locales</h1>
 <mat-card class="column__xdt--12 column__dt--12" *ngIf="resourceList && resourceList.length">
-    <mat-card-title class="toolbar">
+    <!--<mat-card-title class="toolbar">
         <div class="left">Locales</div>
         <div class="right">
             <mat-icon matTooltip="FC Phrase supports all Nordic languages. adding locales is easy, Just click the plus icon button in the locale overview. After adding the locale it will be immediately listed in Locale overview.">live_help</mat-icon>
         </div>
-    </mat-card-title>
+    </mat-card-title>-->
     <mat-card-content>
         <mat-list class="row" *ngIf="!httpProgress">
             <mat-list-item *ngFor="let locale of resourceList">
@@ -15,6 +17,11 @@
                 </div>
                 <div mat-line>{{locale.code}}</div>
                 <mat-progress-bar mode="determinate" value="80" *ngIf="locale.present" class="pad"></mat-progress-bar>
+               <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold" (click)="post(locale.api)" *ngIf="!locale.present">Activate</mat-button-toggle>
+                    <mat-button-toggle value="italic" (click)="delete(locale.api)" *ngIf="locale.present">Deactivate</mat-button-toggle>
+                    <mat-button-toggle value="underline" (click)="download(locale.api, locale.code)" *ngIf="locale.present">Download</mat-button-toggle>
+                </mat-button-toggle-group> -->
                 <div>
                     <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
                         <mat-icon>more_vert</mat-icon>

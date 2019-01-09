@@ -36,5 +36,8 @@ export class KeyFormComponent extends ProjectResourceFormComponent<Key> {
         }
     }
 
+    navigateToList(){
+        this.router.navigate(["projects", this.projectId, "translations"]);
+    }
 
 }

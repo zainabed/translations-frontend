@@ -13,6 +13,8 @@
             <div *ngIf="jwtToken.user" class="mat-button">
                 <button mat-button [matMenuTriggerFor]="menu">{{jwtToken.user.sub}}</button>
                 <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Profile</button>
+                    <button mat-menu-item>Settings</button>
                     <button mat-menu-item routerLink="/login">Logout</button>
                 </mat-menu>
             </div>

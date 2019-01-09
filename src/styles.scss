@@ -9,7 +9,7 @@ $mat-nordea: (
     200: #9fa8da,
     300: #7986cb,
     400: #5c6bc0,
-    500: #0000a0,
+    500: #62b3e5,
     600: #3949ab,
     700: #303f9f,
     800: #283593,
@@ -42,15 +42,15 @@ $mat-nordea: (
     200: #f48fb1,
     300: #f06292,
     400: #ec407a,
-    500: #e91e63,
+    500: #6cc04a,
     600: #d81b60,
     700: #c2185b,
     800: #ad1457,
     900: #880e4f,
     A100: #fdece4,
-    A200: #ff4081,
-    A400: #f50057,
-    A700: #c51162,
+    A200: #6cc04a,
+    A400: #64DD17,
+    A700: #76FF03,
     contrast: (
       50: $dark-primary-text,
       100: $dark-primary-text,
@@ -75,7 +75,7 @@ $mat-nordea: (
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 $candy-app-primary: mat-palette($mat-nordea);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-accent:  mat-palette($mat-nordea-accent, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);
@@ -113,7 +113,7 @@ mat-card.pad--zero{
 button.button__float{
   position: fixed;
   right: 48px;
-  bottom: 48px;
+  top: 185px;
 }
 
 .mat-error {
@@ -299,4 +299,27 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 
 .background__transparent{
   background: transparent !important;
+}
+
+.tieto__logo--side{
+  position: fixed;
+  right:0;
+  bottom: 0;
+  z-index: 1;
+  background-image: url(/assets/images/tieto_logo_side.png);
+  width: 202px;
+  height: 250px;
+  background-size: cover;
+  background-position: bottom;
+}
+
+.heading__content{
+  position: fixed;
+  height: 100px;
+  background: #eee;
+  width: 100%;
+  top: 65px;
+  padding: 24px 0;
+  left: 0;
+  z-index: -1;
 }
