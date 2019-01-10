@@ -274,8 +274,8 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 }
 
 .mat-card-image{
-  width: 95% !important;
-  margin: auto  !important;
+  margin: -24px !important;
+  padding-bottom: 24px !important;
 }
 
 .login-background {
@@ -323,3 +323,37 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
   left: 0;
   z-index: -1;
 }
+
+.mat-button{
+  text-transform: uppercase;  
+}
+
+.project__fab{
+  position: absolute !important;
+  right: 5%;
+  margin-top: -48px !important;
+}
+
+.mat__list--wapper {
+  .mat-list-text{
+    flex : 1;
+  }
+  .mat-progress-bar {
+    flex: 2;
+  }
+
+  .mat-list-action{
+    flex:1;
+    display: flex;
+  }
+}
+
+mat-panel-description mat-progress-bar{
+  margin: 12px 64px 0 0;
+}
+
+mat-panel-title .panel__title{
+  line-height: 32px;
+  margin: 0 16px;
+}
+

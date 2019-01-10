@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatRippleModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -38,6 +40,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatSnackBarModule,
         MatTooltipModule,
         MatButtonToggleModule,
+        MatExpansionModule,
+        MatRippleModule,
         FlexLayoutModule,
     ],
     exports: [
@@ -58,6 +62,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatSnackBarModule,
         MatTooltipModule,
         MatButtonToggleModule,
+        MatExpansionModule,
+        MatRippleModule,
         FlexLayoutModule,
     ]
 })

@@ -33,8 +33,10 @@ export class SidebarService {
     }
 
     setActive(active: Array<any>) {
-        this.active = true;
-        if (active && active.length) {
+        this.active = false;
+        
+        if (active && Object.keys(active).length) {
+            console.log(active);
             this.active = true;
         }
     }

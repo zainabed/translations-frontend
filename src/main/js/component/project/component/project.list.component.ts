@@ -35,7 +35,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     ngOnInit() {
         super.ngOnInit();
         this.get();
-        //     this.sidebarService.resource = null;
+        this.sidebarService.resource = null;
     }
 
     ngAfterContentInit() {
@@ -56,10 +56,17 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     }
 
     onExtendSuccess(response) {
-
+        this.showNotification("Project is extended successfully.");
+        this.get();
     }
 
     onExtendFail(response) {
-        console.log(response);
+        this.error = response;
+        this.showNotification(response.error.message);
+    }
+
+    getImageName(name) {
+        name = name.split(" ").join("_").toLowerCase();
+        return "/assets/images/projects/" + name + ".jpg";
     }
 }

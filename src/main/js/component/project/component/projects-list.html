@@ -3,23 +3,26 @@
 <div class="row component gutter__column--dt gutter__column--xdt" *ngIf="resourceList && resourceList.length">
     <div *ngFor="let project of resourceList" class="column__xdt--4 column__dt--4">
         <mat-card>
-            <mat-card-title>{{project.name}}</mat-card-title>
-            <mat-card-content>
-                <img mat-card-image src="assets/images/project_background.png">
-                <p>{{project.description}}</p>
-                <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
+            <mat-card-content (click)="open(project)" >
+                <img mat-card-image src="{{getImageName(project.name)}}">
             </mat-card-content>
-            <mat-card-actions>
-                <button mat-button color="primary" (click)="open(project)">Open</button>
-                <button mat-button (click)="edit(project)">Edit</button>
-                <button mat-button color="warn" (click)="delete(project)">Delete</button>
-                <button mat-button color="primary" [matMenuTriggerFor]="menu" *ngIf="!project.extended">Extend</button>
+            <ng-container>
+                <button mat-fab color="primary" class="project__fab" [matMenuTriggerFor]="menu"  *ngIf="!project.extended">
+                    <mat-icon aria-label="Extend poject" >device_hub</mat-icon>
+                </button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item *ngFor="let projectMenu of resourceList" (click)="extend(project, projectMenu)">
                         {{projectMenu.name}}
                     </button>
-
                 </mat-menu>
+            </ng-container>
+
+            <mat-card-title>{{project.name}}</mat-card-title>
+            <p>{{project.description}}</p>
+            <mat-card-actions class="toolbar">
+                <button mat-button (click)="edit(project)">edit</button>
+                <button mat-button color="warn" (click)="delete(project)">delete</button>
+
             </mat-card-actions>
         </mat-card>
     </div>

@@ -1,51 +1,27 @@
 <div class="heading__content"></div>
 <h1 class="mat-h1">Locales</h1>
-<mat-card class="column__xdt--12 column__dt--12" *ngIf="resourceList && resourceList.length">
-    <!--<mat-card-title class="toolbar">
-        <div class="left">Locales</div>
-        <div class="right">
-            <mat-icon matTooltip="FC Phrase supports all Nordic languages. adding locales is easy, Just click the plus icon button in the locale overview. After adding the locale it will be immediately listed in Locale overview.">live_help</mat-icon>
-        </div>
-    </mat-card-title>-->
-    <mat-card-content>
-        <mat-list class="row" *ngIf="!httpProgress">
-            <mat-list-item *ngFor="let locale of resourceList">
-                <!-- <mat-icon mat-list-icon>language</mat-icon> -->
+<mat-accordion  *ngIf="resourceList && resourceList.length">
+    <mat-expansion-panel *ngFor="let locale of resourceList" class="column__xdt--8 column__dt--8">
+        <mat-expansion-panel-header collapsedHeight="72px">
+            <mat-panel-title>
                 <img matListAvatar src="assets/images/flags/{{locale.code}}.png" alt="..." class="icon__list">
-                <div mat-line class="color--darkcyan">
-                    {{locale.name}}
-                </div>
-                <div mat-line>{{locale.code}}</div>
+                <div class="panel__title">{{locale.name}} - {{locale.code}}</div>
+            </mat-panel-title>
+            <mat-panel-description>
                 <mat-progress-bar mode="determinate" value="80" *ngIf="locale.present" class="pad"></mat-progress-bar>
-               <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                    <mat-button-toggle value="bold" (click)="post(locale.api)" *ngIf="!locale.present">Activate</mat-button-toggle>
-                    <mat-button-toggle value="italic" (click)="delete(locale.api)" *ngIf="locale.present">Deactivate</mat-button-toggle>
-                    <mat-button-toggle value="underline" (click)="download(locale.api, locale.code)" *ngIf="locale.present">Download</mat-button-toggle>
-                </mat-button-toggle-group> -->
-                <div>
-                    <button mat-icon-button [matMenuTriggerFor]="resourceMenu">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #resourceMenu="matMenu">
-
-                        <button mat-menu-item (click)="post(locale.api)" *ngIf="!locale.present">Add</button>
-                        <button mat-menu-item (click)="delete(locale.api)" *ngIf="locale.present">Delete</button>
-                        <button mat-menu-item (click)="download(locale.api, locale.code)" *ngIf="locale.present">Download</button>
-                    </mat-menu>
-                </div>
-            </mat-list-item>
-
-        </mat-list>
-
-    </mat-card-content>
-
-</mat-card>
-
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-action-row>
+            <button mat-button color="primary" (click)="post(locale.api)" *ngIf="!locale.present">Enable</button>
+            <button mat-button color="warn" (click)="delete(locale.api)" *ngIf="locale.present">disable</button>
+            <button mat-button color="accent" (click)="download(locale.api, locale.code)" *ngIf="locale.present">Download</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
 
 <div class="row center-center" *ngIf="httpProgress">
     <mat-spinner></mat-spinner>
 </div>
-
 <div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">
     <div class="column__dt--12 column__xdt--12 self__center empty__image">
         <img src="assets/images/empty_records.png">
