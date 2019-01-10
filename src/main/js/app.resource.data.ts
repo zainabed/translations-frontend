@@ -31,11 +31,19 @@ export class AppResourceData {
     filterId(href) {
         return href.substring(href.lastIndexOf("/") + 1);
     }
+
+
     filterHrefUrl(href) {
         let position = href.indexOf("{");
         if (position > 0) {
             return href.substring(0, position);
         }
         return href;
+    }
+
+    getId(model): string {
+        let href = model['_links']['self']['href'];
+        let lastIndex = href.lastIndexOf("/") + 1;
+        return href.substr(lastIndex);
     }
 }

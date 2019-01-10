@@ -1,4 +1,4 @@
-import { Component, Injector, AfterContentInit} from '@angular/core';
+import { Component, Injector, AfterContentInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 
 import { SidebarService } from "../../../layout/sidebar/sidebar.service";
@@ -29,17 +29,17 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
 
     constructor(injector: Injector, private sidebarService: SidebarService) {
         super(injector);
-       
+
     }
 
     ngOnInit() {
         super.ngOnInit();
         this.get();
-   //     this.sidebarService.resource = null;
+        //     this.sidebarService.resource = null;
     }
 
-    ngAfterContentInit(){
-       // this.sidebarService.resource = null;
+    ngAfterContentInit() {
+        // this.sidebarService.resource = null;
     }
 
     onGetSuccess(response) {
@@ -47,6 +47,19 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         this.projectsTableData = new MatTableDataSource(this.resourceList);
     }
 
-    
 
+    extend(project, extendProject) {
+        let projectId = this.appData.getId(project);
+        let extendProjectId = this.appData.getId(extendProject);
+        this.resourcesService.post(this.apiUrl + "/" + projectId + "/extend/" + extendProjectId, {})
+            .subscribe(this.onExtendSuccess.bind(this), this.onExtendFail.bind(this));;
+    }
+
+    onExtendSuccess(response) {
+
+    }
+
+    onExtendFail(response) {
+        console.log(response);
+    }
 }

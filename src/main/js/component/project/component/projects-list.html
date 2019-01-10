@@ -1,6 +1,6 @@
 <div class="heading__content"></div>
 <h1 class="mat-h1 pad">Projects</h1>
-<div class="row component gutter__column--dt gutter__column--xdt"  *ngIf="resourceList && resourceList.length">
+<div class="row component gutter__column--dt gutter__column--xdt" *ngIf="resourceList && resourceList.length">
     <div *ngFor="let project of resourceList" class="column__xdt--4 column__dt--4">
         <mat-card>
             <mat-card-title>{{project.name}}</mat-card-title>
@@ -13,6 +13,13 @@
                 <button mat-button color="primary" (click)="open(project)">Open</button>
                 <button mat-button (click)="edit(project)">Edit</button>
                 <button mat-button color="warn" (click)="delete(project)">Delete</button>
+                <button mat-button color="primary" [matMenuTriggerFor]="menu" *ngIf="!project.extended">Extend</button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngFor="let projectMenu of resourceList" (click)="extend(project, projectMenu)">
+                        {{projectMenu.name}}
+                    </button>
+
+                </mat-menu>
             </mat-card-actions>
         </mat-card>
     </div>
