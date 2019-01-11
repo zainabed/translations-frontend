@@ -103,6 +103,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     }
 
     onDownloadSucess(response) {
+        this.httpProgress = false;
         let data = "";
         for (var key in response) {
             data += key + "=" + response[key] + "\n";
@@ -115,7 +116,8 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         // a.href = URL.createObjectURL(blob);
         //a.download = "message.properties";
         // a.click();
-        saveAs(blob, "messages_" + this.downloadLocaleCode.substr(0, 2) + ".properties");
+        let code = this.downloadLocaleCode == 'en' ? '' : '_' + this.downloadLocaleCode;
+        saveAs(blob, "messages" + code + ".properties");
 
     }
 

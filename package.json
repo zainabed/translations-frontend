@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,10 @@
     "@angular/router": "^5.2.11",
     "angular4-hal": "^4.8.12",
     "core-js": "^2.6.0",
+    "express": "^4.16.4",
+    "path": "^0.12.7",
     "rxjs": "^5.5.12",
+    "typescript": "~2.4.2",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -37,6 +41,7 @@
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^6.14.2",
     "codelyzer": "~3.2.0",
+    "enhanced-resolve": "^3.3.0",
     "file-saver": "^2.0.0",
     "gulp-sass": "^3.1.0",
     "jasmine-core": "~2.6.2",
@@ -49,7 +54,10 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
-    "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "tslint": "~5.7.0"
+  },
+  "engines": {
+    "node": "6.10.1",
+    "npm": "3.10.10"
   }
 }
