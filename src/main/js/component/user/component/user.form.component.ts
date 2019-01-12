@@ -27,7 +27,7 @@ import { User } from '../model/user';
     }
 })
 export class UserFormComponent extends ResourceFormComponent<User>{
-    private title: string;
+    public title: string;
 
     constructor(public userForm: UserForm, injector: Injector) {
         super(userForm, injector);

@@ -22,10 +22,10 @@ import { KeyService } from "../../key/model/key.service";
 })
 export class TranslationFormComponent extends ProjectResourceFormComponent<Translation> implements OnChanges, OnDestroy {
 
-    private locales;
-    private keyService: KeyService;
-    private searchUrl: string;
-    private postUrl: string;
+    public locales;
+    public keyService: KeyService;
+    public searchUrl: string;
+    public postUrl: string;
     sub: any;
 
     constructor(injector: Injector, public translationForm: TranslationForm) {

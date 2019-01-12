@@ -80,15 +80,15 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
+                                    <span class="modifier">public</span>
                                 <a href="#code">code</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
+                                    <span class="modifier">public</span>
                                 <a href="#name">name</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
+                                    <span class="modifier">public</span>
                                 <a href="#projects">projects</a>
                             </li>
                         </ul>
@@ -165,7 +165,7 @@
                         <a name="code"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">public</span>
                             code
                             </b>
                             <a href="#code"><span class="icon ion-ios-link"></span></a>
@@ -200,7 +200,7 @@
                         <a name="name"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">public</span>
                             name
                             </b>
                             <a href="#name"><span class="icon ion-ios-link"></span></a>
@@ -235,7 +235,7 @@
                         <a name="projects"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">public</span>
                             projects
                             </b>
                             <a href="#projects"><span class="icon ion-ios-link"></span></a>
@@ -278,9 +278,9 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FormGroup } from &quot;@angular/forms&quot;;
 
 export class Locale {
-    private name: string;
-    private code: string;
-    private projects: string;
+    public name: string;
+    public code: string;
+    public projects: string;
 
     constructor(fb: FormGroup) {
         this.name &#x3D; fb.get(&quot;name&quot;).value;

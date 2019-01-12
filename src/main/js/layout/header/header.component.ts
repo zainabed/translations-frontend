@@ -6,6 +6,6 @@ import { JwtToken } from "../../component/user/model/jwt.token";
 })
 export class HeaderComponent {
 
-    constructor(private jwtToken: JwtToken){
+    constructor(public jwtToken: JwtToken){
     }
 }

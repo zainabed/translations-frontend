@@ -24,7 +24,7 @@ export class ProjectFormComponent extends ResourceFormComponent<Project>{
     inProgress: Boolean = false;
     title: string;
 
-    constructor(private projectForm: ProjectForm, injector: Injector) {
+    constructor(public projectForm: ProjectForm, injector: Injector) {
         super(projectForm, injector);
     }
 

@@ -6,6 +6,7 @@ import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
 import { JwtToken } from "../model/jwt.token";
 import { Router } from "@angular/router";
+import { ErrorMatcher } from "../../../lib/form/error.matcher";
 
 @ResourcePath({
     path: "login",
@@ -22,11 +23,12 @@ import { Router } from "@angular/router";
 export class UserLoginComponent {
     snackBarDuration = 2000;
     httpProgress: boolean;
+    matcher = new ErrorMatcher();
 
-    constructor(private loginService: LoginHttpService,
-        private loginForm: LoginForm,
-        private jwtToken: JwtToken,
-        private router: Router, private snackBar: MatSnackBar) {
+    constructor(public loginService: LoginHttpService,
+        public loginForm: LoginForm,
+        public jwtToken: JwtToken,
+        public router: Router, public snackBar: MatSnackBar) {
 
     }
 
