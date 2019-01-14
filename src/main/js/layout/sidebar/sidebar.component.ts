@@ -15,8 +15,10 @@ export class SidebarComponent implements OnInit, AfterContentInit {
     ];
 
     public settingList = [
+        { title: 'report', icon: "assessment", color: 'color--cornflowerblue' },
         { title: 'users', icon: "person", color: 'color--cornflowerblue' },
-        { title: 'setting', icon: "settings", color: 'color--cornflowerblue' }
+        { title: 'setting', icon: "settings", color: 'color--cornflowerblue' },
+        
     ];
 
     constructor(public sidebar: SidebarService, public appData: AppResourceData ) {

@@ -9,7 +9,7 @@
         </mat-nav-list>
         <mat-divider></mat-divider>
         <mat-nav-list *ngIf="sidebar.active">
-            <h3 mat-subheader>Actions</h3>
+            <h3 mat-subheader>Services</h3>
             <mat-list-item *ngFor="let action of actionList" 
             routerLink="{{getResourceHref(action.title)}}" >
                 <mat-icon mat-list-icon>{{action.icon}}</mat-icon>

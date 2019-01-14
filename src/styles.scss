@@ -195,6 +195,7 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
 }
 
 .project__card {
+  margin-bottom: 24px;
   .mat-ripple{
     cursor: pointer;
     overflow: visible !important;
