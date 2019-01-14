@@ -83,15 +83,15 @@
                                 <a href="#_embedded">_embedded</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
+                                    <span class="modifier">public</span>
                                 <a href="#_links">_links</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
+                                    <span class="modifier">public</span>
                                 <a href="#_list">_list</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
+                                    <span class="modifier">public</span>
                                 <a href="#_page">_page</a>
                             </li>
                             <li>
@@ -278,7 +278,7 @@
                         <a name="_links"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">public</span>
                             _links
                             </b>
                             <a href="#_links"><span class="icon ion-ios-link"></span></a>
@@ -307,7 +307,7 @@
                         <a name="_list"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">public</span>
                             _list
                             </b>
                             <a href="#_list"><span class="icon ion-ios-link"></span></a>
@@ -336,7 +336,7 @@
                         <a name="_page"></a>
                         <span class="name">
                             <b>
-                                <span class="modifier">Private</span>
+                                <span class="modifier">public</span>
                             _page
                             </b>
                             <a href="#_page"><span class="icon ion-ios-link"></span></a>
@@ -888,9 +888,9 @@ export class HttpResource&lt;T&gt;{
     protected apiEndPoint: string;
 
     _embedded;
-    private _links;
-    private _page;
-    private _list;
+    public _links;
+    public _page;
+    public _list;
 
     constructor(protected http: HttpClient, path: string, endPoint: string) {
         this.path &#x3D; path;

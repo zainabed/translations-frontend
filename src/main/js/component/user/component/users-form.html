@@ -1,6 +1,6 @@
 <form [formGroup]="userForm.form" fxLayout="column" fxLayoutGap="20px">
     <h2 fxFlex fxFlexAlign="center">{{title}}</h2>
-    <div id="api-error" *ngIf="apiError">
+    <div id="api-error" *ngIf="error">
         Unable to connet application server.
     </div>
     <div fxFlex="2" fxLayout="column" fxLayoutGap="10px" class="">

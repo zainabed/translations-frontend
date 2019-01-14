@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Response, ResponseOptions } from "@angular/http";
 import { HttpResponse } from "@angular/common/http";
 
-import { Observable } from "rxjs/observable";
+import { Observable } from "rxjs/Observable";
 
 
 export class HttpResource<T>{
