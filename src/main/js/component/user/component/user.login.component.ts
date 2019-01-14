@@ -44,6 +44,7 @@ export class UserLoginComponent {
         this.jwtToken.user = JSON.parse(atob(tokenValues[1]));
         
         this.httpProgress = false;
+        this.loginForm.reset();
         this.router.navigate(["/"]);
     }
 

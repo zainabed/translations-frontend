@@ -194,6 +194,13 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
   padding: 8px;
 }
 
+.project__card {
+  .mat-ripple{
+    cursor: pointer;
+    overflow: visible !important;
+  }
+}
+
 .mat-card-actions, .mat-card-content, .mat-card-subtitle, .mat-card-title {
  // display: flex !important;
 }
@@ -357,3 +364,11 @@ mat-panel-title .panel__title{
   margin: 0 16px;
 }
 
+.card__list{
+  padding: 0 !important;
+
+  .mat-card-title{
+    padding: 16px 16px 0 16px !important;
+    border-bottom: 1px solid #eee !important;
+  }
+}

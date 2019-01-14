@@ -28,6 +28,5 @@ export class AppComponent implements OnInit, AfterContentInit {
  //   this.router.navigate(["/" + UserRouteNames.UserHome]);
   }
   ngAfterContentInit() {
-  
   }
 }

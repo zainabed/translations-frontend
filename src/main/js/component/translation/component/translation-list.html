@@ -1,7 +1,7 @@
 <div class="heading__content"></div>
 <h1 class="mat-h1">Translations</h1>
 <div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">
-    <mat-card class="column__xdt--6 column__dt--6">
+    <mat-card class="column__xdt--6 column__dt--6 card__list">
         <mat-card-title class="row flex" *ngIf="!onSearch">
             <div class="column__xdt--10 column__dt--10 padding--zero">Keys</div>
             <div class="column__xdt--2 column__dt--2 padding--zero">
@@ -28,7 +28,7 @@
 
         <mat-card-content>
 
-            <mat-list class="row">
+            <mat-nav-list class="row">
                 <mat-list-item *ngFor="let key of resourceList" (click)="open(key)">
                     <div mat-line class="color--darkorange">{{key.name}}</div>
                     <div mat-line>{{key.description}}</div>
@@ -44,7 +44,7 @@
                     </div>
                 </mat-list-item>
 
-            </mat-list>
+            </mat-nav-list>
 
             <div *ngIf="!resourceList || !resourceList.length">
                 <p>No result found for given search value.</p>

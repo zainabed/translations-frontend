@@ -44,9 +44,19 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
 
     onGetSuccess(response) {
         super.onGetSuccess(response);
+        this.resourceList = this.filterExtendedProjects(this.resourceList);
         this.projectsTableData = new MatTableDataSource(this.resourceList);
     }
 
+    filterExtendedProjects(projects) {
+        projects.map(p => {
+            p.extendList = this.resourceList.filter(e => {
+                return e.name != p.name && p.extended == null && this.appData.getId(p)!=e.extended;
+            });
+            return p;
+        });
+        return projects;
+    }
 
     extend(project, extendProject) {
         let projectId = this.appData.getId(project);

@@ -65,7 +65,8 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
             }
             resource['api'] = this.projectApi + "/" + id;
             return resource;
-        });
+        }).sort((a, b) => a.name.localeCompare(b.name)
+            ).sort((a, b) => (a.present === b.present) ? 0 : a.present ? -1 : 1);
 
         console.log(this.resourceList);
     }
@@ -76,16 +77,16 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         return href.substr(lastIndex);
     }
 
-    
+
 
     post(apiPath) {
-       this.resourcesService.post(apiPath, null).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+        this.resourcesService.post(apiPath, null).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
     }
 
     onPostSuccess(response) {
         this.httpProgress = false;
         this.get();
-      
+
     }
 
     onPostFail(response) {
