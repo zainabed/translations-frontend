@@ -59,6 +59,8 @@ export abstract class ResourceListComponent<T> implements ResourceList {
             throw new Error("Path property is not set for this component.");
         }
         this.apiUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
+      //  console.log(this.appData.resource);
+      //  console.log(this.apiUrl);
     }
 
     /**
@@ -82,11 +84,11 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.httpProgress = false;
     }
 
-    onGetFail(error) {
+    onGetFail(response) {
         this.resourceList = null;
-        this.error = error;
+        this.error = response;
         this.httpProgress = false;
-        this.showNotification("Unable to fetch record. please try after some time.");
+        this.showNotification(response.error.message);
     }
 
     delete(resource) {
@@ -99,9 +101,9 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.get();
     }
 
-    onDeleteFail(error: any) {
-        this.error = error;
-        this.showNotification("Unable to delete record. please delete all related record associated wit it.");
+    onDeleteFail(response: any) {
+        this.error = response;
+        this.showNotification(response.error.message);
     }
 
     edit(resource) {

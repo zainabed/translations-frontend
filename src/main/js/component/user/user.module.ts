@@ -8,6 +8,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UserForm, UserFormComponent, UserComponent, UserService, UserListComponent } from "./user.core";
 import { UserRoutes } from "./user.route";
 import { UserLoginComponent } from "./component/user.login.component";
+import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
 import { LoginHttpService } from "./http/login.http.service";
 import { JwtToken } from "./model/jwt.token";
@@ -21,7 +22,8 @@ import { JwtToken } from "./model/jwt.token";
         UserComponent,
         UserFormComponent,
         UserListComponent,
-        UserLoginComponent
+        UserLoginComponent,
+        UserLogoutComponent
     ],
     providers: [UserForm, UserService, LoginForm, LoginHttpService, JwtToken]
 })

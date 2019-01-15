@@ -16,10 +16,17 @@ export class LoginForm extends ModelForm<Login>{
             password: ['', Validators.required]
         });
     }
+    
     getData(): Login {
         let login: Login = new Login();
         login.username = this.form.get('username').value;
         login.password = this.form.get('password').value;
+        
         return login;
     }
+
+    reset(){
+        this.form.reset();
+    }
+
 }

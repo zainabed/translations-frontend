@@ -10,7 +10,7 @@ import { JwtToken } from "../../component/user/model/jwt.token";
  */
 @Injectable()
 export class ResourceService {
-    constructor(private http: HttpClient, private jwt: JwtToken) { }
+    constructor(private http: HttpClient, private jwtToken: JwtToken) { }
 
     /**
      * 
@@ -19,7 +19,7 @@ export class ResourceService {
     get(url): Observable<Resource> {
         return this.http.get<Resource>(url, {
             headers: {
-                Authorization: this.jwt.type + " " + this.jwt.token
+                Authorization: this.jwtToken.type + " " + this.jwtToken.token
             }
         });
     }
@@ -30,7 +30,11 @@ export class ResourceService {
      * @param resource 
      */
     patch(url, resource): Observable<Resource> {
-        return this.http.patch<Resource>(url, resource);
+        return this.http.patch<Resource>(url, resource, {
+            headers: {
+                Authorization: this.jwtToken.type + " " + this.jwtToken.token
+            }
+        });
     }
 
     /**
@@ -39,7 +43,11 @@ export class ResourceService {
      * @param resource 
      */
     put(url, resource): Observable<Resource> {
-        return this.http.put<Resource>(url, resource);
+        return this.http.put<Resource>(url, resource, {
+            headers: {
+                Authorization: this.jwtToken.type + " " + this.jwtToken.token
+            }
+        });
     }
 
     /**
@@ -47,7 +55,11 @@ export class ResourceService {
      * @param url 
      */
     delete(url) {
-        return this.http.delete(url);
+        return this.http.delete(url, {
+            headers: {
+                Authorization: this.jwtToken.type + " " + this.jwtToken.token
+            }
+        });
     }
 
     search(url) {

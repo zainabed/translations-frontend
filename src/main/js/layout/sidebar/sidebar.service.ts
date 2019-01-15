@@ -3,9 +3,9 @@ import { environment } from "../../../../environments/environment";
 
 @Injectable()
 export class SidebarService {
-    private _resource = null;
-    private active: boolean = false;
-    private title: string;
+    public _resource = null;
+    public active: boolean = false;
+    public title: string;
 
     set resource(resource) {
         this._resource = {};
@@ -33,8 +33,10 @@ export class SidebarService {
     }
 
     setActive(active: Array<any>) {
-        this.active = true;
-        if (active && active.length) {
+        this.active = false;
+        
+        if (active && Object.keys(active).length) {
+            console.log(active);
             this.active = true;
         }
     }

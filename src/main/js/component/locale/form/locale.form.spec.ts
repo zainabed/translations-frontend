@@ -38,8 +38,8 @@ describe("Unit test for LocaleForm.\n", () => {
             expect(name.invalid).toBeTruthy();
         });
 
-        it("Should fail cause name filed size is less than 5.\n", () => {
-            name.setValue("1234");
+        it("Should fail cause name filed size is less than 2.\n", () => {
+            name.setValue("1");
             expect(name.invalid).toBeTruthy();
         });
 
@@ -66,8 +66,8 @@ describe("Unit test for LocaleForm.\n", () => {
             expect(code.invalid).toBeTruthy();
         });
 
-        it("Should fail cause code filed size is less than 5.\n", () => {
-            code.setValue("1234");
+        it("Should fail cause code filed size is less than 2.\n", () => {
+            code.setValue("1");
             expect(code.invalid).toBeTruthy();
         });
 

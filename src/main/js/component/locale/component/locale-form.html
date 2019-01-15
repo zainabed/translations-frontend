@@ -1,12 +1,11 @@
 <form [formGroup]="localeForm.form" class="column__xdt--12" autocomplete="off">
     <mat-progress-bar mode="indeterminate" *ngIf="httpProgress" class="row"></mat-progress-bar>
     <mat-card class="row">
-        <mat-card-title>{{title}}</mat-card-title>
         <mat-card-content class="">
 
-            <mat-form-field class="row">
+             <!--<mat-form-field class="row">
 
-                <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
+               <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
                 <ng-container>
                     <mat-error id="name-empty-error" *ngIf="localeForm.form.get('name').hasError('required')">
                         name can't be empty
@@ -19,11 +18,11 @@
                     </mat-error>
 
                 </ng-container>
-            </mat-form-field>
+            </mat-form-field>-->
 
             <mat-form-field class="row">
                 <mat-select formControlName="code">
-                    <mat-option *ngFor="let code of codeList" [value]="code">{{code}}</mat-option>
+                    <mat-option *ngFor="let locale of resource" [value]="getId(locale)">{{locale.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </mat-card-content>

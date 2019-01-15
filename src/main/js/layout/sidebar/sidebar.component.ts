@@ -8,18 +8,20 @@ import {AppResourceData} from "../../app.resource.data";
     templateUrl: "sidebar.html"
 })
 export class SidebarComponent implements OnInit, AfterContentInit {
-    private actionList = [
+    public actionList = [
         { title: 'locales', icon: "language", color: 'color--darkcyan' },
-        { title: 'keys', icon: "vpn_key", color: 'color--darkorange' },
+        //{ title: 'keys', icon: "vpn_key", color: 'color--darkorange' },
         { title: 'translations', icon: "translate", color: 'color--darkblue' }
     ];
 
-    private settingList = [
+    public settingList = [
+        { title: 'report', icon: "assessment", color: 'color--cornflowerblue' },
         { title: 'users', icon: "person", color: 'color--cornflowerblue' },
-        { title: 'setting', icon: "settings", color: 'color--cornflowerblue' }
+        { title: 'setting', icon: "settings", color: 'color--cornflowerblue' },
+        
     ];
 
-    constructor(private sidebar: SidebarService, private appData: AppResourceData ) {
+    constructor(public sidebar: SidebarService, public appData: AppResourceData ) {
     }
 
     ngOnInit() {

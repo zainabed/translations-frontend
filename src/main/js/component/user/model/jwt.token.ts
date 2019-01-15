@@ -6,4 +6,5 @@ export class JwtToken {
     token: string;
     type: string;
     refreshToken: string;
+    user: any;
 }
