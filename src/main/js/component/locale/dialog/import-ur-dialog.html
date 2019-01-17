@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Import</h1>
+<div mat-dialog-content>
+  <p class="mat-display2">Import translation from remote URI</p>
+  <form class="row" [formGroup]="form">
+    <mat-form-field class="column__xdt--12 column__dt--12">
+      <input matInput placeholder="Remote URI" formControlName="uri" id="uri">
+    </mat-form-field>
+  
+    <!--<mat-form-field class="column__xdt--4 column__dt--4">
+        <input matInput placeholder="Language" formControlName="locale" id="locale">
+    </mat-form-field>-->
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="import()" cdkFocusInitial>Import</button>
+  <button mat-button (click)="cancel()">Cancel</button>
+</div>

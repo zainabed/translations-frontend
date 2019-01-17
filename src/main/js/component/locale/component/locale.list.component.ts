@@ -3,8 +3,11 @@ import { saveAs } from 'file-saver';
 
 import { ResourceListComponent, ResourcePath } from "../../../lib/component/resource.component.core";
 import { ProjectService, ProjectResourceListComponent } from "../../project/project.core";
+import { ImportUriDialogComponent } from "../dialog/import.uri.dialog.component";
+import { MatDialog } from '@angular/material';
 
 import { Locale } from "../model/locale";
+import { LocaleUri } from "../model/locale.uri";
 
 @ResourcePath({
     path: "locales",
@@ -16,7 +19,8 @@ import { Locale } from "../model/locale";
     templateUrl: "./locale-list.html",
     host: {
         class: "column__xdt--10 column__dt--10 component"
-    }
+    },
+    entryComponents: [ImportUriDialogComponent]
 })
 export class LocaleListComponent extends ResourceListComponent<Locale> {
 
@@ -25,7 +29,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     private projectApi: string;
     private projectService: ProjectService;
 
-    constructor(injector: Injector, ) {
+    constructor(injector: Injector, public dialog: MatDialog) {
         super(injector);
         this.projectService = injector.get(ProjectService);
 
@@ -78,9 +82,48 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     }
 
 
-
     post(apiPath) {
         this.resourcesService.post(apiPath, null).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+    }
+
+    delete(api) {
+        this.resourceService.delete(api).subscribe(this.onDeleteSuccess.bind(this), this.onDeleteFail.bind(this));
+    }
+
+    download(api, code) {
+        this.downloadLocaleCode = code;
+        this.resourceService.get(api + "/download").subscribe(this.onDownloadSucess.bind(this), this.onGetFail.bind(this));
+    }
+
+    import(locale) {
+        let dialogRef = this.dialog.open(ImportUriDialogComponent, {
+            width: "450px",
+            data: {}
+        });
+
+        dialogRef.afterClosed().subscribe(data => {
+            console.log(data);
+            if(data.length){
+                let localeUri: LocaleUri = new LocaleUri(data, locale.code);
+                this.importLanguage(locale.api, localeUri);
+            }
+            
+        });
+    }
+
+    importLanguage(api: string, localeUri: LocaleUri) {
+        this.httpProgress = true;
+        this.resourcesService.post(api + "/import/uri", localeUri).subscribe(this.onImportSucess.bind(this), this.onImportFail.bind(this));
+    }
+
+    onImportSucess(response) {
+        this.httpProgress = false;
+        this.showNotification("Imported translation successfuly");
+    }
+
+    onImportFail(response) {
+        this.httpProgress = false;
+        this.showNotification(response.error.message);
     }
 
     onPostSuccess(response) {
@@ -94,14 +137,9 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         this.showNotification(response.error.message);
     }
 
-    delete(api) {
-        this.resourceService.delete(api).subscribe(this.onDeleteSuccess.bind(this), this.onDeleteFail.bind(this));
-    }
 
-    download(api, code) {
-        this.downloadLocaleCode = code;
-        this.resourceService.get(api + "/download").subscribe(this.onDownloadSucess.bind(this), this.onGetFail.bind(this));
-    }
+
+
 
     onDownloadSucess(response) {
         this.httpProgress = false;

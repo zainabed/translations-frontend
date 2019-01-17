@@ -65,6 +65,16 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
             .subscribe(this.onExtendSuccess.bind(this), this.onExtendFail.bind(this));;
     }
 
+    import(project) {
+        let projectId = this.appData.getId(project);
+        let data = {
+            url: "http://91.106.195.240:8000/getAll",
+            locale: "en" 
+        };
+        this.resourcesService.post(this.apiUrl + "/" + projectId + "/import/uri", data)
+            .subscribe(this.onExtendSuccess.bind(this), this.onExtendFail.bind(this));;
+    }
+
     onExtendSuccess(response) {
         this.showNotification("Project is extended successfully.");
         this.get();
