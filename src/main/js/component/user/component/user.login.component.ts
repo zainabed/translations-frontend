@@ -40,10 +40,7 @@ export class UserLoginComponent {
     }
 
     onSuccess(response) {
-        this.jwtToken.type = response.type;
-        this.jwtToken.token = response.token;
-        let tokenValues = response.token.split(".");
-        this.jwtToken.user = JSON.parse(atob(tokenValues[1]));
+       this.jwtToken.setTokeObject(response);
         
         this.httpProgress = false;
         this.loginForm.reset();

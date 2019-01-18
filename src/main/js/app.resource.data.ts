@@ -2,14 +2,21 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class AppResourceData {
-    private _resource;
+    private _resource = null;
+    storage = window.localStorage;
 
     get resource() {
+        if (this._resource == null) {
+            this._resource = JSON.parse(this.storage.getItem("resource"));
+        }
         return this._resource;
     }
 
     set resource(resource) {
-        this._resource = resource;
+        if(typeof resource !== "undefined") {
+            this.storage.setItem("resource", JSON.stringify(resource));
+        }
+        this._resource = resource; 
     }
 
     getResourceListUrlFor(resource, resourceName) {

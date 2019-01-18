@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 
 import { Locale } from "../model/locale";
 import { LocaleUri } from "../model/locale.uri";
+import {LocalService} from "../service/locale.service";
 
 @ResourcePath({
     path: "locales",
@@ -55,35 +56,11 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     onGetProjectLocalesSuccess(response) {
         this.httpProgress = false;
         let projectLocales = this.getEmbeddedResource(response);
-        projectLocales = projectLocales.map(locale => {
-            return this.getId(locale);
-        });
-
-        console.log(projectLocales);
-
-        this.resourceList = this.resourceList.map(resource => {
-            let id = this.getId(resource);
-            resource["id"] = id;
-            if (projectLocales.indexOf(id) >= 0) {
-                resource["present"] = true;
-            }
-            resource['api'] = this.projectApi + "/" + id;
-            return resource;
-        }).sort((a, b) => a.name.localeCompare(b.name)
-            ).sort((a, b) => (a.present === b.present) ? 0 : a.present ? -1 : 1);
-
-        console.log(this.resourceList);
+        this.resourceList = LocalService.transform(this.resourceList, projectLocales, this.appData, this.projectApi);
     }
-
-    getId(locale) {
-        let href = locale['_links']['self']['href'];
-        let lastIndex = href.lastIndexOf("/") + 1;
-        return href.substr(lastIndex);
-    }
-
 
     post(apiPath) {
-        this.resourcesService.post(apiPath, null).subscribe(this.onPostSuccess.bind(this), this.onPostFail.bind(this));
+        this.resourcesService.post(apiPath, null).subscribe(this.onPostSuccess.bind(this), this.onRequestFail.bind(this));
     }
 
     delete(api) {
@@ -102,18 +79,16 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         });
 
         dialogRef.afterClosed().subscribe(data => {
-            console.log(data);
-            if(data.length){
+            if (data.length) {
                 let localeUri: LocaleUri = new LocaleUri(data, locale.code);
                 this.importLanguage(locale.api, localeUri);
             }
-            
         });
     }
 
     importLanguage(api: string, localeUri: LocaleUri) {
         this.httpProgress = true;
-        this.resourcesService.post(api + "/import/uri", localeUri).subscribe(this.onImportSucess.bind(this), this.onImportFail.bind(this));
+        this.resourcesService.post(api + "/import/uri", localeUri).subscribe(this.onImportSucess.bind(this), this.onRequestFail.bind(this));
     }
 
     onImportSucess(response) {
@@ -121,25 +96,10 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         this.showNotification("Imported translation successfuly");
     }
 
-    onImportFail(response) {
-        this.httpProgress = false;
-        this.showNotification(response.error.message);
-    }
-
     onPostSuccess(response) {
         this.httpProgress = false;
         this.get();
-
     }
-
-    onPostFail(response) {
-        this.httpProgress = false;
-        this.showNotification(response.error.message);
-    }
-
-
-
-
 
     onDownloadSucess(response) {
         this.httpProgress = false;
@@ -148,16 +108,8 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
             data += key + "=" + response[key] + "\n";
         };
         const blob = new Blob([data], { type: "text/x-java-properties" });
-        console.log(blob);
-        // const url= window.URL.createObjectURL(blob);
-        //  window.open(url + ".properties");
-        //var a = document.createElement("a");
-        // a.href = URL.createObjectURL(blob);
-        //a.download = "message.properties";
-        // a.click();
         let code = this.downloadLocaleCode == 'en' ? '' : '_' + this.downloadLocaleCode;
         saveAs(blob, "messages" + code + ".properties");
-
     }
 
 }

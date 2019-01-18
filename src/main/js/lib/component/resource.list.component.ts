@@ -59,8 +59,8 @@ export abstract class ResourceListComponent<T> implements ResourceList {
             throw new Error("Path property is not set for this component.");
         }
         this.apiUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
-      //  console.log(this.appData.resource);
-      //  console.log(this.apiUrl);
+        //  console.log(this.appData.resource);
+        //  console.log(this.apiUrl);
     }
 
     /**
@@ -120,5 +120,10 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.snackBar.open(message, null, {
             duration: this.snackBarDuration
         });
+    }
+
+    onRequestFail(response) {
+        this.error = response;
+        this.showNotification(response.error.message);
     }
 }
