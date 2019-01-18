@@ -15,7 +15,7 @@
             <button mat-button color="primary" (click)="post(locale.api)" *ngIf="!locale.present">Enable</button>
             <button mat-button color="warn" (click)="delete(locale.api)" *ngIf="locale.present">disable</button>
             <button mat-button color="accent" (click)="download(locale.api, locale.code)" *ngIf="locale.present">Download</button>
-            <button mat-button color="accent" (click)="import(locale)">Import</button>
+            <button mat-button color="accent" (click)="import(locale)" *ngIf="locale.present">Import</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

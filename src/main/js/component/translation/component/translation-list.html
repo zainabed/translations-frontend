@@ -2,30 +2,36 @@
 <h1 class="mat-h1">Translations</h1>
 <div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">
     <mat-card class="column__xdt--6 column__dt--6 card__list">
-        <mat-card-title class="row flex" *ngIf="!onSearch">
-            <div class="column__xdt--10 column__dt--10 padding--zero">Keys</div>
-            <div class="column__xdt--2 column__dt--2 padding--zero">
-                <button mat-icon-button (click)="openSearchBox()">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </div>
-        </mat-card-title>
-        <mat-card-title class="row flex" *ngIf="onSearch">
-            <div class="column__xdt--2 column__dt--2 padding--zero">
-                <button mat-icon-button (click)="closeSearchBox()">
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-            </div>
-            <form [formGroup]="keyForm.form" class="column__xdt--10 column__dt--10 padding--zero searchbox" autocomplete="off">
-                <mat-form-field class="row">
-                    <input matInput formControlName="name" id="name">
-                    
-                </mat-form-field>
-                <button mat-raised-button color="primary" (click)="search()" class="hide">Search</button>
 
-            </form>
-        </mat-card-title>
-
+        <mat-toolbar *ngIf="!onSearch" class="background__transparent">
+            <mat-toolbar-row class="toolbar">
+                <div class="left">Keys</div>
+                <div class="right">
+                    <button mat-icon-button (click)="openSearchBox()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-toolbar *ngIf="onSearch">
+            <mat-toolbar-row class="toolbar">
+                <div class="left">
+                    <button mat-icon-button (click)="closeSearchBox()">
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                </div>
+                <div class="center">
+                    <form [formGroup]="keyForm.form" class="padding--zero searchbox" autocomplete="off">
+                        <mat-form-field class="row">
+                            <input matInput formControlName="name" id="name" placeholder="search">
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="right">
+                    <button mat-raised-button color="primary" (click)="search()" class="">Search</button>
+                </div>
+            </mat-toolbar-row>
+        </mat-toolbar>
         <mat-card-content>
 
             <mat-nav-list class="row">
@@ -45,11 +51,10 @@
                 </mat-list-item>
 
             </mat-nav-list>
-
             <div *ngIf="!resourceList || !resourceList.length">
                 <p>No result found for given search value.</p>
             </div>
-
+            <mat-paginator [length]="page.totalElements" [pageSize]="page.size" (page)="pageHandler($event)"></mat-paginator>
         </mat-card-content>
 
     </mat-card>
