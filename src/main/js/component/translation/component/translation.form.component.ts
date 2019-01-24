@@ -72,7 +72,6 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
         this.resource = null;
         this.resourceList = null;
         this.error = error;
-        this.httpProgress = false;
         this.configureForm();
     }
 
@@ -83,12 +82,10 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
 
     onPostSuccess(response) {
         this.resource = response;
-        this.httpProgress = false;
         this.showNotification("Added record successfully.");
     }
 
     onPutSuccess(reponse) {
-        this.httpProgress = false;
         this.showNotification("Updated record successfully.");
     }
 
@@ -115,12 +112,10 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
 
     getLocales() {
         let localesApiPath = this.appData.getResourceListUrlFor(this.projectService.resource, "locales");
-        this.httpProgress = true;
         this.resourcesService.get(localesApiPath).subscribe(this.onLocaleGetSuccess.bind(this), this.onLocaleGetFail.bind(this));
     }
 
     onLocaleGetSuccess(response) {
-        this.httpProgress = false;
         this.locales = response[this.EMBEDDED]["locales"];
         if(this.locales.length){
             let locale = this.locales[0];
@@ -132,7 +127,6 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
     }
 
     onLocaleGetFail(error) {
-        this.httpProgress = false;
         this.error = error;
     }
 

@@ -68,7 +68,6 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
     onGetSuccess(response) {
         this.resourceList = this.getEmbeddedResource(response);
         this.page = response["page"];
-        this.httpProgress = false;
     }
 
     search() {

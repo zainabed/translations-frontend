@@ -49,12 +49,10 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     }
 
     getProjectLocales() {
-        this.httpProgress = true;
         this.resourcesService.get(this.projectApi).subscribe(this.onGetProjectLocalesSuccess.bind(this), this.onGetFail.bind(this));
     }
 
     onGetProjectLocalesSuccess(response) {
-        this.httpProgress = false;
         let projectLocales = this.getEmbeddedResource(response);
         this.resourceList = LocalService.transform(this.resourceList, projectLocales, this.appData, this.projectApi);
     }
@@ -87,22 +85,18 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     }
 
     importLanguage(api: string, localeUri: LocaleUri) {
-        this.httpProgress = true;
         this.resourcesService.post(api + "/import/uri", localeUri).subscribe(this.onImportSucess.bind(this), this.onRequestFail.bind(this));
     }
 
     onImportSucess(response) {
-        this.httpProgress = false;
         this.showNotification("Imported translation successfuly");
     }
 
     onPostSuccess(response) {
-        this.httpProgress = false;
         this.get();
     }
 
     onDownloadSucess(response) {
-        this.httpProgress = false;
         let data = "";
         for (var key in response) {
             data += key + "=" + response[key] + "\n";

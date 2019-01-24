@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
+import { HttpProgress } from "../../../lib/http/http.progress";
 import { MatSnackBar } from '@angular/material';
 import { LoginHttpService } from "../http/login.http.service";
 import { LoginForm } from "../form/login.form";
@@ -22,33 +23,30 @@ import { ErrorMatcher } from "../../../lib/form/error.matcher";
 })
 export class UserLoginComponent {
     snackBarDuration = 2000;
-    httpProgress: boolean;
     matcher = new ErrorMatcher();
 
     constructor(public loginService: LoginHttpService,
         public loginForm: LoginForm,
         public jwtToken: JwtToken,
-        public router: Router, public snackBar: MatSnackBar) {
+        public router: Router,
+        public snackBar: MatSnackBar,
+        public httpProgress: HttpProgress) {
 
     }
 
     login() {
         let login: Login = this.loginForm.getData();
-        this.httpProgress = true;
         this.loginService.authenticate(login.username, login.password).subscribe(this.onSuccess.bind(this),
             this.onError.bind(this));
     }
 
     onSuccess(response) {
-       this.jwtToken.setTokeObject(response);
-        
-        this.httpProgress = false;
+        this.jwtToken.setTokeObject(response);
         this.loginForm.reset();
         this.router.navigate(["/"]);
     }
 
     onError(error) {
-        this.httpProgress = false;
         console.log(error);
         this.snackBar.open(error.error.message, null, {
             duration: this.snackBarDuration
