@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { ResourcesService } from "../http/resources.service";
 import { ResourceService } from "../http/resource.service";
+import { HttpProgress } from "../http/http.progress";
 import { Resources } from "../http/resources";
 import { AppResourceData } from "../../app.resource.data";
 
@@ -23,7 +24,7 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     public error;
     public resource: T;
     public resourceList;
-    public httpProgress: boolean = false;
+    public httpProgress: HttpProgress;
     public snackBar: MatSnackBar;
     public snackBarDuration = 5000;
 
@@ -41,10 +42,12 @@ export abstract class ResourceListComponent<T> implements ResourceList {
     constructor(injector: Injector) {
         this.resourcesService = injector.get(ResourcesService);
         this.resourceService = injector.get(ResourceService);
+        this.httpProgress = injector.get(HttpProgress);
         this.appData = injector.get(AppResourceData);
         this.router = injector.get(Router);
         this.route = injector.get(ActivatedRoute);
         this.snackBar = injector.get(MatSnackBar);
+
     }
 
     getComponentPath() {
@@ -59,8 +62,8 @@ export abstract class ResourceListComponent<T> implements ResourceList {
             throw new Error("Path property is not set for this component.");
         }
         this.apiUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
-      //  console.log(this.appData.resource);
-      //  console.log(this.apiUrl);
+        //  console.log(this.appData.resource);
+        //  console.log(this.apiUrl);
     }
 
     /**
@@ -75,19 +78,16 @@ export abstract class ResourceListComponent<T> implements ResourceList {
      * 
      */
     get() {
-        this.httpProgress = true;
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
     onGetSuccess(response) {
         this.resourceList = this.getEmbeddedResource(response);
-        this.httpProgress = false;
     }
 
     onGetFail(response) {
         this.resourceList = null;
         this.error = response;
-        this.httpProgress = false;
         this.showNotification(response.error.message);
     }
 
@@ -120,5 +120,10 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.snackBar.open(message, null, {
             duration: this.snackBarDuration
         });
+    }
+
+    onRequestFail(response) {
+        this.error = response;
+        this.showNotification(response.error.message);
     }
 }

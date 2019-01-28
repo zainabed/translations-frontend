@@ -12,7 +12,7 @@ export class TranslationForm extends ModelForm<Translation>{
 
     buildForm(fb: FormBuilder): FormGroup {
         return fb.group({
-            content: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(500)]],
+            content: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(2500)]],
             verified: [""],
             locales: ["", [Validators.required]],
             keys: ["", [Validators.required]],

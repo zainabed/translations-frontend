@@ -19,6 +19,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRippleModule } from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -42,6 +45,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatButtonToggleModule,
         MatExpansionModule,
         MatRippleModule,
+        MatDialogModule,
+        MatPaginatorModule,
         FlexLayoutModule,
     ],
     exports: [
@@ -64,6 +69,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatButtonToggleModule,
         MatExpansionModule,
         MatRippleModule,
+        MatDialogModule,
+        MatPaginatorModule,
         FlexLayoutModule,
     ]
 })

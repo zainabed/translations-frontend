@@ -373,3 +373,13 @@ mat-panel-title .panel__title{
     border-bottom: 1px solid #eee !important;
   }
 }
+
+.http-spinner{
+  position: fixed !important;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
