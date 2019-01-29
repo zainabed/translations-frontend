@@ -8,26 +8,55 @@
   "interactions": [
     {
       "description": "A Post request to create new User",
-      "providerState": "As user I should be able to register myself into system",
+      "providerState": "user registration",
       "request": {
         "method": "POST",
         "path": "/users",
+        "headers": {
+          "Content-Type": "application/json"
+        },
         "body": {
           "username": "testuser",
           "password": "testpassword",
-          "email": "test@email.com",
-          "id": 1
+          "email": "test@email.com"
         }
       },
       "response": {
         "status": 201,
         "headers": {
+          "Content-Type": "application/json"
         },
         "body": {
           "username": "testuser",
           "password": "testpassword",
           "email": "test@email.com",
           "id": 1
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "A POST request to authenticate user",
+      "providerState": "user authentication",
+      "request": {
+        "method": "POST",
+        "path": "/auth",
+        "headers": {
+          "Authorization": "Basic dGVzdDoxMjM="
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "token": "test",
+          "type": "Bearer"
         },
         "matchingRules": {
           "$.body": {

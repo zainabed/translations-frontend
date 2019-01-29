@@ -5,6 +5,23 @@ import { PactWeb, Matchers } from '@pact-foundation/pact-web';
 import { User } from "../model/user";
 import { UserHttp } from "./user.http";
 
+
+import { UserPactInteractions } from "./mock/user.http.interactions";
+
+function buildInteractions(interactions, provider: PactWeb, done) {
+    interactions.forEach(interaction => {
+        provider.addInteraction(interaction).then(done, error => done.fail(error));
+    });
+}
+
+const userFactory = () => {
+    let user = new User();
+    user.username = "testuser";
+    user.password = "testpassword";
+    user.email = "test@email.com";
+    return user;
+}
+
 describe("Unit test for User Registration HTTP service.\n", () => {
     let http: UserHttp;
     let apiUrl: string;
@@ -24,45 +41,25 @@ describe("Unit test for User Registration HTTP service.\n", () => {
 
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
         setTimeout(done, 2000);
-
         provider.removeInteractions();
 
     });
 
     afterAll((done) => {
         provider.finalize().then(() => {
-            console.log("pact created");
             done();
         }, (error) => {
-            console.log(error);
             done.fail(error);
         })
     });
 
     describe("Testing API services.", () => {
         beforeAll((done) => {
-            user = new User();
-            user.username = "testuser";
-            user.password = "testpassword";
-            user.email = "test@email.com";
-            userResponse = user;
+            user = userFactory();
+            userResponse = userFactory();
             userResponse.id = 1;
 
-            provider.addInteraction({
-                state: "As user I should be able to register myself into system",
-                uponReceiving: "A Post request to create new User",
-                withRequest: {
-                    method: "POST",
-                    path: "/users",
-                    body: user,
-                    headers: contentTypeJson
-                },
-                willRespondWith: {
-                    status: 201,
-                    body: Matchers.somethingLike(userResponse),
-                    headers: contentTypeJson
-                }
-            }).then(done, error => done.fail(error));
+            buildInteractions(UserPactInteractions, provider, done);
         });
 
         beforeEach((done) => {
@@ -91,6 +88,15 @@ describe("Unit test for User Registration HTTP service.\n", () => {
                 done.fail(error);
             });
 
+        });
+
+        it("Should authenticate user", (done) => {
+            http.authenticate("test", "123").subscribe(response => {
+                expect(response.token).toEqual("test");
+                done();
+            }, error => {
+                done.fail(error);
+            })
         });
     });
 
