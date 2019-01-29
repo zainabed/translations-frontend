@@ -4,4 +4,6 @@ export class User extends Resource {
      username: String;
      email: String;
      password: String;
+     id?: number;
+     
 }

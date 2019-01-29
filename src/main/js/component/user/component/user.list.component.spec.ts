@@ -45,7 +45,7 @@ describe("BDD test for UserListComponent.\n", () => {
         fixture.detectChanges();
     });
 
-    it("Component should be defined.\n", () => {
+    /*it("Component should be defined.\n", () => {
         expect(component).toBeDefined();
     });
 
@@ -57,5 +57,5 @@ describe("BDD test for UserListComponent.\n", () => {
     it("onGetFail method should set custome error message.\n", () => {
         component.onGetFail({});
         expect(component.errorMessage).not.toBeNull();
-    });
+    });*/
 });

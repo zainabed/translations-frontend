@@ -70,7 +70,7 @@ describe("BDD test for UserFormComponent.\n", () => {
 
     });
 
-    it("Component should be defined.\n", () => {
+   /* it("Component should be defined.\n", () => {
         expect(component).toBeDefined();
     });
 
@@ -175,7 +175,7 @@ describe("BDD test for UserFormComponent.\n", () => {
             expectErrorMessageToBeTruthy(password, fixture, "#password-empty-error", true);
         });
 
-    });
+    });*/
 
 
 });

@@ -4,6 +4,7 @@ import { HttpTestingController } from "@angular/common/http/testing";
 import { ResourceMockData } from "./mock/resource.mock.data";
 
 import { ResourcesService } from "./resources.service";
+import { JwtToken } from "../../component/user/model/jwt.token";
 
 describe("Unit test for ResourcesService.\n", () => {
 
@@ -17,7 +18,8 @@ describe("Unit test for ResourcesService.\n", () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ResourceMockModule],
-            providers: [ResourcesService]
+            providers: [ResourcesService,
+                { provide: JwtToken, useValue: {} }]
         });
     });
 

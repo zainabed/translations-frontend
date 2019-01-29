@@ -5,6 +5,7 @@ import { ResourceMockData } from "./mock/resource.mock.data";
 
 import { ProjectResourceService } from "./project.resource.service";
 import { ProjectResource } from "./project.resource";
+import { JwtToken } from "../../component/user/model/jwt.token";
 
 
 describe("Unit test for ProjectResourceService.\n", () => {
@@ -16,7 +17,10 @@ describe("Unit test for ProjectResourceService.\n", () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ResourceMockModule],
-            providers: [ProjectResourceService]
+            providers: [
+                ProjectResourceService,
+                { provide: JwtToken, useValue: {} }
+            ]
         });
     });
 

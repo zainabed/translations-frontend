@@ -1,0 +1,45 @@
+{
+  "consumer": {
+    "name": "ui"
+  },
+  "provider": {
+    "name": "api"
+  },
+  "interactions": [
+    {
+      "description": "A Post request to create new User",
+      "providerState": "As user I should be able to register myself into system",
+      "request": {
+        "method": "POST",
+        "path": "/users",
+        "body": {
+          "username": "testuser",
+          "password": "testpassword",
+          "email": "test@email.com",
+          "id": 1
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+        },
+        "body": {
+          "username": "testuser",
+          "password": "testpassword",
+          "email": "test@email.com",
+          "id": 1
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
