@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
 import { HttpProgress } from "../../../lib/http/http.progress";
 import { MatSnackBar } from '@angular/material';
-import { LoginHttpService } from "../http/login.http.service";
+import { UserHttp } from "../http/user.http";
 import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
 import { JwtToken } from "../model/jwt.token";
@@ -25,7 +25,7 @@ export class UserLoginComponent {
     snackBarDuration = 2000;
     matcher = new ErrorMatcher();
 
-    constructor(public loginService: LoginHttpService,
+    constructor(public http: UserHttp,
         public loginForm: LoginForm,
         public jwtToken: JwtToken,
         public router: Router,
@@ -36,7 +36,7 @@ export class UserLoginComponent {
 
     login() {
         let login: Login = this.loginForm.getData();
-        this.loginService.authenticate(login.username, login.password).subscribe(this.onSuccess.bind(this),
+        this.http.authenticate(login.username, login.password).subscribe(this.onSuccess.bind(this),
             this.onError.bind(this));
     }
 

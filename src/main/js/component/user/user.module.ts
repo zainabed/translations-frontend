@@ -10,7 +10,7 @@ import { UserRoutes } from "./user.route";
 import { UserLoginComponent } from "./component/user.login.component";
 import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
-import { LoginHttpService } from "./http/login.http.service";
+import { UserHttp } from "./http/user.http";
 import { JwtToken } from "./model/jwt.token";
 
 @NgModule({
@@ -25,7 +25,13 @@ import { JwtToken } from "./model/jwt.token";
         UserLoginComponent,
         UserLogoutComponent
     ],
-    providers: [UserForm, UserService, LoginForm, LoginHttpService, JwtToken]
+    providers: [
+        UserForm,
+        UserService,
+        LoginForm,
+        UserHttp,
+        JwtToken
+    ]
 })
 export class UserModule {
 

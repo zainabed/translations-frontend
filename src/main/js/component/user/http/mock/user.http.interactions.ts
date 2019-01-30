@@ -1,8 +1,8 @@
-import { PactWeb, Matchers } from '@pact-foundation/pact-web';
+import { PactWeb, Matchers, InteractionObject } from '@pact-foundation/pact-web';
 
 const contentTypeJson = { "Content-Type": "application/json" };
 
-export const UserPactInteractions = [
+export const UserPactInteractions : Array<InteractionObject> = [
     {
         state: "user registration",
         uponReceiving: "A Post request to create new User",
