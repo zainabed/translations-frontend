@@ -14,19 +14,10 @@ export const UserPactInteractions : Array<InteractionObject> = [
                 "password": "testpassword",
                 "email": "test@email.com",
             },
-            headers: contentTypeJson
+            headers: contentTypeJson,
         },
         willRespondWith: {
-            status: 201,
-            body: Matchers.somethingLike(
-                {
-                    "username": "testuser",
-                    "password": "testpassword",
-                    "email": "test@email.com",
-                    "id": 1
-                }
-            ),
-            headers: contentTypeJson
+            status: 201
         }
     },
     {

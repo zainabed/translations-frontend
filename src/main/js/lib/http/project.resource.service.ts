@@ -14,7 +14,7 @@ import { JwtToken } from "../../component/user/model/jwt.token";
 @Injectable()
 export class ProjectResourceService {
 
-    constructor(private http: HttpClient, private jwt: JwtToken) { }
+    constructor(private http: HttpClient, public jwt: JwtToken) { }
 
     /**
      * @method get

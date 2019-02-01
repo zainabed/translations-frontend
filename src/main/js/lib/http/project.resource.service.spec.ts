@@ -28,6 +28,7 @@ describe("Unit test for ProjectResourceService.\n", () => {
         service = TestBed.get(ProjectResourceService);
         http = TestBed.get(HttpTestingController);
         mockData = TestBed.get(ResourceMockData);
+        service.jwt.token = "test"; 
     });
 
     it("Service should be defined.\n", () => {

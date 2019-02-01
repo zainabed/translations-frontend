@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { User } from "../model/user";
@@ -26,9 +26,9 @@ export class UserHttp {
      * 
      * @param user 
      */
-    register(user: User): Observable<Resource> {
+    register(user: User): Observable<HttpResponse<any>> {
         console.log(this.apiUrl + this.registerPath);
-        return this.http.post<Resource>(this.apiUrl + this.registerPath, user);
+        return this.http.post<HttpResponse<any>>(this.apiUrl + this.registerPath, user);
     }
 
     /**

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router'
-import { UserFormComponent, UserComponent, UserListComponent } from './user.core';
+import { UserFormComponent, UserComponent, UserListComponent, UserRegisterComponent } from './core';
 import { UserLoginComponent } from './component/user.login.component';
 import { UserLogoutComponent } from './component/user.logout.component';
 
@@ -24,5 +24,8 @@ export const UserRoutes: Routes = [
     }, {
         path: "logout",
         component: UserLogoutComponent
+    }, {
+        path: "register",
+        component: UserRegisterComponent
     }
 ];

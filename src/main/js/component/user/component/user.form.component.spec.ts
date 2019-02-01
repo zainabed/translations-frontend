@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserModule } from "../user.module";
 import { UserFormComponent } from "./user.form.component";
 import { Component } from "@angular/core";
-import { UserForm, UserService, User } from "../user.core";
+import { UserForm, UserService, User } from "../core";
 
 import { ResourceService } from "../../../lib/http/resource.service";
 import { ResourcesService } from "../../../lib/http/resources.service";

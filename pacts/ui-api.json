@@ -24,18 +24,6 @@
       "response": {
         "status": 201,
         "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "username": "testuser",
-          "password": "testpassword",
-          "email": "test@email.com",
-          "id": 1
-        },
-        "matchingRules": {
-          "$.body": {
-            "match": "type"
-          }
         }
       }
     },

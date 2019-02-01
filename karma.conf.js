@@ -38,7 +38,7 @@ module.exports = function (config) {
     singleRun: false,
     pact: [{
       cors: true,
-      port: 1234,
+      port: 8080,
       consumer: "ui",
       provider: "api",
       dir: "pacts",
