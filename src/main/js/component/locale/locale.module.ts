@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 
 
 // Locale Component and Services
-import { LocaleComponent, LocaleListComponent, LocaleFormComponent, ImportUriDialogComponent, LocaleForm } from "./locale.core";
+import { LocaleComponent, LocaleListComponent, LocaleFormComponent, ImportUriDialogComponent, ExportDialogComponent, LocaleForm } from "./locale.core";
 import { LocaleRoutes } from "./locale.route";
 
 @NgModule({
@@ -15,13 +15,14 @@ import { LocaleRoutes } from "./locale.route";
     ],
     declarations: [
         ImportUriDialogComponent,
+        ExportDialogComponent,
         LocaleComponent,
         LocaleListComponent,
         LocaleFormComponent
     ],
     providers: [LocaleForm],
-    exports: [ImportUriDialogComponent],
-    entryComponents: [ImportUriDialogComponent]
+    exports: [ImportUriDialogComponent, ExportDialogComponent],
+    entryComponents: [ImportUriDialogComponent, ExportDialogComponent]
 })
 export class LocaleModule {
 

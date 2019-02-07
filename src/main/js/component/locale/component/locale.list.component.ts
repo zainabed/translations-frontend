@@ -1,14 +1,18 @@
 import { Component, Injector } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import { saveAs } from 'file-saver';
+import {  tap } from 'rxjs/operators';
 
 import { ResourceListComponent, ResourcePath } from "../../../lib/component/resource.component.core";
 import { ProjectService, ProjectResourceListComponent } from "../../project/project.core";
 import { ImportUriDialogComponent } from "../dialog/import.uri.dialog.component";
+import { ExportDialogComponent } from "../dialog/export.dialog.component";
 import { MatDialog } from '@angular/material';
 
 import { Locale } from "../model/locale";
 import { LocaleUri } from "../model/locale.uri";
-import {LocalService} from "../service/locale.service";
+import { LocalService } from "../service/locale.service";
+import { JwtToken } from "@user/core";
 
 @ResourcePath({
     path: "locales",
@@ -30,7 +34,8 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     private projectApi: string;
     private projectService: ProjectService;
 
-    constructor(injector: Injector, public dialog: MatDialog) {
+
+    constructor(injector: Injector, public dialog: MatDialog, public http: HttpClient, public jwtToken: JwtToken) {
         super(injector);
         this.projectService = injector.get(ProjectService);
 
@@ -66,8 +71,31 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     }
 
     download(api, code) {
-        this.downloadLocaleCode = code;
-        this.resourceService.get(api + "/download").subscribe(this.onDownloadSucess.bind(this), this.onGetFail.bind(this));
+        let dialogRef = this.dialog.open(ExportDialogComponent, {
+            width: "450px",
+            data: {}
+        });
+
+        let self = this;
+        dialogRef.afterClosed().subscribe(format => {
+            if (format.length) {
+                this.downloadLocaleCode = code;
+                this.http.get(api + "/export/" + format, {
+                    headers: {
+                        Authorization: this.jwtToken.type + " " + this.jwtToken.token
+                    },
+                    responseType: 'text'
+                }).subscribe(this.onDownloadSucess.bind(this), error => {
+                    console.log(error);
+                })
+            }
+        });
+
+    }
+
+    onDownloadSucess(response) {
+        console.log(response);
+        window.open(response, "_blank");
     }
 
     import(locale) {
@@ -96,14 +124,6 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         this.get();
     }
 
-    onDownloadSucess(response) {
-        let data = "";
-        for (var key in response) {
-            data += key + "=" + response[key] + "\n";
-        };
-        const blob = new Blob([data], { type: "text/x-java-properties" });
-        let code = this.downloadLocaleCode == 'en' ? '' : '_' + this.downloadLocaleCode;
-        saveAs(blob, "messages" + code + ".properties");
-    }
+
 
 }

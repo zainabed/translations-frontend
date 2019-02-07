@@ -15,18 +15,28 @@ import { ResourceForm } from "./resource.form";
 
 
 
-
+/**
+ * 
+ */
 export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> implements ResourceForm {
 
     matcher = new ErrorMatcher();
     public id: any;
     public isForUpdate: boolean = false;
-    
+   
+    /**
+     * 
+     * @param form 
+     * @param injector 
+     */
     constructor(public form: ModelForm<T>, injector: Injector) {
         super(injector);
         
     }
 
+    /**
+     * 
+     */
     ngOnInit() {
         super.ngOnInit();
         this.id = this.route.snapshot.paramMap.get(this._id);
@@ -37,6 +47,9 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
         }
     }
 
+    /**
+     * 
+     */
     post() {
         if (this.form.form.valid) {
             let data = this.form.getData();
@@ -44,16 +57,28 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
         }
     }
 
+    /**
+     * 
+     * @param response 
+     */
     onPostSuccess(response) {
         this.showNotification("Added record successfully.");
         this.navigateToList();
     }
 
+    /**
+     * 
+     * @param response 
+     */
     onPostFail(response) {
         this.error = response;
         this.showNotification(response.error.message);
     }
 
+    /**
+     * 
+     * @param resource 
+     */
     patch(resource: Resource) {
         if (this.form.form.valid) {
             let apiUrl = this.appData.getResourceSelfUrl(resource);
@@ -62,16 +87,28 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
         }
     }
 
+    /**
+     * 
+     * @param reponse 
+     */
     onPatchSuccess(reponse) {
         this.showNotification("Update record successfully.");
         this.navigateToList();
     }
 
+    /**
+     * 
+     * @param response 
+     */
     onPatchFail(response) {
         this.error = response;
         this.showNotification(response.error.message);
     }
 
+    /**
+     * 
+     * @param resource 
+     */
     put(resource) {
         if (this.form.form.valid) {
             let apiUrl = this.appData.getResourceSelfUrl(resource);
@@ -80,26 +117,45 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
         }
     }
 
+    /**
+     * 
+     * @param reponse 
+     */
     onPutSuccess(reponse) {
         this.showNotification("Update record successfully.");
         this.navigateToList();
     }
 
+    /**
+     * 
+     * @param response 
+     */
     onPutFail(response) {
         this.error = response;
         this.showNotification(response.error.message);
     }
     
 
+    /**
+     * 
+     */
     navigateToList() {
         this.router.navigate([this._route]);
     }
 
+    /**
+     * 
+     * @param response 
+     */
     onGetSuccess(response) {
         this.resource = response;
         this.form.form.patchValue(response);
     }
 
+    /**
+     * 
+     * @param response 
+     */
     onDeleteSuccess(response: any) {
         this.showNotification("Deleted record successfully.");
         this.navigateToList();

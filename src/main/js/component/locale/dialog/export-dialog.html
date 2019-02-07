@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Export</h1>
+<div mat-dialog-content>
+  <p class="mat-display2">Select file format</p>
+  <form class="row" [formGroup]="form">
+    <mat-form-field class="column__xdt--12 column__dt--12">
+      <mat-select matNativeControl required formControlName="format" placeholder="File format">
+        <mat-option value="{{format.format}}" *ngFor="let format of formats">{{format.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="download()">Download</button>
+  <button mat-button (click)="cancel()">Cancel</button>
+</div>
