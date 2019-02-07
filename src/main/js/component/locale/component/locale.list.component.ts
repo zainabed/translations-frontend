@@ -104,16 +104,18 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
             data: {}
         });
 
-        dialogRef.afterClosed().subscribe(data => {
-            if (data.length) {
-                let localeUri: LocaleUri = new LocaleUri(data, locale.code);
-                this.importLanguage(locale.api, localeUri);
+        dialogRef.afterClosed().subscribe( importFile => {
+            if (importFile) {
+                //let localeUri: LocaleUri = new LocaleUri(data, locale.code);
+                this.importLanguage(locale.api, importFile);
             }
         });
     }
 
-    importLanguage(api: string, localeUri: LocaleUri) {
-        this.resourcesService.post(api + "/import/uri", localeUri).subscribe(this.onImportSucess.bind(this), this.onRequestFail.bind(this));
+    importLanguage(api: string, importFile) {
+        const formData: FormData = new FormData();
+        formData.append('file', importFile.file, importFile.file.name);
+        this.resourcesService.post(api + "/import/" + importFile.type, formData).subscribe(this.onImportSucess.bind(this), this.onRequestFail.bind(this));
     }
 
     onImportSucess(response) {

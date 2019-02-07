@@ -2,10 +2,15 @@
 <div mat-dialog-content>
   <p class="mat-display2">Import translation from remote URI</p>
   <form class="row" [formGroup]="form">
-    <mat-form-field class="column__xdt--12 column__dt--12">
+    <!--<mat-form-field class="column__xdt--12 column__dt--12">
       <input matInput placeholder="Remote URI" formControlName="uri" id="uri">
+    </mat-form-field>-->
+    <mat-form-field class="column__xdt--12 column__dt--12">
+      <mat-select matNativeControl required formControlName="format" placeholder="File format">
+        <mat-option value="{{format.format}}" *ngFor="let format of formats">{{format.title}}</mat-option>
+      </mat-select>
     </mat-form-field>
-  
+    <input type="file" id="file" (change)="fileInput($event.target.files)">
     <!--<mat-form-field class="column__xdt--4 column__dt--4">
         <input matInput placeholder="Language" formControlName="locale" id="locale">
     </mat-form-field>-->

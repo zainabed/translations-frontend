@@ -2,11 +2,8 @@ import { Component, Inject } from "@angular/core";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LocaleUri } from "../model/locale.uri";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FileFormat } from "../model/file.format";
 
-interface FileFormat {
-    title: string;
-    format: string;
-}
 
 @Component({
     selector: "export-dialog",
