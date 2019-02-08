@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Export</h1>
 <div mat-dialog-content>
-  <p class="mat-display2">Select file format</p>
+  <h2 class="mat-body-2">Select file format</h2>
   <form class="row" [formGroup]="form">
     <mat-form-field class="column__xdt--12 column__dt--12">
       <mat-select matNativeControl required formControlName="format" placeholder="File format">
@@ -10,6 +10,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="primary" (click)="download()">Download</button>
+  <button mat-button color="primary" (click)="download()">export</button>
   <button mat-button (click)="cancel()">Cancel</button>
 </div>

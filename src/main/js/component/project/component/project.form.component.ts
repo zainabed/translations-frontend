@@ -16,7 +16,7 @@ import { ResourcePath, ResourceFormComponent } from "../../../lib/component/reso
     selector: "project-form-component",
     templateUrl: "./projects-form.html",
     host: {
-        class: "component column__xdt--6 column__dt--6"
+        class: "column__xdt--10 column__dt--10"
     }
 })
 export class ProjectFormComponent extends ResourceFormComponent<Project>{

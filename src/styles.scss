@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import 'assets/css/input.scss';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -382,4 +383,8 @@ mat-panel-title .panel__title{
   -moz-transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
+}
+
+.mat-dialog-content{
+  margin: 16px -24px !important;
 }

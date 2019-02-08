@@ -33,6 +33,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     private localeApi: string;
     private projectApi: string;
     private projectService: ProjectService;
+    private dialogWith: string = "500px"
 
 
     constructor(injector: Injector, public dialog: MatDialog, public http: HttpClient, public jwtToken: JwtToken) {
@@ -72,7 +73,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
 
     download(api, code) {
         let dialogRef = this.dialog.open(ExportDialogComponent, {
-            width: "450px",
+            width: this.dialogWith,
             data: {}
         });
 
@@ -100,7 +101,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
 
     import(locale) {
         let dialogRef = this.dialog.open(ImportUriDialogComponent, {
-            width: "450px",
+            width: this.dialogWith,
             data: {}
         });
 

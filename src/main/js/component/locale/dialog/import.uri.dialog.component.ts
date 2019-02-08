@@ -12,7 +12,7 @@ export class ImportUriDialogComponent {
 
     form: FormGroup;
     formats: Array<FileFormat>;
-    inputFile: File;
+    inputFile: File = null;
 
     constructor(public dilogRef: MatDialogRef<ImportUriDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: LocaleUri,
@@ -39,9 +39,12 @@ export class ImportUriDialogComponent {
     }
 
     import() {
-        let exportFile = {
-            file: this.inputFile,
-            type: this.form.get("format").value
+        let exportFile = null;
+        if (this.inputFile) {
+            exportFile = {
+                file: this.inputFile,
+                type: this.form.get("format").value
+            };
         }
         console.log(exportFile);
         this.dilogRef.close(exportFile);
