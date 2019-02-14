@@ -42,7 +42,7 @@
 
             <mat-card-actions>
                 <button mat-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">SAVE</button>
-                <button mat-button color="primary" *ngIf=isForUpdate (click)="patch(resource)" class="">UPDATE</button>
+                <button mat-button color="primary" *ngIf=isForUpdate (click)="put(resource)" class="">UPDATE</button>
                 <button mat-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">DELETE</button>
                 <button mat-button (click)="navigateToList()">CANCEL</button>
             </mat-card-actions>

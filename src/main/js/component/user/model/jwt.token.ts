@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { UserToken } from "./user.token";
 
 
 /**
@@ -9,7 +10,7 @@ export class JwtToken {
     token: string;
     type: string;
     refreshToken: string;
-    user: any;
+    user: UserToken;
    
     storage = window.localStorage;
 
@@ -27,7 +28,7 @@ export class JwtToken {
     public setTokeObject(tokenObject) {
         this.type = tokenObject.type;
         this.token = tokenObject.token;
-        
+
         if (tokenObject.token) {
             this.buildUserFromToken(tokenObject.token);
         }
@@ -39,20 +40,27 @@ export class JwtToken {
      * 
      * @param token 
      */
-    public buildUserFromToken(token: string){
+    public buildUserFromToken(token: string) {
         let tokenValues = token.split(".");
         this.user = this.getBase64EncodedObj(tokenValues[1]);
 
+        if (this.user && this.user.sub) {
+
+            let userInfo = this.user.sub.split("_");
+            this.user.username = userInfo[0];
+            this.user.userId = userInfo[1];
+        }
+
         let tokenTime = new Date(this.user.exp * 1000);
 
-        if(tokenTime < new Date()){
+        if (tokenTime < new Date()) {
             this.reset();
         }
     }
     /**
      * 
      */
-    public reset(){
+    public reset() {
         this.token = null;
         this.type = null;
         this.refreshToken = null;
@@ -64,7 +72,7 @@ export class JwtToken {
      * 
      * @param value 
      */
-    private getBase64EncodedObj(value: string){
+    private getBase64EncodedObj(value: string) {
         return JSON.parse(atob(value));
     }
 }

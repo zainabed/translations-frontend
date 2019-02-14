@@ -6,6 +6,7 @@ import { ResourcePath, ResourceListComponent } from "../../../lib/component/reso
 
 import { Project } from '../model/project';
 import { ProjectService } from '../model/project.service';
+import {JwtToken} from "@user/core";
 
 
 
@@ -27,7 +28,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     projectsTableData: MatTableDataSource<Project>;
     displayedColumns = ['name', 'description', "selection"];
 
-    constructor(injector: Injector, private sidebarService: SidebarService) {
+    constructor(injector: Injector, private sidebarService: SidebarService, private jwtToken: JwtToken) {
         super(injector);
 
     }
@@ -36,6 +37,11 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         super.ngOnInit();
         this.get();
         this.sidebarService.resource = null;
+    }
+
+    get() {
+        this.apiUrl += "/search/user?id=" + this.jwtToken.user.userId;
+        this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
     ngAfterContentInit() {
