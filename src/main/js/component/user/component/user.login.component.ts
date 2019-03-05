@@ -8,6 +8,7 @@ import { Login } from "../model/login";
 import { JwtToken } from "../model/jwt.token";
 import { Router } from "@angular/router";
 import { ErrorMatcher } from "../../../lib/form/error.matcher";
+import { UserRouteSecurity } from "@user/user.route.security";
 
 @ResourcePath({
     path: "login",
@@ -30,7 +31,8 @@ export class UserLoginComponent {
         public jwtToken: JwtToken,
         public router: Router,
         public snackBar: MatSnackBar,
-        public httpProgress: HttpProgress) {
+        public httpProgress: HttpProgress,
+        public userRouteSecurity: UserRouteSecurity) {
 
     }
 
@@ -43,6 +45,7 @@ export class UserLoginComponent {
     onSuccess(response) {
         this.jwtToken.setTokeObject(response);
         this.loginForm.reset();
+        this.userRouteSecurity.login(response);
         this.router.navigate(["/"]);
     }
 

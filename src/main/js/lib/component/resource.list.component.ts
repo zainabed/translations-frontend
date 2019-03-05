@@ -67,6 +67,10 @@ export abstract class ResourceListComponent<T> implements ResourceList {
         this.apiUrl = this.appData.getResourceListUrlFor(this.appData.resource, this._path);
     }
 
+    getApiUrl(){
+        return this.appData.getResourceListUrlFor(this.appData.resource, this._path);
+    }
+
     /**
      * 
      * @param response 

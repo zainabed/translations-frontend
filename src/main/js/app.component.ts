@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     if (this.appResourceData.resource != null) {
       this.router.navigate(["/", "projects"]);
     }
+    
     //   this.resourceData.resource = this.mockData.PROJECT_RESOURCE_RESPONSE;
     //   this.router.navigate(["/" + UserRouteNames.UserHome]);
   }

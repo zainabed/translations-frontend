@@ -6,13 +6,19 @@ import { Resources } from "./resources";
 import { Resource } from "./resource";
 
 import { JwtToken } from "../../component/user/model/jwt.token";
+import { UserDetailsService } from "@app/lib/security/user.details.service";
 
 /**
  * 
  */
 @Injectable()
 export class ResourcesService {
-    constructor(private http: HttpClient, private jwtToken: JwtToken) { }
+    jwtToken: any;
+    constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
+      //  if(userDetailsService.userDetails !=null) {
+        this.jwtToken = userDetailsService.userDetails.jwt;
+     //   }
+    }
 
     /**
      * 

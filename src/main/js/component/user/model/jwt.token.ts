@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { UserToken } from "./user.token";
+import { UserDetailsService } from "@app/lib/security/user.details.service";
 
 
 /**
@@ -12,13 +13,17 @@ export class JwtToken {
     refreshToken: string;
     user: UserToken;
    
-    storage = window.localStorage;
+   // storage = window.localStorage;
 
-    constructor() {
-        let tokenObject = this.storage.getItem("token");
-        if (tokenObject && typeof tokenObject == "string") {
-            this.setTokeObject(JSON.parse(tokenObject));
+    constructor(public userDetailsService: UserDetailsService) {
+        //let tokenObject = this.storage.getItem("token");
+        //if (tokenObject && typeof tokenObject == "string") {
+        //    this.setTokeObject(JSON.parse(tokenObject));
+        //}
+        if(userDetailsService.userDetails !=null) {
+            this.setTokeObject(userDetailsService.userDetails.jwt);
         }
+        
     }
 
     /**
@@ -33,7 +38,7 @@ export class JwtToken {
             this.buildUserFromToken(tokenObject.token);
         }
 
-        this.storage.setItem("token", JSON.stringify(tokenObject));
+        //this.storage.setItem("token", JSON.stringify(tokenObject));
     }
 
     /**
@@ -65,7 +70,7 @@ export class JwtToken {
         this.type = null;
         this.refreshToken = null;
         this.user = null;
-        this.storage.removeItem("token");
+       // this.storage.removeItem("token");
     }
 
     /**

@@ -12,6 +12,8 @@ import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
 import { UserHttp } from "./http/user.http";
 import { JwtToken } from "./model/jwt.token";
+import { UserRouteSecurity } from "./user.route.security";
+import { UserDetailsService } from "@app/lib/security/user.details.service";
 
 @NgModule({
     imports: [
@@ -31,7 +33,9 @@ import { JwtToken } from "./model/jwt.token";
         UserService,
         LoginForm,
         UserHttp,
-        JwtToken
+        JwtToken,
+        UserRouteSecurity,
+        UserDetailsService
     ]
 })
 export class UserModule {

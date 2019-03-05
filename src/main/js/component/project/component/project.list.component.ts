@@ -7,7 +7,7 @@ import { ResourcePath, ResourceListComponent } from "../../../lib/component/reso
 import { Project } from '../model/project';
 import { ProjectService } from '../model/project.service';
 import {JwtToken} from "@user/core";
-
+import { UserDetailsService } from '@app/lib/security/user.details.service';
 
 
 @ResourcePath({
@@ -28,7 +28,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     projectsTableData: MatTableDataSource<Project>;
     displayedColumns = ['name', 'description', "selection"];
 
-    constructor(injector: Injector, private sidebarService: SidebarService, private jwtToken: JwtToken) {
+    constructor(injector: Injector, private sidebarService: SidebarService, private userDetailsService: UserDetailsService) {
         super(injector);
 
     }
@@ -40,7 +40,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     }
 
     get() {
-        this.apiUrl += "/search/user?id=" + this.jwtToken.user.userId;
+        this.apiUrl += "/search/user?id=" + this.userDetailsService.userDetails.userId;
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
@@ -67,7 +67,8 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     extend(project, extendProject) {
         let projectId = this.appData.getId(project);
         let extendProjectId = this.appData.getId(extendProject);
-        this.resourcesService.post(this.apiUrl + "/" + projectId + "/extend/" + extendProjectId, {})
+        let extendApiUrl = this.getApiUrl() + "/" + projectId + "/extend/" + extendProjectId;
+        this.resourcesService.post(extendApiUrl, {})
             .subscribe(this.onExtendSuccess.bind(this), this.onExtendFail.bind(this));;
     }
 

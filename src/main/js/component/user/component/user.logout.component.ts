@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { JwtToken } from "../model/jwt.token";
 import { AppResourceData } from "../../../app.resource.data";
 import { SidebarService } from "../../../layout/sidebar/sidebar.service";
+import { UserRouteSecurity } from "@user/user.route.security";
 
 @Component({
     selector: "user-logout",
@@ -13,15 +14,17 @@ export class UserLogoutComponent implements OnInit {
     constructor(private jwtToken: JwtToken, 
         private sidebarService: SidebarService, 
         private router: Router,
-        private appResourceData: AppResourceData
+        private appResourceData: AppResourceData,
+        public userRouteSecurity: UserRouteSecurity
     ) {
 
     }
 
     ngOnInit(): void {
-        this.jwtToken.reset();
+       // this.jwtToken.reset();
         this.appResourceData.reset();
         this.sidebarService.resource = null;
+        this.userRouteSecurity.logout();
         this.router.navigate(["/"]);
     }
 
