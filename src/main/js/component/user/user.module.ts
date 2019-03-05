@@ -12,8 +12,9 @@ import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
 import { UserHttp } from "./http/user.http";
 import { JwtToken } from "./model/jwt.token";
-import { UserRouteSecurity } from "./user.route.security";
 import { UserDetailsService } from "@app/lib/security/user.details.service";
+import { UserDetailsServiceImpl } from "@user/user.details.service.impl";
+import { UserSecurity } from "@app/lib/security/user.security";
 
 @NgModule({
     imports: [
@@ -34,8 +35,8 @@ import { UserDetailsService } from "@app/lib/security/user.details.service";
         LoginForm,
         UserHttp,
         JwtToken,
-        UserRouteSecurity,
-        UserDetailsService
+        UserSecurity,
+        { provide: UserDetailsService, useClass: UserDetailsServiceImpl },
     ]
 })
 export class UserModule {

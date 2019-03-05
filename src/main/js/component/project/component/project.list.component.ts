@@ -40,7 +40,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     }
 
     get() {
-        this.apiUrl += "/search/user?id=" + this.userDetailsService.userDetails.userId;
+        this.apiUrl += "/search/user?id=" + this.userDetailsService.userDetails.id;
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 

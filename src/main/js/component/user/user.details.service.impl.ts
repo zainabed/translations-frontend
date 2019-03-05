@@ -1,20 +1,17 @@
 import { Injectable, Injector } from "@angular/core";
-import { AbstractUserSecurity } from "@app/lib/security/abstract.user.security";
 import { JwtToken } from "@app/lib/security/jwt.token";
 import { UserDetails } from "@app/lib/security/user.details";
 import { Router } from "@angular/router";
+import { UserDetailsService } from "@app/lib/security/user.details.service";
 
-@Injectable()
-export class UserRouteSecurity extends AbstractUserSecurity {
 
-    constructor(injector: Injector) {
-        super(injector);
-    }
+export class UserDetailsServiceImpl extends UserDetailsService {
 
-    getLoginRoute(): [string] {
-        return ["/login"];
-    }
 
+    /**
+     * 
+     * @param jwtToken 
+     */
     build(jwtToken: JwtToken): UserDetails {
         let userDetails = new UserDetails();
         userDetails.jwt = jwtToken;
@@ -24,13 +21,17 @@ export class UserRouteSecurity extends AbstractUserSecurity {
         if (user && user.sub) {
             let userInfo = user.sub.split("_");
             userDetails.username = userInfo[0];
-            userDetails.userId = userInfo[1];
+            userDetails.id = userInfo[1];
             userDetails.roles = user.roles;
         }
         console.log(userDetails);
         return userDetails;
     }
 
+    /**
+     * 
+     * @param value 
+     */
     private getBase64EncodedObj(value: string) {
         return JSON.parse(atob(value));
     }
