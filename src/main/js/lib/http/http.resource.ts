@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
-import { Response, ResponseOptions } from "@angular/http";
 import { HttpResponse } from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
+import { map } from "rxjs/operators";
 
 
 export class HttpResource<T>{
@@ -42,13 +42,14 @@ export class HttpResource<T>{
      */
     get(): Observable<HttpResource<T>> {
         return this.http.get(this.apiEndPoint)
-            .map((response: Response) => response)
-            .map((data) => {
+            .pipe(
+            map((response: Response) => response),
+            map((data) => {
                 this._list = data["_embedded"][this.path];
                 this._links = data["_links"];
                 this._page = data["page"];
                 return this;
-            });
+            }));
     }
 
     /**

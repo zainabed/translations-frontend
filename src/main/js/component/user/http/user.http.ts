@@ -7,7 +7,6 @@ import { User } from "../model/user";
 import { Resource } from "../../../lib/http/resource";
 import { environment } from "../../../../../environments/environment";
 import { HttpConst } from "../../../lib/http/http.const";
-import { JwtToken } from "../model/jwt.token";
 
 @Injectable()
 export class UserHttp {
@@ -36,9 +35,9 @@ export class UserHttp {
      * @param username 
      * @param password 
      */
-    authenticate(username: string, password: string): Observable<JwtToken> {
+    authenticate(username: string, password: string): Observable<any> {
         let basicAuthenticationHeader = this.getBasicAuth(username, password);
-        return this.http.post<JwtToken>(this.apiUrl + this.authenticationPath, null, {
+        return this.http.post<any>(this.apiUrl + this.authenticationPath, null, {
             headers: {
                 Authorization: basicAuthenticationHeader
             }

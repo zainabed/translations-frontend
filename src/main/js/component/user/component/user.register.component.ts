@@ -1,10 +1,10 @@
 
 import { Component } from "@angular/core";
 import { MatSnackBar } from '@angular/material';
-import { HttpProgress } from "@app/lib/http/http.progress";
 import { UserHttp } from "../http/user.http";
 import { UserForm } from "../form/user.form";
 import { User } from "../model/user";
+import { HttpProgress } from "src/main/js/lib/http/http.progress";
 
 
 /**

@@ -34,6 +34,9 @@ import { BreadcrumbModule } from "./layout/breadcrumb/breadcrumb.module";
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
+import { SecurityModule } from '@zainabed/security';
+import { UserDetailsService } from '@zainabed/shield/lib/core';
+import { UserDetailsServiceImpl } from 'src/main/js/component/user/user.details.service.impl';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     KeyModule,
     TranslationModule,
     ContentModule,
+    SecurityModule.forRoot(
+      { provide: UserDetailsService, useClass: UserDetailsServiceImpl }
+    ),
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,

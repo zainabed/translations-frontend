@@ -4,9 +4,8 @@ import { Observable } from "rxjs/Observable";
 
 import { Resources } from "./resources";
 import { Resource } from "./resource";
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
-import { JwtToken } from "../../component/user/model/jwt.token";
-import { UserDetailsService } from "@app/lib/security/user.details.service";
 
 /**
  * 
@@ -15,9 +14,7 @@ import { UserDetailsService } from "@app/lib/security/user.details.service";
 export class ResourcesService {
     jwtToken: any;
     constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
-      //  if(userDetailsService.userDetails !=null) {
-        this.jwtToken = userDetailsService.userDetails.jwt;
-     //   }
+        this.jwtToken = userDetailsService.get().getCredentials();
     }
 
     /**

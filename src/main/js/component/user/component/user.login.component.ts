@@ -5,10 +5,9 @@ import { MatSnackBar } from '@angular/material';
 import { UserHttp } from "../http/user.http";
 import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
-import { JwtToken } from "../model/jwt.token";
 import { Router } from "@angular/router";
 import { ErrorMatcher } from "../../../lib/form/error.matcher";
-import { UserDetailsService } from "@app/lib/security/user.details.service";
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
 @ResourcePath({
     path: "login",
@@ -28,7 +27,6 @@ export class UserLoginComponent {
 
     constructor(public http: UserHttp,
         public loginForm: LoginForm,
-        public jwtToken: JwtToken,
         public router: Router,
         public snackBar: MatSnackBar,
         public httpProgress: HttpProgress,
@@ -43,7 +41,6 @@ export class UserLoginComponent {
     }
 
     onSuccess(response) {
-        this.jwtToken.setTokeObject(response);
         this.loginForm.reset();
         this.userDetailsService.set(response);
         this.router.navigate(["/"]);

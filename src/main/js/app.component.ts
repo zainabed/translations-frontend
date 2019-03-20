@@ -7,7 +7,6 @@ import { UserRouteNames } from "./component/user/user.route";
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 
-import { JwtToken } from "./component/user/model/jwt.token";
 
 
 @Component({
@@ -20,8 +19,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   constructor(private appResourceData: AppResourceData,
     private route: ActivatedRoute,
     private router: Router,
-    private mockData: ResourceMockData,
-    public jwtToken: JwtToken
+    private mockData: ResourceMockData
   ) {
 
   }

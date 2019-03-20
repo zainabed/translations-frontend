@@ -3,8 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { Resource } from "./resource";
-import { JwtToken } from "../../component/user/model/jwt.token";
-import { UserDetailsService } from "@app/lib/security/user.details.service";
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
 /**
  * 
@@ -13,8 +12,9 @@ import { UserDetailsService } from "@app/lib/security/user.details.service";
 export class ResourceService {
     jwtToken: any;
     constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
-        if(userDetailsService.userDetails !=null) {
-          this.jwtToken = userDetailsService.userDetails.jwt;
+        let userDetails = userDetailsService.get();
+        if(userDetails !=null) {
+            this.jwtToken = userDetails.getCredentials();
         }
     }
 

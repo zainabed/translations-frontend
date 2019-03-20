@@ -6,8 +6,7 @@ import { ResourcePath, ResourceListComponent } from "../../../lib/component/reso
 
 import { Project } from '../model/project';
 import { ProjectService } from '../model/project.service';
-import {JwtToken} from "@user/core";
-import { UserDetailsService } from '@app/lib/security/user.details.service';
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
 
 @ResourcePath({
@@ -40,7 +39,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     }
 
     get() {
-        this.apiUrl += "/search/user?id=" + this.userDetailsService.userDetails.id;
+        this.apiUrl += "/search/user?id=" + this.userDetailsService.get().getId();
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 

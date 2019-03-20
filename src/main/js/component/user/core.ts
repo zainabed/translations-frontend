@@ -1,5 +1,4 @@
 export { User } from "./model/user";
-export { JwtToken } from "./model/jwt.token";
 export { UserHttp } from "./http/user.http";
 export { UserService } from "./model/user.service";
 export { UserForm } from "./form/user.form";

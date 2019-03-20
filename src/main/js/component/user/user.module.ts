@@ -11,10 +11,10 @@ import { UserLoginComponent } from "./component/user.login.component";
 import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
 import { UserHttp } from "./http/user.http";
-import { JwtToken } from "./model/jwt.token";
-import { UserDetailsService } from "@app/lib/security/user.details.service";
-import { UserDetailsServiceImpl } from "@user/user.details.service.impl";
-import { UserSecurity } from "@app/lib/security/user.security";
+import { UserDetailsService, } from "@zainabed/shield/lib/core";
+import { RouteSecurity } from "@zainabed/security";
+import { RouteSecurityEvent } from "src/main/js/lib/security/route.security.event";
+import { UserDetailsServiceImpl } from "src/main/js/component/user/user.details.service.impl";
 
 @NgModule({
     imports: [
@@ -34,8 +34,8 @@ import { UserSecurity } from "@app/lib/security/user.security";
         UserService,
         LoginForm,
         UserHttp,
-        JwtToken,
-        UserSecurity,
+        RouteSecurity,
+        RouteSecurityEvent,
         { provide: UserDetailsService, useClass: UserDetailsServiceImpl },
     ]
 })

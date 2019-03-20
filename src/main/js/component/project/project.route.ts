@@ -3,7 +3,7 @@ import { ProjectComponent, ProjectFormComponent, ProjectListComponent, ProjectDa
 import { LocaleFormComponent, LocaleListComponent, LocaleComponent } from '../locale/locale.core';
 import { KeyFormComponent, KeyListComponent, KeyComponent } from '../key/key.core';
 import { TranslationListComponent, TranslationFormComponent } from "../translation/translation.core";
-import { UserSecurity } from '@app/lib/security/user.security';
+import { RouteSecurity } from "@zainabed/security";
 
 export const ProjectRouteNames = {
     projectHome: 'projects',
@@ -13,7 +13,7 @@ export const ProjectRouteNames = {
 export const ProjectRoutes: Routes = [
     {
         path: ProjectRouteNames.projectHome, component: ProjectComponent,
-        canActivate: [UserSecurity],
+        canActivate: [RouteSecurity],
         children: [
             { path: '', component: ProjectListComponent },
             { path: 'new', component: ProjectFormComponent },
@@ -21,7 +21,7 @@ export const ProjectRoutes: Routes = [
             { path: ':projectId/edit', component: ProjectFormComponent },
             {
                 path: ':projectId/locales', component: LocaleListComponent,
-                canActivate: [UserSecurity],
+                canActivate: [RouteSecurity],
                 data: { roles: ["ROLE_ADMIN"] }
             },
             { path: ':projectId/locales/new', component: LocaleFormComponent },
