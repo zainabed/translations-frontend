@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AbstractUserDetailsService, UserDetails , GrantedRole} from "@zainabed/shield/lib/core";
 import { UserPricipalImpl } from "src/main/js/component/user/model/user.principal.impl";
 
+@Injectable()
 export class UserDetailsServiceImpl extends AbstractUserDetailsService {
 
     storage: any;
@@ -12,12 +13,24 @@ export class UserDetailsServiceImpl extends AbstractUserDetailsService {
         this.storage = window.localStorage;
     }
 
-    setItem(key: string, value: string): void {
-        this.storage.setItem(key, value);
+    setItem(key: string, value: UserDetails): void {
+
+        this.storage.setItem(key, JSON.stringify(value));
     }
 
-    getItem(key: string): string {
-        return this.storage.getItem(key);
+    getItem(key: string): UserDetails {
+        
+        if(!this.storage.getItem(key)) {
+            return null;
+        }
+
+        let data = JSON.parse(this.storage.getItem(key));
+        let userDetails = Object.assign(new UserPricipalImpl(), data);
+        userDetails.roles = userDetails.roles.map( role => {
+            return new GrantedRole(role._role);
+        });
+        console.log(userDetails);
+        return userDetails;
     }
 
     removeItem(key: string): void {

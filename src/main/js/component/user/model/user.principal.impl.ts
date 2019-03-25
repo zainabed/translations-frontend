@@ -4,23 +4,27 @@ import { UserPrincipal, GrantedRole } from "@zainabed/shield/lib/core";
 export class UserPricipalImpl extends UserPrincipal {
 
 
-    isAccountExpired(): boolean {
+    public isAccountExpired(): boolean {
         return false;
     }
-    isAccountBlocked(): boolean {
+
+    public isAccountBlocked(): boolean {
         return false;
     }
-    getRoles(): GrantedRole[] {
+
+    public getRoles(): GrantedRole[] {
         return this.roles;
     }
-    getUsername(): string {
+
+    public getUsername(): string {
         return this.username;
     }
-    getId(): string {
+
+    public getId(): string {
         return this.id;
     }
 
-    getCredentials() {
+    public getCredentials() {
         return this.credentails;
     }
 }

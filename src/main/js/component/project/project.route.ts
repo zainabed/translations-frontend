@@ -14,15 +14,20 @@ export const ProjectRoutes: Routes = [
     {
         path: ProjectRouteNames.projectHome, component: ProjectComponent,
         canActivate: [RouteSecurity],
+        data: { roles: ["ROLE_USER"] },
         children: [
             { path: '', component: ProjectListComponent },
-            { path: 'new', component: ProjectFormComponent },
+            { 
+                path: 'new', component: ProjectFormComponent,
+                canActivate: [RouteSecurity],
+                data: { roles: ["ROLE_ADMIN"] } 
+            },
             { path: ':projectId', component: ProjectDashboardComponent },
             { path: ':projectId/edit', component: ProjectFormComponent },
             {
                 path: ':projectId/locales', component: LocaleListComponent,
                 canActivate: [RouteSecurity],
-                data: { roles: ["ROLE_ADMIN"] }
+                data: { roles: ["ROLE_USER"] }
             },
             { path: ':projectId/locales/new', component: LocaleFormComponent },
             { path: ':projectId/locales/:localeId/edit', component: LocaleFormComponent },

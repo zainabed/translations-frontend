@@ -47,6 +47,9 @@ import { UserDetailsServiceImpl } from 'src/main/js/component/user/user.details.
     BrowserAnimationsModule,
     FlexLayoutModule,
     AngularHalModule.forRoot(),
+    SecurityModule.forRoot(
+      { provide: UserDetailsService, useClass: UserDetailsServiceImpl }
+    ),
     ProjectModule,
     HeaderModule,
     SidebarModule,
@@ -57,9 +60,7 @@ import { UserDetailsServiceImpl } from 'src/main/js/component/user/user.details.
     KeyModule,
     TranslationModule,
     ContentModule,
-    SecurityModule.forRoot(
-      { provide: UserDetailsService, useClass: UserDetailsServiceImpl }
-    ),
+    
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,

@@ -26,11 +26,12 @@ export class ProjectResourceService {
      * @return {Observable<ProjectResource>} Observable of ProjectResource. 
      */
     get(apiUrl): Observable<ProjectResource> {
-        let jwt = this.userDetailsService.get().getCredentials();
-        if(!jwt.token) {
+        let userDetail = this.userDetailsService.get();
+        if(!userDetail) {
             return null;
         }
 
+        let jwt = userDetail.getCredentials();
         return this.http.get<ProjectResource>(apiUrl, {
             headers: {
                 Authorization: jwt.type + " " + jwt.token

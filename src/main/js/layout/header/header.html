@@ -4,14 +4,14 @@
             <mat-icon>gesture</mat-icon>
             Translation Solution
         </span>
-        <div class="center" *ngIf="jwtToken">
+        <div class="center" *ngIf="userDetails">
             <button mat-button routerLink="/projects">Projects</button>
         </div>
         <div class="right">
             <button mat-button>About Us</button>
             <button mat-button>Contact Us</button>
-            <div *ngIf="jwtToken" class="mat-button">
-                <button mat-button [matMenuTriggerFor]="menu">{{jwtToken.user.username}}</button>
+            <div *ngIf="userDetails" class="mat-button">
+                <button mat-button [matMenuTriggerFor]="menu">{{userDetails.username}}</button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item>Profile</button>
                     <button mat-menu-item>Settings</button>
