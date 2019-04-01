@@ -13,8 +13,7 @@ import { LoginForm } from "./form/login.form";
 import { UserHttp } from "./http/user.http";
 import { UserDetailsService, } from "@zainabed/shield/lib/core";
 import { RouteSecurity } from "@zainabed/security";
-import { RouteSecurityEvent } from "src/main/js/lib/security/route.security.event";
-import { UserDetailsServiceImpl } from "src/main/js/component/user/user.details.service.impl";
+import { UserStoreService } from "./service/user.store.service";
 
 @NgModule({
     imports: [
@@ -35,8 +34,7 @@ import { UserDetailsServiceImpl } from "src/main/js/component/user/user.details.
         LoginForm,
         UserHttp,
         RouteSecurity,
-        RouteSecurityEvent,
-        { provide: UserDetailsService, useClass: UserDetailsServiceImpl },
+        UserStoreService
     ]
 })
 export class UserModule {

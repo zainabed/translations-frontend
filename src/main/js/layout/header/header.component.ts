@@ -6,7 +6,7 @@ import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
     templateUrl: "./header.html",
     host: { class: "row" }
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
 
     userDetails: UserDetails;
@@ -14,14 +14,14 @@ export class HeaderComponent implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        this.userDetails = this.userDetailsService.get();
-        console.log(this.userDetails);
+        this.userDetailsService.getSubsriber().subscribe(userDetails => {
+            this.userDetails = userDetails;
+            console.log(this.userDetails);
+        })
+
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        this.userDetails = this.userDetailsService.get();
-        console.log(this.userDetails);
-    }
+
 
 
 }

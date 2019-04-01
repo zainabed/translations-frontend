@@ -7,7 +7,9 @@ import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
 import { Router } from "@angular/router";
 import { ErrorMatcher } from "../../../lib/form/error.matcher";
-import { UserDetailsService } from "@zainabed/shield/lib/core";
+import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
+import { UserStoreService } from "../service/user.store.service";
+
 
 @ResourcePath({
     path: "login",
@@ -30,6 +32,7 @@ export class UserLoginComponent {
         public router: Router,
         public snackBar: MatSnackBar,
         public httpProgress: HttpProgress,
+        public userStoreService: UserStoreService,
         public userDetailsService: UserDetailsService) {
 
     }
@@ -42,7 +45,8 @@ export class UserLoginComponent {
 
     onSuccess(response) {
         this.loginForm.reset();
-        this.userDetailsService.set(response);
+        let userDetails: UserDetails = this.userStoreService.buildUserDetails(response);
+        this.userDetailsService.set(userDetails);
         this.router.navigate(["/"]);
     }
 

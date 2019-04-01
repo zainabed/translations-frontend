@@ -17,13 +17,23 @@ export const ProjectRoutes: Routes = [
         data: { roles: ["ROLE_USER"] },
         children: [
             { path: '', component: ProjectListComponent },
-            { 
+            {
                 path: 'new', component: ProjectFormComponent,
                 canActivate: [RouteSecurity],
-                data: { roles: ["ROLE_ADMIN"] } 
+                data: { roles: ["ROLE_ADMIN"] }
             },
-            { path: ':projectId', component: ProjectDashboardComponent },
-            { path: ':projectId/edit', component: ProjectFormComponent },
+            {
+                path: ':projectId', component: ProjectDashboardComponent,
+                canActivate: [RouteSecurity],
+                data: { roles: ["ROLE_USER"] }
+            },
+            {
+                path: ':projectId/edit', component: ProjectFormComponent,
+                canActivate: [RouteSecurity],
+                data: {
+                    roles: ["ROLE_ADMIN"]
+                }
+            },
             {
                 path: ':projectId/locales', component: LocaleListComponent,
                 canActivate: [RouteSecurity],
@@ -32,8 +42,16 @@ export const ProjectRoutes: Routes = [
             { path: ':projectId/locales/new', component: LocaleFormComponent },
             { path: ':projectId/locales/:localeId/edit', component: LocaleFormComponent },
             { path: ':projectId/keys', component: KeyListComponent },
-            { path: ':projectId/keys/new', component: KeyFormComponent },
-            { path: ':projectId/keys/:keyId/edit', component: KeyFormComponent },
+            {
+                path: ':projectId/keys/new', component: KeyFormComponent,
+                canActivate: [RouteSecurity],
+                data: { roles: ["ROLE_ADMIN", "ROLE_PO"] }
+            },
+            {
+                path: ':projectId/keys/:keyId/edit', component: KeyFormComponent,
+                canActivate: [RouteSecurity],
+                data: { roles: ["ROLE_ADMIN", "ROLE_PO"] }
+            },
             {
                 path: ':projectId/translations', component: TranslationListComponent,
                 children: [

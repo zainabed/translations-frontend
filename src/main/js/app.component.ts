@@ -9,6 +9,7 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 import { UserDetailsService } from '@zainabed/shield/lib/core';
 import { MatSnackBar } from '@angular/material';
 import { RouteSecurityEvent } from "@zainabed/security";
+import { UserStoreService } from './component/user/service/user.store.service';
 
 
 
@@ -25,22 +26,28 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     private mockData: ResourceMockData,
     public userDetailsService: UserDetailsService,
     public routeSecurityEvent: RouteSecurityEvent,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public userStoreService: UserStoreService
+
   ) {
 
   }
 
   ngOnInit() {
     this.appResourceData.resource = this.route.snapshot.data.projectResource;
+    this.userDetailsService.set(this.userStoreService.getItem());
+    console.log(this.userStoreService.getItem());
     if (this.appResourceData.resource != null) {
       this.router.navigate(["/", "projects"]);
     }
 
     this.routeSecurityEvent.event.subscribe(success => {
+      console.log("route error event");
       this.snackBar.open(success.message, null, {
         duration: 2000
       });
     }, error => {
+      console.log("route error event");
       this.snackBar.open(error.message, null, {
         duration: 2000
       });

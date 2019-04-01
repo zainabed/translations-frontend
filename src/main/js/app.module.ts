@@ -34,9 +34,8 @@ import { BreadcrumbModule } from "./layout/breadcrumb/breadcrumb.module";
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
-import { SecurityModule } from '@zainabed/security';
+import { SecurityModule, IfLoginDirective, IfHasAnyRoleDirective, IfHasRolesDirective, IfHasRoleDirective } from '@zainabed/security';
 import { UserDetailsService } from '@zainabed/shield/lib/core';
-import { UserDetailsServiceImpl } from 'src/main/js/component/user/user.details.service.impl';
 
 
 @NgModule({
@@ -47,9 +46,7 @@ import { UserDetailsServiceImpl } from 'src/main/js/component/user/user.details.
     BrowserAnimationsModule,
     FlexLayoutModule,
     AngularHalModule.forRoot(),
-    SecurityModule.forRoot(
-      { provide: UserDetailsService, useClass: UserDetailsServiceImpl }
-    ),
+    SecurityModule,
     ProjectModule,
     HeaderModule,
     SidebarModule,

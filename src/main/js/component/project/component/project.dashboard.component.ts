@@ -6,6 +6,8 @@ import { AppResourceData } from "../../../app.resource.data";
 
 import { Project } from "../model/project";
 import { ProjectService } from "../model/project.service";
+import { UserDetailsService, UserDetails, GrantedRole } from "@zainabed/shield/lib/core";
+import { User } from "../../user/model/user";
 
 @ResourcePath({
     path: "projects",
@@ -21,7 +23,10 @@ import { ProjectService } from "../model/project.service";
 })
 export class ProjectDashboardComponent extends ResourceComponent<Project>{
     appData: AppResourceData;
-    constructor(injector: Injector, private sidebarService: SidebarService, private projectService: ProjectService) {
+    constructor(injector: Injector,
+        private sidebarService: SidebarService,
+        private projectService: ProjectService,
+        public userDetailsService: UserDetailsService) {
         super(injector);
         this.appData = injector.get(AppResourceData);
     }
@@ -33,5 +38,19 @@ export class ProjectDashboardComponent extends ResourceComponent<Project>{
         this.projectService.projectId = id
         this.sidebarService.resource = this.resource;
         this.router.navigate([this._route, id, "locales"]);
+        this.updateUserDetailsRoles(id);
+    }
+
+    updateUserDetailsRoles(projectId: string){
+        let userDetails: User = Object.assign(new User(), this.userDetailsService.get());
+        let roles = userDetails.getRoles().filter( (grantedRole : GrantedRole) =>{
+            return grantedRole.getRole().startsWith(projectId);
+        }).map( (grantedRole : GrantedRole) => {
+            return new GrantedRole(grantedRole.getRole().replace(projectId + "_", ""));
+        });
+
+        userDetails.roles = roles;
+        console.log(userDetails); 
+        this.userDetailsService.set(userDetails);
     }
 }

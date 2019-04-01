@@ -394,3 +394,9 @@ mat-panel-title .panel__title{
   z-index: 1;
   text-align: center; 
 }
+
+.disable{
+  color: gray !important;
+  cursor: default !important;
+  background: transparent !important;
+}
