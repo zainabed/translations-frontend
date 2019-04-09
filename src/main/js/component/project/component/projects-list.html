@@ -37,11 +37,10 @@
     <mat-spinner></mat-spinner>
 </div>
 
-<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress">
+<div class="row center-center" *ngIf="(!resourceList || !resourceList.length) && !httpProgress.progress">
     <div class="column__dt--12 column__xdt--12 self__center empty__image">
         <img src="assets/images/empty_records.png">
     </div>
-    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
-    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
-    <button mat-raised-button color="primary" routerLink="/projects/new">Add New</button>
+    <p class="column__dt--12 column__xdt--12 mat-h1 self__center">No projects are assigned to you.</p>
+   
 </div>

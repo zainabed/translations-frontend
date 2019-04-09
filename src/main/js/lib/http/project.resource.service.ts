@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { ProjectResource } from "./project.resource";
-import { JwtToken } from "../../component/user/model/jwt.token";
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
 /**
  * @description
@@ -14,7 +14,7 @@ import { JwtToken } from "../../component/user/model/jwt.token";
 @Injectable()
 export class ProjectResourceService {
 
-    constructor(private http: HttpClient, private jwt: JwtToken) { }
+    constructor(private http: HttpClient, public userDetailsService: UserDetailsService) { }
 
     /**
      * @method get
@@ -26,9 +26,15 @@ export class ProjectResourceService {
      * @return {Observable<ProjectResource>} Observable of ProjectResource. 
      */
     get(apiUrl): Observable<ProjectResource> {
+        let userDetail = this.userDetailsService.get();
+        if(!userDetail) {
+            return null;
+        }
+
+        let jwt = userDetail.getCredentials();
         return this.http.get<ProjectResource>(apiUrl, {
             headers: {
-                Authorization: this.jwt.type + " " + this.jwt.token
+                Authorization: jwt.type + " " + jwt.token
             }
         });
     }

@@ -18,11 +18,13 @@ import { LocaleModule } from "./component/locale/locale.module";
 import { KeyModule } from "./component/key/key.module";
 import { ProjectModule } from './component/project/project.module';
 import { TranslationModule } from './component/translation/translation.module';
+import { ContentModule } from "./component/content/content.module";
 import { ResourceModule } from "./lib/http/resource.module";
 
-import {ProjectRoutes} from "./component/project/project.route";
+import { ProjectRoutes } from "./component/project/project.route";
 
 import { AppComponent } from './app.component';
+
 import { AppResourceData } from "./app.resource.data";
 import { AppResourceDataResolve } from "./app.resource.data.resolve";
 import { SidebarService } from "./layout/sidebar/sidebar.service";
@@ -32,17 +34,19 @@ import { BreadcrumbModule } from "./layout/breadcrumb/breadcrumb.module";
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
+import { SecurityModule, IfLoginDirective, IfHasAnyRoleDirective, IfHasRolesDirective, IfHasRoleDirective } from '@zainabed/security';
+import { UserDetailsService } from '@zainabed/shield/lib/core';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-  ],
+    AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     AngularHalModule.forRoot(),
+    SecurityModule,
     ProjectModule,
     HeaderModule,
     SidebarModule,
@@ -52,20 +56,22 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
     LocaleModule,
     KeyModule,
     TranslationModule,
+    ContentModule,
+    
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,
         resolve: { "projectResource": AppResourceDataResolve },
-     //   children: ProjectRoutes
+        //   children: ProjectRoutes
       },
       { path: '', component: HeaderComponent, outlet: 'toolbar' },
       { path: '', component: SidebarComponent, outlet: 'sidebar' },
-     // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }
+      // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }
     ],
       { enableTracing: false }),
   ],
   exports: [
-    FlexLayoutModule, 
+    FlexLayoutModule,
     BreadcrumbComponent
   ],
   providers: [

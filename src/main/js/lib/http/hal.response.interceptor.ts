@@ -4,7 +4,6 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { HttpResponse } from 'selenium-webdriver/http';
 
 @Injectable()
-export class HalResponseInterceptor {}
+export class HalResponseInterceptor { }

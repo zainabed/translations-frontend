@@ -15,7 +15,7 @@ import { ResourceFormComponent, ResourcePath } from "../../../lib/component/reso
     selector: "key-form",
     templateUrl: "key-form.html",
     host: {
-        class: "column__xdt--6 column__dt--6 component"
+        class: "column__xdt--11 column__dt--11 component"
     }
 })
 export class KeyFormComponent extends ProjectResourceFormComponent<Key> {

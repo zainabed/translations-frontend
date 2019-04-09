@@ -1,46 +1,52 @@
 <mat-progress-bar mode="indeterminate" *ngIf="httpProgress.progress" class="row"></mat-progress-bar>
-<mat-card>
-    <form [formGroup]="projectForm.form" autocomplete="off">
-        <mat-card-title>
-            <h4>{{title}}</h4>
-        </mat-card-title>
-        <mat-card-content>
-            <mat-form-field class="row">
-                <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
-                <ng-container>
-                    <mat-error id="name-empty-error" *ngIf="projectForm.form.get('name').hasError('required')">
-                        name can't be empty
-                    </mat-error>
-                    <mat-error id="name-less-error" *ngIf="projectForm.form.get('name').hasError('minlength')">
-                        Please enter at least 5 characters
-                    </mat-error>
-                    <mat-error id="name-max-error" *ngIf="projectForm.form.get('name').hasError('maxlength')">
-                        Maximum characters limit of name is 50
-                    </mat-error>
+<div class="heading__content"></div>
+<h1 class="mat-h1 pad">Projects</h1>
+<div class="row component gutter__column--dt gutter__column--xdt">
+    <div class="column__xdt--6 column__dt--6">
+        <mat-card class="row gutter__column--dt gutter__column--xdt">
+            <form [formGroup]="projectForm.form" autocomplete="off">
+                <mat-card-title>
+                    <h4>{{title}}</h4>
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-form-field class="row">
+                        <input matInput placeholder="Name" formControlName="name" id="name" [errorStateMatcher]="matcher">
+                        <ng-container>
+                            <mat-error id="name-empty-error" *ngIf="projectForm.form.get('name').hasError('required')">
+                                name can't be empty
+                            </mat-error>
+                            <mat-error id="name-less-error" *ngIf="projectForm.form.get('name').hasError('minlength')">
+                                Please enter at least 5 characters
+                            </mat-error>
+                            <mat-error id="name-max-error" *ngIf="projectForm.form.get('name').hasError('maxlength')">
+                                Maximum characters limit of name is 50
+                            </mat-error>
 
-                </ng-container>
-            </mat-form-field>
-            <mat-form-field class="row">
-                <textarea matInput placeholder="Description" formControlName="description" id="description" [errorStateMatcher]="matcher"></textarea>
-                <ng-container>
-                    <mat-error id="description-empty-error" *ngIf="projectForm.form.get('description').hasError('required')">
-                        name can't be empty
-                    </mat-error>
-                    <mat-error id="description-less-error" *ngIf="projectForm.form.get('description').hasError('minlength')">
-                        Please enter at least 10 characters
-                    </mat-error>
-                    <mat-error id="description-max-error" *ngIf="projectForm.form.get('description').hasError('maxlength')">
-                        Maximum characters limit of name is 500
-                    </mat-error>
+                        </ng-container>
+                    </mat-form-field>
+                    <mat-form-field class="row">
+                        <textarea matInput placeholder="Description" formControlName="description" id="description" [errorStateMatcher]="matcher"></textarea>
+                        <ng-container>
+                            <mat-error id="description-empty-error" *ngIf="projectForm.form.get('description').hasError('required')">
+                                name can't be empty
+                            </mat-error>
+                            <mat-error id="description-less-error" *ngIf="projectForm.form.get('description').hasError('minlength')">
+                                Please enter at least 10 characters
+                            </mat-error>
+                            <mat-error id="description-max-error" *ngIf="projectForm.form.get('description').hasError('maxlength')">
+                                Maximum characters limit of name is 500
+                            </mat-error>
 
-                </ng-container>
-            </mat-form-field>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">Save</button>
-            <button mat-button color="primary" *ngIf=isForUpdate (click)="patch(resource)" type="submit">Update</button>
-            <button mat-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">delete</button>
-            <button mat-button (click)="navigateToList()">Cancel</button>
-        </mat-card-actions>
-    </form>
-</mat-card>
+                        </ng-container>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button color="primary" *ngIf=!isForUpdate (click)="post()" type="submit">Save</button>
+                    <button mat-button color="primary" *ngIf=isForUpdate (click)="patch(resource)" type="submit">Update</button>
+                    <button mat-button color="warn" *ngIf=isForUpdate (click)="delete(resource)">delete</button>
+                    <button mat-button (click)="navigateToList()">Cancel</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</div>

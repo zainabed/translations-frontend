@@ -3,14 +3,20 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { Resource } from "./resource";
-import { JwtToken } from "../../component/user/model/jwt.token";
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
 /**
  * 
  */
 @Injectable()
 export class ResourceService {
-    constructor(private http: HttpClient, private jwtToken: JwtToken) { }
+    jwtToken: any;
+    constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
+        let userDetails = userDetailsService.get();
+        if(userDetails !=null) {
+            this.jwtToken = userDetails.getCredentials();
+        }
+    }
 
     /**
      * 

@@ -1,21 +1,21 @@
-<mat-toolbar color="primary" class="toolbar__fixed" [class.background__transparent]="!jwtToken.user">
+<mat-toolbar color="primary" class="toolbar__fixed" [class.background__transparent]="transparentBackground">
     <mat-toolbar-row class="toolbar">
         <span class="left">
             <mat-icon>gesture</mat-icon>
             Translation Solution
         </span>
-        <div class="center" *ngIf="jwtToken.user">
+        <div class="center" *ngIf="userDetails">
             <button mat-button routerLink="/projects">Projects</button>
         </div>
         <div class="right">
             <button mat-button>About Us</button>
             <button mat-button>Contact Us</button>
-            <div *ngIf="jwtToken.user" class="mat-button">
-                <button mat-button [matMenuTriggerFor]="menu">{{jwtToken.user.sub}}</button>
+            <div *ngIf="userDetails" class="mat-button">
+                <button mat-button [matMenuTriggerFor]="menu">{{userDetails.username}}</button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item>Profile</button>
-                    <button mat-menu-item>Settings</button>
-                    <button mat-menu-item routerLink="/logout">Logout</button> 
+                    <button mat-menu-item *ifHasRole="'ROLE_ADMIN'">Settings</button>
+                    <button mat-menu-item routerLink="/logout">Logout</button>
                 </mat-menu>
             </div>
         </div>

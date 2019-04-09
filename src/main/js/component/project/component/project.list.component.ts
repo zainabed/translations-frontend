@@ -6,7 +6,8 @@ import { ResourcePath, ResourceListComponent } from "../../../lib/component/reso
 
 import { Project } from '../model/project';
 import { ProjectService } from '../model/project.service';
-
+import { UserDetailsService } from "@zainabed/shield/lib/core";
+import { UserStoreService } from '../../user/service/user.store.service';
 
 
 @ResourcePath({
@@ -27,7 +28,11 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     projectsTableData: MatTableDataSource<Project>;
     displayedColumns = ['name', 'description', "selection"];
 
-    constructor(injector: Injector, private sidebarService: SidebarService) {
+    constructor(
+        injector: Injector,
+        private sidebarService: SidebarService,
+        private userDetailsService: UserDetailsService,
+        private userStoreService: UserStoreService) {
         super(injector);
 
     }
@@ -36,6 +41,12 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         super.ngOnInit();
         this.get();
         this.sidebarService.resource = null;
+        this.userDetailsService.set(this.userStoreService.getItem());
+    }
+
+    get() {
+        this.apiUrl += "/search/user?id=" + this.userDetailsService.get().getId();
+        this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 
     ngAfterContentInit() {
@@ -51,7 +62,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     filterExtendedProjects(projects) {
         projects.map(p => {
             p.extendList = this.resourceList.filter(e => {
-                return e.name != p.name && p.extended == null && this.appData.getId(p)!=e.extended;
+                return e.name != p.name && p.extended == null && this.appData.getId(p) != e.extended;
             });
             return p;
         });
@@ -61,7 +72,8 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     extend(project, extendProject) {
         let projectId = this.appData.getId(project);
         let extendProjectId = this.appData.getId(extendProject);
-        this.resourcesService.post(this.apiUrl + "/" + projectId + "/extend/" + extendProjectId, {})
+        let extendApiUrl = this.getApiUrl() + "/" + projectId + "/extend/" + extendProjectId;
+        this.resourcesService.post(extendApiUrl, {})
             .subscribe(this.onExtendSuccess.bind(this), this.onExtendFail.bind(this));;
     }
 

@@ -2,12 +2,14 @@ import { Component } from "@angular/core";
 import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
 import { HttpProgress } from "../../../lib/http/http.progress";
 import { MatSnackBar } from '@angular/material';
-import { LoginHttpService } from "../http/login.http.service";
+import { UserHttp } from "../http/user.http";
 import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
-import { JwtToken } from "../model/jwt.token";
 import { Router } from "@angular/router";
 import { ErrorMatcher } from "../../../lib/form/error.matcher";
+import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
+import { UserStoreService } from "../service/user.store.service";
+
 
 @ResourcePath({
     path: "login",
@@ -25,24 +27,26 @@ export class UserLoginComponent {
     snackBarDuration = 2000;
     matcher = new ErrorMatcher();
 
-    constructor(public loginService: LoginHttpService,
+    constructor(public http: UserHttp,
         public loginForm: LoginForm,
-        public jwtToken: JwtToken,
         public router: Router,
         public snackBar: MatSnackBar,
-        public httpProgress: HttpProgress) {
+        public httpProgress: HttpProgress,
+        public userStoreService: UserStoreService,
+        public userDetailsService: UserDetailsService) {
 
     }
 
     login() {
         let login: Login = this.loginForm.getData();
-        this.loginService.authenticate(login.username, login.password).subscribe(this.onSuccess.bind(this),
+        this.http.authenticate(login.username, login.password).subscribe(this.onSuccess.bind(this),
             this.onError.bind(this));
     }
 
     onSuccess(response) {
-        this.jwtToken.setTokeObject(response);
         this.loginForm.reset();
+        let userDetails: UserDetails = this.userStoreService.buildUserDetails(response);
+        this.userDetailsService.set(userDetails);
         this.router.navigate(["/"]);
     }
 

@@ -4,15 +4,18 @@ import { Observable } from "rxjs/Observable";
 
 import { Resources } from "./resources";
 import { Resource } from "./resource";
+import { UserDetailsService } from "@zainabed/shield/lib/core";
 
-import { JwtToken } from "../../component/user/model/jwt.token";
 
 /**
  * 
  */
 @Injectable()
 export class ResourcesService {
-    constructor(private http: HttpClient, private jwtToken: JwtToken) { }
+    jwtToken: any;
+    constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
+        this.jwtToken = userDetailsService.get().getCredentials();
+    }
 
     /**
      * 

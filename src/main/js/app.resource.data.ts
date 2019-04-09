@@ -19,6 +19,11 @@ export class AppResourceData {
         this._resource = resource; 
     }
 
+    reset(){
+        this._resource = null;
+        this.storage.removeItem("resource");
+    }
+
     getResourceListUrlFor(resource, resourceName) {
         let href = resource["_links"][resourceName]["href"];
         if (href.indexOf("{") > 0) {

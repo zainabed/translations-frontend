@@ -14,11 +14,9 @@ export class HttpProgress {
 
     start(){
         this.progress = true;
-        console.log("Http Request started.");
     }
 
     end(){
         this.progress = false;
-        console.log("Http request eneded.");
     }
 }

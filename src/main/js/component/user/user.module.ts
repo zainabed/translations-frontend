@@ -5,13 +5,15 @@ import { Router, RouterModule } from '@angular/router';
 
 
 // User Component and Services
-import { UserForm, UserFormComponent, UserComponent, UserService, UserListComponent } from "./user.core";
+import { UserForm, UserFormComponent, UserComponent, UserService, UserListComponent, UserRegisterComponent } from "./core";
 import { UserRoutes } from "./user.route";
 import { UserLoginComponent } from "./component/user.login.component";
 import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
-import { LoginHttpService } from "./http/login.http.service";
-import { JwtToken } from "./model/jwt.token";
+import { UserHttp } from "./http/user.http";
+import { UserDetailsService, } from "@zainabed/shield/lib/core";
+import { RouteSecurity } from "@zainabed/security";
+import { UserStoreService } from "./service/user.store.service";
 
 @NgModule({
     imports: [
@@ -23,9 +25,17 @@ import { JwtToken } from "./model/jwt.token";
         UserFormComponent,
         UserListComponent,
         UserLoginComponent,
-        UserLogoutComponent
+        UserLogoutComponent,
+        UserRegisterComponent
     ],
-    providers: [UserForm, UserService, LoginForm, LoginHttpService, JwtToken]
+    providers: [
+        UserForm,
+        UserService,
+        LoginForm,
+        UserHttp,
+        RouteSecurity,
+        UserStoreService
+    ]
 })
 export class UserModule {
 
