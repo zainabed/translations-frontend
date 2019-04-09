@@ -57,13 +57,14 @@ import { UserDetailsService } from '@zainabed/shield/lib/core';
     KeyModule,
     TranslationModule,
     ContentModule,
-    
+
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,
         resolve: { "projectResource": AppResourceDataResolve },
         //   children: ProjectRoutes
       },
+      { path: '**', redirectTo: '/index', pathMatch: 'full' },
       { path: '', component: HeaderComponent, outlet: 'toolbar' },
       { path: '', component: SidebarComponent, outlet: 'sidebar' },
       // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }

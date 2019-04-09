@@ -11,8 +11,8 @@ export class ProjectResourceFormComponent<T> extends ResourceFormComponent<T> {
     projectService: ProjectService;
     projectId: string;
 
-    constructor(form: ModelForm<T>, injector: Injector) {
-        super(form, injector);
+    constructor(injector: Injector) {
+        super(injector);
         this.projectService = injector.get(ProjectService);
     }
 

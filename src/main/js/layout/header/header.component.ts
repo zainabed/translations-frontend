@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
+import { Autowired } from '@zainabed/tdi/core';
+import { HeaderService } from './header.service';
 
 @Component({
     selector: "header-component",
@@ -8,6 +10,8 @@ import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
 })
 export class HeaderComponent implements OnInit {
 
+    @Autowired()
+    public headerService: HeaderService;
 
     userDetails: UserDetails;
     constructor(public userDetailsService: UserDetailsService) {
@@ -17,6 +21,7 @@ export class HeaderComponent implements OnInit {
         this.userDetailsService.getSubsriber().subscribe(userDetails => {
             this.userDetails = userDetails;
             console.log(this.userDetails);
+       
         })
 
     }

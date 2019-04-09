@@ -5,6 +5,8 @@ import { Key } from "../model/key";
 import { KeyForm } from "../form/key.form";
 import { ProjectService, ProjectResourceFormComponent } from "../../project/project.core";
 import { ResourceFormComponent, ResourcePath } from "../../../lib/component/resource.component.core";
+import { Autowired } from '@zainabed/tdi/core';
+
 
 @ResourcePath({
     path: "keys",
@@ -20,8 +22,12 @@ import { ResourceFormComponent, ResourcePath } from "../../../lib/component/reso
 })
 export class KeyFormComponent extends ProjectResourceFormComponent<Key> {
 
-    constructor(injector: Injector, public keyForm: KeyForm) {
-        super(keyForm, injector);
+    @Autowired()
+    public keyForm: KeyForm;
+
+    constructor(injector: Injector, ) {
+        super(injector);
+        this.form = this.keyForm;
     }
 
     ngOnInit() {
@@ -36,7 +42,7 @@ export class KeyFormComponent extends ProjectResourceFormComponent<Key> {
         }
     }
 
-    navigateToList(){
+    navigateToList() {
         this.router.navigate(["projects", this.projectId, "translations"]);
     }
 

@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../model/user';
 import { ModelForm } from '../../../lib/form/model.form';
+import { Service } from '@zainabed/tdi/core';
 
 /**
  * 
  */
-@Injectable()
+@Service()
 export class UserForm extends ModelForm<User>{
 
-    constructor(fb: FormBuilder) {
-        super(fb);
+    constructor() {
+        super();
     }
 
     buildForm(fb: FormBuilder): FormGroup {

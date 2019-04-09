@@ -13,6 +13,7 @@ import { ResourcePath, ResourceFormComponent } from "../../../lib/component/reso
 
 import { UserForm } from "../form/user.form";
 import { User } from '../model/user';
+import { Autowired } from '@zainabed/tdi/core';
 
 @ResourcePath({
     path: "users",
@@ -29,9 +30,12 @@ import { User } from '../model/user';
 export class UserFormComponent extends ResourceFormComponent<User>{
     public title: string;
 
-    constructor(public userForm: UserForm, injector: Injector) {
-        super(userForm, injector);
+    @Autowired()
+    public userForm: UserForm;
 
+    constructor(injector: Injector) {
+        super(injector);
+        this.form = this.userForm;
     }
 
     ngOnInit() {

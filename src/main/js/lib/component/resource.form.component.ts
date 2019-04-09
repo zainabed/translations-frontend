@@ -23,13 +23,13 @@ export abstract class ResourceFormComponent<T> extends ResourceListComponent<T> 
     matcher = new ErrorMatcher();
     public id: any;
     public isForUpdate: boolean = false;
-   
+    public form: ModelForm<T>;
     /**
      * 
      * @param form 
      * @param injector 
      */
-    constructor(public form: ModelForm<T>, injector: Injector) {
+    constructor(injector: Injector) {
         super(injector);
         
     }

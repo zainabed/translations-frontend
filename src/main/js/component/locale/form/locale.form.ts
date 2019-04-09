@@ -8,8 +8,8 @@ import { Locale } from "../model/locale";
 @Injectable()
 export class LocaleForm extends ModelForm<Locale> {
 
-    constructor(fb: FormBuilder) {
-        super(fb);
+    constructor() {
+        super();
     }
 
     buildForm(fb: FormBuilder): FormGroup {

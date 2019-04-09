@@ -5,6 +5,7 @@ import { Locale } from "../model/locale";
 import { LocaleForm } from "../form/locale.form";
 import { ProjectService, ProjectResourceFormComponent, ProjectResourceListComponent } from "../../project/project.core";
 import { ResourceFormComponent, ResourcePath } from "../../../lib/component/resource.component.core";
+import { Autowired } from '@zainabed/tdi/core';
 
 @ResourcePath({
     path: "locales",
@@ -25,9 +26,13 @@ export class LocaleFormComponent extends ResourceFormComponent<Locale> {
     private localeApi: string;
     private projectApi: string;
 
-    constructor(injector: Injector, public localeForm: LocaleForm) {
-        super(localeForm, injector);
+    @Autowired()
+    public localeForm: LocaleForm;
+
+    constructor(injector: Injector) {
+        super(injector);
         this.projectService = injector.get(ProjectService);
+        this.form = this.localeForm;
     }
 
 

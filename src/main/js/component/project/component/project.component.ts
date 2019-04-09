@@ -3,6 +3,8 @@ import { MatTableDataSource } from '@angular/material';
 
 import { Project } from '../model/project';
 import { ProjectService } from '../model/project.service';
+import { HeaderService } from '../../../layout/header/header.service';
+import { Autowired } from '@zainabed/tdi/core';
 //import { RouteSecurityEvent } from '@app/lib/security/route.security.event';
 
 @Component({
@@ -13,6 +15,13 @@ import { ProjectService } from '../model/project.service';
     }
 })
 export class ProjectComponent {
+
+  @Autowired()
+  public headerService: HeaderService;
+
+  constructor(){
+    this.headerService.backgroundVisibility = true;
+  }
 
   /*constructor(event: RouteSecurityEvent) {
     event.subscribe({

@@ -9,6 +9,8 @@ import { Router } from "@angular/router";
 import { ErrorMatcher } from "../../../lib/form/error.matcher";
 import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
 import { UserStoreService } from "../service/user.store.service";
+import { Autowired } from "@zainabed/tdi/core";
+import { HeaderService } from '../../../layout/header/header.service';
 
 
 @ResourcePath({
@@ -27,14 +29,19 @@ export class UserLoginComponent {
     snackBarDuration = 2000;
     matcher = new ErrorMatcher();
 
+    @Autowired()
+    public loginForm: LoginForm;
+
+    @Autowired()
+    public headerService: HeaderService;
+    
     constructor(public http: UserHttp,
-        public loginForm: LoginForm,
         public router: Router,
         public snackBar: MatSnackBar,
         public httpProgress: HttpProgress,
         public userStoreService: UserStoreService,
         public userDetailsService: UserDetailsService) {
-
+            this.headerService.backgroundVisibility = false;
     }
 
     login() {

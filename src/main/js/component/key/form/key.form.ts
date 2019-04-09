@@ -1,13 +1,15 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import {ModelForm} from "../../../lib/form/model.form";
-import {Key} from "../model/key";
+import { ModelForm } from "../../../lib/form/model.form";
+import { Key } from "../model/key";
+import { Service } from '@zainabed/tdi/core';
 
-@Injectable()
+@Service()
 export class KeyForm extends ModelForm<Key>{
-    constructor(fb: FormBuilder) {
-        super(fb);
+    
+    constructor() {
+        super();
     }
 
     buildForm(fb: FormBuilder): FormGroup {

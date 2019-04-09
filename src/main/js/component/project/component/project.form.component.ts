@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 
 import { ResourcePath, ResourceFormComponent } from "../../../lib/component/resource.component.core";
+import { Autowired } from '@zainabed/tdi/core';
 
 @ResourcePath({
     path: "projects",
@@ -24,15 +25,19 @@ export class ProjectFormComponent extends ResourceFormComponent<Project>{
     inProgress: Boolean = false;
     title: string;
 
-    constructor(public projectForm: ProjectForm, injector: Injector) {
-        super(projectForm, injector);
+    @Autowired()
+    public projectForm: ProjectForm;
+
+    constructor(injector: Injector) {
+        super(injector);
+        this.form = this.projectForm;
     }
 
-    ngOnInit(){
+    ngOnInit() {
         super.ngOnInit();
-        if(this.isForUpdate){
+        if (this.isForUpdate) {
             this.title = "Update Project";
-        }else{
+        } else {
             this.title = "Add New Project";
             this.projectForm.form.reset();
         }

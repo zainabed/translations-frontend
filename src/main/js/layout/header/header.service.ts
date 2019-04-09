@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
+import { Service } from '@zainabed/tdi/core';
 
-@Injectable()
+@Service()
 export class HeaderService {
-    transparentBackground: boolean;
+    public backgroundVisibility: boolean;
 
     constructor() {
-        this.transparentBackground = false;
+        this.backgroundVisibility = true;
     }
 }

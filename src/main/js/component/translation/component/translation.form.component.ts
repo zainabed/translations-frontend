@@ -6,6 +6,7 @@ import { TranslationForm } from "../form/translation.form";
 import { ProjectService, ProjectResourceFormComponent } from "../../project/project.core";
 import { ResourceFormComponent, ResourcePath } from "../../../lib/component/resource.component.core";
 import { KeyService } from "../../key/model/key.service";
+import { Autowired } from '@zainabed/tdi/core';
 
 
 @ResourcePath({
@@ -28,8 +29,12 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
     public postUrl: string;
     sub: any;
 
-    constructor(injector: Injector, public translationForm: TranslationForm) {
-        super(translationForm, injector);
+    @Autowired()
+    public translationForm: TranslationForm;
+
+    constructor(injector: Injector, ) {
+        super(injector);
+        this.form = this.translationForm;
         this.keyService = injector.get(KeyService);
     }
 
@@ -37,7 +42,7 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
         super.ngOnInit();
         this.postUrl = this.apiUrl;
         this.projectId = this.projectService.projectId;
-              
+
         this.sub = this.route.params.subscribe((params) => {
             this.setSearchUrl("");
             this.getLocales();
@@ -117,7 +122,7 @@ export class TranslationFormComponent extends ProjectResourceFormComponent<Trans
 
     onLocaleGetSuccess(response) {
         this.locales = response[this.EMBEDDED]["locales"];
-        if(this.locales.length){
+        if (this.locales.length) {
             let locale = this.locales[0];
             this.translationForm.form.get("locales").setValue(this.appData.getResourceSelfUrl(locale));
             this.onLocalesChange();
