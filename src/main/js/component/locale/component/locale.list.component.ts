@@ -12,7 +12,7 @@ import { MatDialog } from '@angular/material';
 import { Locale } from "../model/locale";
 import { LocaleUri } from "../model/locale.uri";
 import { LocalService } from "../service/locale.service";
-import { UserDetailsService } from "@zainabed/shield/lib/core";
+import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 
 @ResourcePath({
     path: "locales",
@@ -36,7 +36,8 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     private dialogWith: string = "500px"
 
 
-    constructor(injector: Injector, public dialog: MatDialog, public http: HttpClient, public userDetailsService:UserDetailsService) {
+    constructor(injector: Injector, public dialog: MatDialog, public http: HttpClient, 
+        public securityFactory: SecurityFactory) {
         super(injector);
         this.projectService = injector.get(ProjectService);
 
@@ -78,7 +79,8 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         });
 
         let self = this;
-        let jwtToken = this.userDetailsService.get().getCredentials();
+        let authenticationManager: AuthenticationManager = this.securityFactory.getAuthenticationManager();
+        let jwtToken = authenticationManager.get().getCredentials();
         dialogRef.afterClosed().subscribe(format => {
             if (format.length) {
                 this.downloadLocaleCode = code;

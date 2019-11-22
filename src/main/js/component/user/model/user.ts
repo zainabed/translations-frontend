@@ -1,9 +1,28 @@
-//import {Resource} from 'angular4-hal';
-import { UserPrincipal, GrantedRole } from "@zainabed/shield/lib/core";
+import { AuthUser } from '@zainabed/security';
 
-export class User extends UserPrincipal {
+//import {Resource} from 'angular4-hal';
+
+export class User implements AuthUser {
+   
 
     password: string;
+    username: string;
+    id: string;
+    roles: Set<string>;
+    credentails : string;
+    email: string;
+
+    constructor(userConst: any){
+        if(!userConst) return;
+        Object.assign(this, userConst);
+        this.setRoles(userConst.roles);
+    }
+
+    setRoles(roles: Array<string>){
+      
+        this.roles = new Set(roles);
+        console.log(this.roles);
+    }
 
     public isAccountExpired(): boolean {
         return false;
@@ -11,10 +30,6 @@ export class User extends UserPrincipal {
 
     public isAccountBlocked(): boolean {
         return false;
-    }
-
-    public getRoles(): GrantedRole[] {
-        return this.roles;
     }
 
     public getUsername(): string {
@@ -25,15 +40,14 @@ export class User extends UserPrincipal {
         return this.id;
     }
 
-    public getCredentials() {
+    getRoles(): Set<string> {
+        return new Set(this.roles);
+    }
+
+    getCredentials() {
         return this.credentails;
-    }
+    } 
 
-    public static buildRoles(roles: any[]) {
-        return roles.map(role => {
-            return new GrantedRole(role._role);
-        });
-    }
-
+    
 
 }

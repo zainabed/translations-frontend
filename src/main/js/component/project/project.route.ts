@@ -3,7 +3,7 @@ import { ProjectComponent, ProjectFormComponent, ProjectListComponent, ProjectDa
 import { LocaleFormComponent, LocaleListComponent, LocaleComponent } from '../locale/locale.core';
 import { KeyFormComponent, KeyListComponent, KeyComponent } from '../key/key.core';
 import { TranslationListComponent, TranslationFormComponent } from "../translation/translation.core";
-import { RouteSecurity } from "@zainabed/security";
+import { RouteSecurity } from '../../lib/security/route.security';
 
 export const ProjectRouteNames = {
     projectHome: 'projects',

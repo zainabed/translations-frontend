@@ -34,8 +34,8 @@ import { BreadcrumbModule } from "./layout/breadcrumb/breadcrumb.module";
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
-import { SecurityModule, IfLoginDirective, IfHasAnyRoleDirective, IfHasRolesDirective, IfHasRoleDirective } from '@zainabed/security';
-import { UserDetailsService } from '@zainabed/shield/lib/core';
+import { SecurityFactory, Security } from '@zainabed/security';
+import { SecurityFactoryImpl } from '@zainabed/soteria';
 
 
 @NgModule({
@@ -46,7 +46,6 @@ import { UserDetailsService } from '@zainabed/shield/lib/core';
     BrowserAnimationsModule,
     FlexLayoutModule,
     AngularHalModule.forRoot(),
-    SecurityModule,
     ProjectModule,
     HeaderModule,
     SidebarModule,
@@ -57,7 +56,7 @@ import { UserDetailsService } from '@zainabed/shield/lib/core';
     KeyModule,
     TranslationModule,
     ContentModule,
-    
+
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,
@@ -79,8 +78,13 @@ import { UserDetailsService } from '@zainabed/shield/lib/core';
     AppResourceData,
     AppResourceDataResolve,
     SidebarService,
-    ResourceMockData
+    ResourceMockData,
+    { provide: SecurityFactory, useClass: SecurityFactoryImpl }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(securityFactory: SecurityFactory) {
+    Security.registerSecurityFactory(securityFactory);
+  }
+}

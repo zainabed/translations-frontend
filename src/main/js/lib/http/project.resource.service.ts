@@ -3,7 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { ProjectResource } from "./project.resource";
-import { UserDetailsService } from "@zainabed/shield/lib/core";
+import { AuthenticationManager,SecurityFactory, AuthUser } from "@zainabed/security";
+import {} from "@zainabed/soteria"
 
 /**
  * @description
@@ -13,8 +14,10 @@ import { UserDetailsService } from "@zainabed/shield/lib/core";
  */
 @Injectable()
 export class ProjectResourceService {
-
-    constructor(private http: HttpClient, public userDetailsService: UserDetailsService) { }
+     authenticationManager: AuthenticationManager;
+    constructor(private http: HttpClient, securityFactory: SecurityFactory) {
+         this.authenticationManager = securityFactory.getAuthenticationManager();
+     }
 
     /**
      * @method get
@@ -26,7 +29,7 @@ export class ProjectResourceService {
      * @return {Observable<ProjectResource>} Observable of ProjectResource. 
      */
     get(apiUrl): Observable<ProjectResource> {
-        let userDetail = this.userDetailsService.get();
+        let userDetail : AuthUser = this.authenticationManager.get();
         if(!userDetail) {
             return null;
         }

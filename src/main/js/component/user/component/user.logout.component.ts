@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AppResourceData } from "../../../app.resource.data";
 import { SidebarService } from "../../../layout/sidebar/sidebar.service";
-import { UserDetailsService } from "@zainabed/shield/lib/core";
 import { UserStoreService } from "../service/user.store.service";
+import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 
 @Component({
     selector: "user-logout",
@@ -15,7 +15,7 @@ export class UserLogoutComponent implements OnInit {
         private sidebarService: SidebarService,
         private router: Router,
         private appResourceData: AppResourceData,
-        public userDetailsService: UserDetailsService,
+        private securityFactory: SecurityFactory,
         public userStoreService: UserStoreService
     ) {
 
@@ -25,7 +25,8 @@ export class UserLogoutComponent implements OnInit {
         // this.jwtToken.reset();
         this.appResourceData.reset();
         this.sidebarService.resource = null;
-        this.userDetailsService.reset();
+        let authenticationManager: AuthenticationManager = this.securityFactory.getAuthenticationManager();
+        authenticationManager.reset();
         this.userStoreService.removeItem();
         this.router.navigate(["/login"]);
     }

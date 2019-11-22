@@ -7,8 +7,8 @@ import { LoginForm } from "../form/login.form";
 import { Login } from "../model/login";
 import { Router } from "@angular/router";
 import { ErrorMatcher } from "../../../lib/form/error.matcher";
-import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
 import { UserStoreService } from "../service/user.store.service";
+import { SecurityFactory, AuthenticationManager, AuthUser } from '@zainabed/security';
 
 
 @ResourcePath({
@@ -33,7 +33,7 @@ export class UserLoginComponent {
         public snackBar: MatSnackBar,
         public httpProgress: HttpProgress,
         public userStoreService: UserStoreService,
-        public userDetailsService: UserDetailsService) {
+        private securityFactory: SecurityFactory) {
 
     }
 
@@ -45,9 +45,10 @@ export class UserLoginComponent {
 
     onSuccess(response) {
         this.loginForm.reset();
-        let userDetails: UserDetails = this.userStoreService.buildUserDetails(response);
-        this.userDetailsService.set(userDetails);
-        this.router.navigate(["/"]);
+        let authenticationManager : AuthenticationManager = this.securityFactory.getAuthenticationManager();
+        let userDetails: AuthUser = this.userStoreService.buildUserDetails(response);
+        authenticationManager.set(userDetails);
+        this.router.navigate(["/projects"]);
     }
 
     onError(error) {

@@ -14,7 +14,7 @@
                 <button mat-button [matMenuTriggerFor]="menu">{{userDetails.username}}</button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item>Profile</button>
-                    <button mat-menu-item *ifHasRole="'ROLE_ADMIN'">Settings</button>
+                    <button mat-menu-item >Settings</button>
                     <button mat-menu-item routerLink="/logout">Logout</button>
                 </mat-menu>
             </div>

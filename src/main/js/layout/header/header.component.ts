@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
+import { Security, SecurityFactory, AuthorizationManager, AuthUser, AuthenticationManager } from '@zainabed/security';
 
 @Component({
     selector: "header-component",
@@ -8,17 +8,15 @@ import { UserDetailsService, UserDetails } from "@zainabed/shield/lib/core";
 })
 export class HeaderComponent implements OnInit {
 
+    userDetails: AuthUser;
 
-    userDetails: UserDetails;
-    constructor(public userDetailsService: UserDetailsService) {
+    authenticationManager: AuthenticationManager;
+    constructor(securityFactory: SecurityFactory) {
+        this.authenticationManager = securityFactory.getAuthenticationManager();
     }
 
     ngOnInit(): void {
-        this.userDetailsService.getSubsriber().subscribe(userDetails => {
-            this.userDetails = userDetails;
-            console.log(this.userDetails);
-        })
-
+        this.userDetails = this.authenticationManager.get();
     }
 
 

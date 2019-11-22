@@ -22,7 +22,7 @@ export class UserForm extends ModelForm<User>{
     }
 
     getData(): User {
-        let user: User = new User();
+        let user: User = new User(null);
         user.username = this.form.get('username').value;
         user.email = this.form.get('email').value;
         user.password = this.form.get('password').value;

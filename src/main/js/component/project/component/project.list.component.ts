@@ -5,9 +5,8 @@ import { SidebarService } from "../../../layout/sidebar/sidebar.service";
 import { ResourcePath, ResourceListComponent } from "../../../lib/component/resource.component.core";
 
 import { Project } from '../model/project';
-import { ProjectService } from '../model/project.service';
-import { UserDetailsService } from "@zainabed/shield/lib/core";
 import { UserStoreService } from '../../user/service/user.store.service';
+import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 
 
 @ResourcePath({
@@ -27,11 +26,12 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
     private projects;
     projectsTableData: MatTableDataSource<Project>;
     displayedColumns = ['name', 'description', "selection"];
+    authenticationManager: AuthenticationManager;
 
     constructor(
         injector: Injector,
         private sidebarService: SidebarService,
-        private userDetailsService: UserDetailsService,
+        private securityFactory: SecurityFactory,
         private userStoreService: UserStoreService) {
         super(injector);
 
@@ -39,13 +39,15 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
 
     ngOnInit() {
         super.ngOnInit();
-        this.get();
         this.sidebarService.resource = null;
-        this.userDetailsService.set(this.userStoreService.getItem());
+        this.authenticationManager = this.securityFactory.getAuthenticationManager();
+        this.authenticationManager.set(this.userStoreService.getItem());
+        this.get();
+       
     }
 
     get() {
-        this.apiUrl += "/search/user?id=" + this.userDetailsService.get().getId();
+        this.apiUrl += "/search/user?id=" + this.authenticationManager.get().getId();
         this.resourcesService.get(this.apiUrl).subscribe(this.onGetSuccess.bind(this), this.onGetFail.bind(this));
     }
 

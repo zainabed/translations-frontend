@@ -11,8 +11,6 @@ import { UserLoginComponent } from "./component/user.login.component";
 import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
 import { UserHttp } from "./http/user.http";
-import { UserDetailsService, } from "@zainabed/shield/lib/core";
-import { RouteSecurity } from "@zainabed/security";
 import { UserStoreService } from "./service/user.store.service";
 
 @NgModule({
@@ -33,7 +31,6 @@ import { UserStoreService } from "./service/user.store.service";
         UserService,
         LoginForm,
         UserHttp,
-        RouteSecurity,
         UserStoreService
     ]
 })

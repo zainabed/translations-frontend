@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 import { Resource } from "./resource";
-import { UserDetailsService } from "@zainabed/shield/lib/core";
+import { SecurityFactory, AuthenticationManager, AuthUser } from '@zainabed/security';
 
 /**
  * 
@@ -11,9 +11,10 @@ import { UserDetailsService } from "@zainabed/shield/lib/core";
 @Injectable()
 export class ResourceService {
     jwtToken: any;
-    constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
-        let userDetails = userDetailsService.get();
-        if(userDetails !=null) {
+    constructor(private http: HttpClient, securityFactory: SecurityFactory) {
+        let authenticationManager: AuthenticationManager = securityFactory.getAuthenticationManager();
+        let userDetails: AuthUser = authenticationManager.get();
+        if (userDetails != null) {
             this.jwtToken = userDetails.getCredentials();
         }
     }

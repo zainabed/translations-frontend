@@ -1,14 +1,14 @@
 import { Injectable, Injector } from "@angular/core";
 import { Router } from "@angular/router";
-import { AbstractUserDetailsService, UserDetails, GrantedRole, UserDetailsService } from "@zainabed/shield/lib/core";
 import { User } from "../model/user";
+import { SecurityFactory, AuthUser } from '@zainabed/security';
 
 @Injectable()
 export class UserStoreService {
 
     storage: any;
     key: string = "user_token";
-    constructor(private userDetailsService: UserDetailsService) {
+    constructor(private securityFactory: SecurityFactory) {
         this.storage = window.localStorage;
 
         /*this.userDetailsService.getSubsriber().subscribe(userDetails=>{
@@ -20,19 +20,23 @@ export class UserStoreService {
         });*/
     }
 
-    setItem(value: UserDetails): void {
-        this.storage.setItem(this.key, JSON.stringify(value));
+    
+    
+    setItem(authUser: AuthUser): void {
+        let temp:any = authUser;
+        temp.roles = Array.from(authUser.getRoles().values()); 
+        this.storage.setItem(this.key, JSON.stringify(authUser));
     }
 
-    getItem(): UserDetails {
+    getItem(): AuthUser {
 
         if (!this.storage.getItem(this.key)) {
             return null;
         }
 
         let data = JSON.parse(this.storage.getItem(this.key));
-        let user: User = Object.assign(new User(), data);
-        user.roles = User.buildRoles(user.roles);
+        console.log(data);
+        let user: User = new User(data);
         console.log(user);
         return user;
     }
@@ -47,8 +51,8 @@ export class UserStoreService {
      * 
      * @param jwtToken 
      */
-    buildUserDetails(jwtToken: any): UserDetails {
-        let user: User = new User();
+    buildUserDetails(jwtToken: any): AuthUser {
+        let user: User = new User(null);
         user.credentails = jwtToken;
         let tokenValues = jwtToken.token.split(".");
         let userJSON = this.getBase64EncodedObj(tokenValues[1]);
@@ -57,9 +61,11 @@ export class UserStoreService {
             let userInfo = userJSON.sub.split("_");
             user.username = userInfo[0];
             user.id = userInfo[1];
-            user.roles = userJSON.roles.map(role => new GrantedRole(role));
+            user.setRoles(userJSON.roles);
         }
+        user = new User(user);
         console.log(user);
+        console.log(JSON.stringify(user))
         this.setItem(user);
         return user;
     }

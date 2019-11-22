@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 import { Resources } from "./resources";
 import { Resource } from "./resource";
-import { UserDetailsService } from "@zainabed/shield/lib/core";
+import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 
 
 /**
@@ -13,8 +13,9 @@ import { UserDetailsService } from "@zainabed/shield/lib/core";
 @Injectable()
 export class ResourcesService {
     jwtToken: any;
-    constructor(private http: HttpClient, private userDetailsService: UserDetailsService) { 
-        this.jwtToken = userDetailsService.get().getCredentials();
+    constructor(private http: HttpClient, securityFactory: SecurityFactory) {
+        let authenticationManager: AuthenticationManager = securityFactory.getAuthenticationManager();
+        this.jwtToken = authenticationManager.get().getCredentials();
     }
 
     /**
@@ -23,7 +24,7 @@ export class ResourcesService {
      */
     get(apiURL): Observable<Resources> {
         return this.http.get<Resources>(apiURL, {
-            headers : {
+            headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token
             }
         });
@@ -40,10 +41,10 @@ export class ResourcesService {
      * @return Observable Observable of Resource object.
      */
     post(apiURL, resource): Observable<Resource> {
-        return this.http.post<Resource>(apiURL, resource,{
-            headers : {
+        return this.http.post<Resource>(apiURL, resource, {
+            headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token
-            } 
+            }
         });
     }
 
