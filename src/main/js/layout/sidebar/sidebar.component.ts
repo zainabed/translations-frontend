@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit, AfterContentInit {
         private securityFactory: SecurityFactory) {
         this.settingList = [
             { title: 'report', icon: "assessment", color: 'color--cornflowerblue', status: true, role: "ROLE_USER" },
-            { title: 'users', icon: "person", color: 'color--cornflowerblue', status: true, role: "ROLE_ADMIN" },
+            { title: 'access', icon: "person", color: 'color--cornflowerblue', status: true, role: "ROLE_ADMIN" },
             { title: 'setting', icon: "settings", color: 'color--cornflowerblue', status: true, role: "ROLE_ADMIN" }
 
         ];
@@ -53,6 +53,7 @@ export class SidebarComponent implements OnInit, AfterContentInit {
     }
 
     getResourceHref(name) {
+        if(!this.sidebar.resource[name]) return "/";
         return this.appData.filterHrefUrl(this.sidebar.resource[name].href);
     }
 

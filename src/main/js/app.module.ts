@@ -36,6 +36,7 @@ import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 import { SecurityFactory, Security } from '@zainabed/security';
 import { SecurityFactoryImpl } from '@zainabed/soteria';
+import { AccessModule } from './component/access/access.module';
 
 
 @NgModule({
@@ -56,7 +57,7 @@ import { SecurityFactoryImpl } from '@zainabed/soteria';
     KeyModule,
     TranslationModule,
     ContentModule,
-
+    AccessModule,
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,

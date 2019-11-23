@@ -7,12 +7,19 @@ import { Injectable } from '@angular/core';
 })
 export class RouteSecurity implements CanActivate {
     authorizationManager: AuthorizationManager;
+
     constructor(private securityFactory: SecurityFactory) {
         this.authorizationManager = securityFactory.getAuthorizationManager();
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        return this.authorizationManager.hasAnyRoles(route.data.roles);
+        let roles: Array<string> = route.data.roles;
+        let projectId: string = route.params["projectId"];
+        console.log("Project id=" + projectId);
+        if (projectId) {
+            roles = roles.concat(roles.map(role => projectId + "_" + role));
+        }
+        return this.authorizationManager.hasAnyRoles(new Set(roles));
     }
 
 }

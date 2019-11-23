@@ -4,6 +4,7 @@ import { LocaleFormComponent, LocaleListComponent, LocaleComponent } from '../lo
 import { KeyFormComponent, KeyListComponent, KeyComponent } from '../key/key.core';
 import { TranslationListComponent, TranslationFormComponent } from "../translation/translation.core";
 import { RouteSecurity } from '../../lib/security/route.security';
+import { AccessListComponent } from '../access/access.list.component';
 
 export const ProjectRouteNames = {
     projectHome: 'projects',
@@ -36,6 +37,11 @@ export const ProjectRoutes: Routes = [
             },
             {
                 path: ':projectId/locales', component: LocaleListComponent,
+                canActivate: [RouteSecurity],
+                data: { roles: ["ROLE_USER"] }
+            },
+            {
+                path: ':projectId/access', component: AccessListComponent,
                 canActivate: [RouteSecurity],
                 data: { roles: ["ROLE_USER"] }
             },
