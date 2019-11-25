@@ -13,16 +13,19 @@ import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 @Injectable()
 export class ResourcesService {
     jwtToken: any;
-    constructor(private http: HttpClient, securityFactory: SecurityFactory) {
-        let authenticationManager: AuthenticationManager = securityFactory.getAuthenticationManager();
+    constructor(private http: HttpClient, private securityFactory: SecurityFactory) {
+            }
+
+    buildJwtToken(){
+        let authenticationManager: AuthenticationManager = this.securityFactory.getAuthenticationManager();
         this.jwtToken = authenticationManager.get().getCredentials();
     }
-
     /**
      * 
      * @param apiURL 
      */
     get(apiURL): Observable<Resources> {
+        this.buildJwtToken();
         return this.http.get<Resources>(apiURL, {
             headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token
@@ -41,6 +44,7 @@ export class ResourcesService {
      * @return Observable Observable of Resource object.
      */
     post(apiURL, resource): Observable<Resource> {
+        this.buildJwtToken();
         return this.http.post<Resource>(apiURL, resource, {
             headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token

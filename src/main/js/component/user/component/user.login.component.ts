@@ -48,7 +48,7 @@ export class UserLoginComponent {
         let authenticationManager : AuthenticationManager = this.securityFactory.getAuthenticationManager();
         let userDetails: AuthUser = this.userStoreService.buildUserDetails(response);
         authenticationManager.set(userDetails);
-        this.router.navigate(["/projects"]);
+        this.router.navigate(["/"]);
     }
 
     onError(error) {

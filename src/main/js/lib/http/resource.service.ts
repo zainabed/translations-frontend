@@ -11,8 +11,12 @@ import { SecurityFactory, AuthenticationManager, AuthUser } from '@zainabed/secu
 @Injectable()
 export class ResourceService {
     jwtToken: any;
-    constructor(private http: HttpClient, securityFactory: SecurityFactory) {
-        let authenticationManager: AuthenticationManager = securityFactory.getAuthenticationManager();
+    constructor(private http: HttpClient, private securityFactory: SecurityFactory) {
+        
+    }
+
+    buildJwtToken(){
+        let authenticationManager: AuthenticationManager = this.securityFactory.getAuthenticationManager();
         let userDetails: AuthUser = authenticationManager.get();
         if (userDetails != null) {
             this.jwtToken = userDetails.getCredentials();
@@ -24,6 +28,7 @@ export class ResourceService {
      * @param url 
      */
     get(url): Observable<Resource> {
+        this.buildJwtToken();
         return this.http.get<Resource>(url, {
             headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token
@@ -37,6 +42,7 @@ export class ResourceService {
      * @param resource 
      */
     patch(url, resource): Observable<Resource> {
+        this.buildJwtToken();
         return this.http.patch<Resource>(url, resource, {
             headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token
@@ -50,6 +56,7 @@ export class ResourceService {
      * @param resource 
      */
     put(url, resource): Observable<Resource> {
+        this.buildJwtToken();
         return this.http.put<Resource>(url, resource, {
             headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token
@@ -62,6 +69,7 @@ export class ResourceService {
      * @param url 
      */
     delete(url) {
+        this.buildJwtToken();
         return this.http.delete(url, {
             headers: {
                 Authorization: this.jwtToken.type + " " + this.jwtToken.token

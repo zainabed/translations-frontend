@@ -9,6 +9,7 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 import { MatSnackBar } from '@angular/material';
 import { UserStoreService } from './component/user/service/user.store.service';
 import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
+import { RouteSecurity } from './lib/security/route.security';
 
 
 
@@ -38,21 +39,18 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     this.authenticationManager.set(this.userStoreService.getItem());
     console.log(this.userStoreService.getItem());
     console.log( this.authenticationManager.get());
-   /* if (this.appResourceData.resource != null) {
+    if (this.userStoreService.getItem() != null) {
       this.router.navigate(["/", "projects"]);
-    }*/
+    }else{
+      this.router.navigate(["/login"]);
+    }
 
-    /*this.routeSecurityEvent.event.subscribe(success => {
+    RouteSecurity.event.subscribe(message => {
       console.log("route error event");
-      this.snackBar.open(success.message, null, {
+      this.snackBar.open(message, null, {
         duration: 2000
       });
-    }, error => {
-      console.log("route error event");
-      this.snackBar.open(error.message, null, {
-        duration: 2000
-      });
-    });*/
+    });
 
 
 

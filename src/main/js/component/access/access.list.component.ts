@@ -4,6 +4,7 @@ import { ResourceListComponent } from '../../lib/component/resource.list.compone
 import { Access } from './access';
 import { HttpClient } from '@angular/common/http';
 import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
+import { User } from '../user/core';
 
 @ResourcePath({
     path: "access",
@@ -17,6 +18,8 @@ import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 export class AccessListComponent extends ResourceListComponent<Access> implements OnInit {
 
     jwtToken: any;
+    user: User = null;
+    accessList : Array<Access>;
 
     constructor(injector: Injector, private http: HttpClient, securityFactory: SecurityFactory) {
         super(injector);
