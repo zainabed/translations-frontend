@@ -12,6 +12,7 @@ import { UserLogoutComponent } from './component/user.logout.component';
 import { LoginForm } from "./form/login.form";
 import { UserHttp } from "./http/user.http";
 import { UserStoreService } from "./service/user.store.service";
+import { UserMenuComponent } from './component/user.menu.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { UserStoreService } from "./service/user.store.service";
         UserListComponent,
         UserLoginComponent,
         UserLogoutComponent,
-        UserRegisterComponent
+        UserRegisterComponent,
+        UserMenuComponent
     ],
     providers: [
         UserForm,
