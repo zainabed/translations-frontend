@@ -3,23 +3,24 @@ import { AuthUser } from '@zainabed/security';
 //import {Resource} from 'angular4-hal';
 
 export class User implements AuthUser {
-   
+
 
     password: string;
     username: string;
     id: string;
     roles: Set<string>;
-    credentails : string;
+    credentails: string;
     email: string;
+    _links: any;
 
-    constructor(userConst: any){
-        if(!userConst) return;
+    constructor(userConst: any) {
+        if (!userConst) return;
         Object.assign(this, userConst);
         this.setRoles(userConst.roles);
     }
 
-    setRoles(roles: Array<string>){
-      
+    setRoles(roles: Array<string>) {
+
         this.roles = new Set(roles);
         console.log(this.roles);
     }
@@ -36,6 +37,8 @@ export class User implements AuthUser {
         return this.username;
     }
 
+    
+
     public getId(): string {
         return this.id;
     }
@@ -46,8 +49,8 @@ export class User implements AuthUser {
 
     getCredentials() {
         return this.credentails;
-    } 
+    }
 
-    
+
 
 }

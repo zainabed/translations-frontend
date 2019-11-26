@@ -1,0 +1,38 @@
+<div class="heading__content"></div>
+<h1 class="mat-h1">Access Rights</h1>
+<div class="row gutter__column--dt gutter__column--xdt component">
+    <mat-card class="column__xdt--12 column__dt--12" *ngIf="accessList && accessList.length">
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field>
+                    <input type="text" matInput [formControl]="usernameControl" [matAutocomplete]="auto">
+                </mat-form-field>
+
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let user of userList" [value]="user.username">{{user.username}}</mat-option>
+                </mat-autocomplete>
+                <div>
+                    <button mat-raised-button color="primary" (click)="AddUser()">Add</button>
+                </div>
+            </div>
+            <mat-list class="row">
+                <mat-list-item *ngFor="let accesss of accessList">
+                    <div mat-line class="color--darkorange">{{accesss.username}}</div>
+                    <div>
+                        <mat-form-field>
+                            <mat-select [(value)]="accesss.roleId" (selectionChange)="roleChangeEvent(accesss, $event)">
+                                <mat-option *ngFor="let role of roleList" [value]="role.id">{{role.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+    <div class="row center-center" *ngIf="(!accessList || !accessList.length)">
+        <div class="column__dt--12 column__xdt--12 self__center empty__image">
+            <img src="assets/images/empty_records.png">
+        </div>
+        <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in Access</p>
+    </div>
+</div>

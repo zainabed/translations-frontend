@@ -19,8 +19,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRippleModule } from '@angular/material/core';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -48,6 +49,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatDialogModule,
         MatPaginatorModule,
         FlexLayoutModule,
+        MatAutocompleteModule
     ],
     exports: [
         MatFormFieldModule,
@@ -72,6 +74,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatDialogModule,
         MatPaginatorModule,
         FlexLayoutModule,
+        MatAutocompleteModule
     ]
 })
 export class MaterialModule {

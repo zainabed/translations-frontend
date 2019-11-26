@@ -43,7 +43,7 @@ export const ProjectRoutes: Routes = [
             {
                 path: ':projectId/access', component: AccessListComponent,
                 canActivate: [RouteSecurity],
-                data: { roles: ["ROLE_USER"] }
+                data: { roles: ["ROLE_ADMIN"] }
             },
             { path: ':projectId/locales/new', component: LocaleFormComponent },
             { path: ':projectId/locales/:localeId/edit', component: LocaleFormComponent },
