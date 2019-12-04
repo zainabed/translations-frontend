@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { Security, SecurityFactory, AuthorizationManager, AuthUser, AuthenticationManager } from '@zainabed/security';
 
 @Component({
@@ -6,7 +6,8 @@ import { Security, SecurityFactory, AuthorizationManager, AuthUser, Authenticati
     templateUrl: "./header.html",
     host: { class: "row" }
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck {
+    
 
     userDetails: AuthUser;
 
@@ -16,10 +17,12 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userDetails = this.authenticationManager.get();
+       
     }
 
-
+    ngDoCheck(): void {
+        this.userDetails = this.authenticationManager.get();
+    }
 
 
 }
