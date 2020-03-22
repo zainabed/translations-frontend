@@ -18,9 +18,19 @@
       "es2018",
       "dom"
     ],
-    "paths" : {
-      "@app/lib/*" : ["main/js/lib/*"],
-      "@user/*": ["main/js/component/user/*"] 
+    "paths": {
+      "@app/lib/*": [
+        "main/js/lib/*"
+      ],
+      "@user/*": [
+        "main/js/component/user/*"
+      ],
+      "onborading": [
+        "dist/onborading"
+      ],
+      "onborading/*": [
+        "dist/onborading/*"
+      ]
     }
   }
 }

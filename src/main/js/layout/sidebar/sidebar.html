@@ -1,3 +1,32 @@
+<n-sheet *ngIf="sidebar.active">
+    <div slot="header">{{sidebar.title}}</div>
+    <div slot="body">
+        <n-list>
+            <n-container *ngFor="let action of actionList">
+                <n-list-item routerLink="{{getResourceHref(action.title)}}">
+                    <n-text>{{action.title}}
+                        <div slot="icon">
+                            <n-icon size="small" name="{{action.icon}}"></n-icon>
+                        </div>
+                    </n-text>
+                </n-list-item>
+            </n-container>
+        </n-list>
+        <mat-divider></mat-divider>
+        <n-list>
+            <n-container *ngFor="let setting of settingList">
+                <n-list-item routerLink="{{getResourceHref(setting.title)}}">
+                    <n-text>{{setting.title}}
+                        <div slot="icon">
+                            <n-icon size="small" name="{{setting.icon}}"></n-icon>
+                        </div>
+                    </n-text>
+                </n-list-item>
+            </n-container>
+        </n-list>
+    </div>
+</n-sheet>
+<!--
 <mat-sidenav-container class="sidebar-container">
     <mat-sidenav mode="side" [(opened)]="sidebar.active" class="sidebar">
         <mat-nav-list>
@@ -10,8 +39,7 @@
         <mat-divider></mat-divider>
         <mat-nav-list *ngIf="sidebar.active">
             <h3 mat-subheader>Services</h3>
-            <mat-list-item *ngFor="let action of actionList" 
-            routerLink="{{getResourceHref(action.title)}}" >
+            <mat-list-item *ngFor="let action of actionList" routerLink="{{getResourceHref(action.title)}}">
                 <mat-icon mat-list-icon>{{action.icon}}</mat-icon>
                 <h4 mat-line>{{action.title}}</h4>
             </mat-list-item>
@@ -19,8 +47,8 @@
         <mat-divider></mat-divider>
         <mat-nav-list *ngIf="sidebar.active">
             <h3 mat-subheader>Settings</h3>
-            <mat-list-item *ngFor="let setting of settingList" disableRipple="{{!setting.status}}" 
-            [ngClass]="!setting.status? 'disable': '' "  routerLink="{{getResourceHref(setting.title)}}">
+            <mat-list-item *ngFor="let setting of settingList" disableRipple="{{!setting.status}}"
+                [ngClass]="!setting.status? 'disable': '' " routerLink="{{getResourceHref(setting.title)}}">
                 <mat-icon mat-list-icon>{{setting.icon}}</mat-icon>
                 <h4 mat-line>{{setting.title}}</h4>
             </mat-list-item>
@@ -30,3 +58,4 @@
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
+-->

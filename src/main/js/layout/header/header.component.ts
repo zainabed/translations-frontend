@@ -4,10 +4,10 @@ import { Security, SecurityFactory, AuthorizationManager, AuthUser, Authenticati
 @Component({
     selector: "header-component",
     templateUrl: "./header.html",
-    host: { class: "row" }
+    styleUrls: ["./header.scss"]
 })
 export class HeaderComponent implements OnInit, DoCheck {
-    
+
 
     userDetails: AuthUser;
 
@@ -17,12 +17,17 @@ export class HeaderComponent implements OnInit, DoCheck {
     }
 
     ngOnInit(): void {
-       
+
     }
 
     ngDoCheck(): void {
         this.userDetails = this.authenticationManager.get();
     }
 
+    toggleSideBar($event: any) {
+        $event.stopPropagation();
+        let event = new Event("toggle-navigation");
+        document.dispatchEvent(event);
+    }
 
 }

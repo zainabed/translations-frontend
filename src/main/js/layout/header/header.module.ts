@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { MaterialModule } from "../../lib/material/mareial.module"
 import { HeaderComponent } from './header.component';
@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
+    schemas:[CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         BrowserModule,
         MaterialModule,

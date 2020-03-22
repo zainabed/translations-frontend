@@ -3,37 +3,45 @@
 <div class="column__xdt--4 column__dt--6">
     <mat-progress-bar mode="indeterminate" *ngIf="httpProgress.progress" class="row"></mat-progress-bar>
     <mat-card>
-        <mat-card-title>Login</mat-card-title>
+        <n-text type="h4">Login</n-text>
         <mat-card-content>
             <form [formGroup]="loginForm.form" class="row">
                 <div class="column__xdt--12 column__dt--12">
-                    <mat-form-field  class="row"> 
+                    <mat-form-field class="row">
 
-                        <input matInput placeholder="Username" formControlName="username" id="username" [errorStateMatcher]="matcher">
+                        <input matInput placeholder="Username" formControlName="username" id="username"
+                            [errorStateMatcher]="matcher">
                         <ng-container>
-                            <mat-error id="username-empty-error" *ngIf="loginForm.form.get('username').hasError('required')">
+                            <mat-error id="username-empty-error"
+                                *ngIf="loginForm.form.get('username').hasError('required')">
                                 Username can't be empty
                             </mat-error>
-                            <mat-error id="username-less-error" *ngIf="loginForm.form.get('username').hasError('minlength')">
+                            <mat-error id="username-less-error"
+                                *ngIf="loginForm.form.get('username').hasError('minlength')">
                                 Please enter at least 5 characters
                             </mat-error>
-                            <mat-error id="username-max-error" *ngIf="loginForm.form.get('username').hasError('maxlength')">
+                            <mat-error id="username-max-error"
+                                *ngIf="loginForm.form.get('username').hasError('maxlength')">
                                 Maximum characters limit of username is 20
                             </mat-error>
 
                         </ng-container>
                     </mat-form-field>
 
-                    <mat-form-field  class="row">
-                        <input matInput placeholder="Password" type="password" formControlName="password" id="password" [errorStateMatcher]="matcher">
+                    <mat-form-field class="row">
+                        <input matInput placeholder="Password" type="password" formControlName="password" id="password"
+                            [errorStateMatcher]="matcher">
                         <ng-container>
-                            <mat-error id="password-invalid-error" *ngIf="loginForm.form.get('password').hasError('password')">
+                            <mat-error id="password-invalid-error"
+                                *ngIf="loginForm.form.get('password').hasError('password')">
                                 Email can't be empty
                             </mat-error>
-                            <mat-error id="password-less-error" *ngIf="loginForm.form.get('password').hasError('minlength')">
+                            <mat-error id="password-less-error"
+                                *ngIf="loginForm.form.get('password').hasError('minlength')">
                                 Please enter at least 5 characters
                             </mat-error>
-                            <mat-error id="password-max-error" *ngIf="loginForm.form.get('password').hasError('maxlength')">
+                            <mat-error id="password-max-error"
+                                *ngIf="loginForm.form.get('password').hasError('maxlength')">
                                 Maximum characters limit of username is 30
                             </mat-error>
 
@@ -41,13 +49,16 @@
                     </mat-form-field>
 
                     <div class="row">
-                        <button mat-raised-button color="primary" (click)="login()">Login</button>
+                        <n-button color="primary" (click)="login()" value="Login"></n-button>
 
                     </div>
 
                 </div>
             </form>
-            <h4 class="row"><span>No account? &nbsp;</span><a routerLink="/register">Create one!</a></h4>
+            <h4 class="row">
+                <n-text type="body2">No account? &nbsp;</n-text>
+                <n-button type="flat" routerLink="/register" value="Create one!"></n-button>
+            </h4>
         </mat-card-content>
     </mat-card>
 </div>

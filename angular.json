@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "onborading": {
+      "root": "projects/onborading",
+      "sourceRoot": "projects/onborading/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/onborading/tsconfig.lib.json",
+            "project": "projects/onborading/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/onborading/src/test.ts",
+            "tsConfig": "projects/onborading/tsconfig.spec.json",
+            "karmaConfig": "projects/onborading/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/onborading/tsconfig.lib.json",
+              "projects/onborading/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "translation-frontend"

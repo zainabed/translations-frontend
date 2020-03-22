@@ -1,25 +1,19 @@
-<mat-toolbar color="primary" class="toolbar__fixed" >
-    <mat-toolbar-row class="toolbar">
-        <span class="left">
-            <mat-icon>gesture</mat-icon>
-            Translation Solution
-        </span>
-        <div class="center" *ngIf="userDetails">
-            <button mat-button routerLink="/projects">Projects</button>
-        </div>
-        <div class="right">
-            <button mat-button>About Us</button>
-            <button mat-button>Contact Us</button>
-            <div *ngIf="userDetails" class="mat-button">
-                <button mat-button [matMenuTriggerFor]="menu">{{userDetails.username}}</button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item>Profile</button>
-                    <button mat-menu-item >Settings</button>
-                    <button mat-menu-item routerLink="/logout">Logout</button>
-                </mat-menu>
-            </div>
-        </div>
+<n-toolbar class="toolbar">
+    <n-toolbar-content direction="left">
+        <n-icon size="small" name="menu" *ngIf="userDetails" (click)="toggleSideBar($event)"></n-icon>
+    </n-toolbar-content>
+    <n-toolbar-content direction="center">
+        <n-text type="h6">Translation Solution</n-text>
+    </n-toolbar-content>
+    <n-toolbar-content direction="right">
 
-
-    </mat-toolbar-row>
-</mat-toolbar>
+        <n-menu icon="more-vert" direction="right" color="secondary">
+            <n-menu-item *ngIf="userDetails" title="User: Zainul"></n-menu-item>
+            <n-menu-item showAsAction="ifRoom" title="About Us" icon="info"></n-menu-item>
+            <n-menu-item showAsAction="ifRoom" title="Contact Us" icon="settings-phone"></n-menu-item>
+            <n-menu-item icon="visibility" title="Profile"></n-menu-item>
+            <n-menu-item icon="settings" title="Settings"></n-menu-item>
+            <n-menu-item routerLink="/logout" *ngIf="userDetails" title="Logout"></n-menu-item>
+        </n-menu>
+    </n-toolbar-content>
+</n-toolbar>

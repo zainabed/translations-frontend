@@ -1,5 +1,5 @@
 // Core Modules
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { UserRquireModule } from './user.require.module';
 import { Router, RouterModule } from '@angular/router';
 
@@ -15,6 +15,7 @@ import { UserStoreService } from "./service/user.store.service";
 import { UserMenuComponent } from './component/user.menu.component';
 
 @NgModule({
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         UserRquireModule,
         RouterModule.forChild(UserRoutes)

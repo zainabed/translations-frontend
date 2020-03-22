@@ -3,8 +3,10 @@
 <div class="heading__content pad" *ngIf="response">
     <div class="column__xdt--8 column__dt--12">
         <p class="mat-h3 pad">Thanks, we have received your request.</p>
-        <p class="mat-h3 pad">Our support team will notify you with account activation link. <button mat-button color="primary" routerLink="/">Back to home</button></p>
-        
+        <p class="mat-h3 pad">Our support team will notify you with account activation link. <n-button mat-n-button
+                color="primary" routerLink="/">Back to home</n-button>
+        </p>
+
     </div>
 
 </div>
@@ -17,15 +19,19 @@
                 <div class="column__xdt--12 column__dt--12">
                     <mat-form-field class="row">
 
-                        <input matInput placeholder="Username" formControlName="username" id="username" [errorStateMatcher]="matcher">
+                        <input matInput placeholder="Username" formControlName="username" id="username"
+                            [errorStateMatcher]="matcher">
                         <ng-container>
-                            <mat-error id="username-empty-error" *ngIf="userForm.form.get('username').hasError('required')">
+                            <mat-error id="username-empty-error"
+                                *ngIf="userForm.form.get('username').hasError('required')">
                                 Username can't be empty
                             </mat-error>
-                            <mat-error id="username-less-error" *ngIf="userForm.form.get('username').hasError('minlength')">
+                            <mat-error id="username-less-error"
+                                *ngIf="userForm.form.get('username').hasError('minlength')">
                                 Please enter at least 5 characters
                             </mat-error>
-                            <mat-error id="username-max-error" *ngIf="userForm.form.get('username').hasError('maxlength')">
+                            <mat-error id="username-max-error"
+                                *ngIf="userForm.form.get('username').hasError('maxlength')">
                                 Maximum characters limit of username is 20
                             </mat-error>
 
@@ -33,7 +39,8 @@
                     </mat-form-field>
                     <mat-form-field class="row">
 
-                        <input matInput type="email" placeholder="Email" formControlName="email" id="email" [errorStateMatcher]="matcher">
+                        <input matInput type="email" placeholder="Email" formControlName="email" id="email"
+                            [errorStateMatcher]="matcher">
                         <ng-container>
                             <mat-error id="email-empty-error" *ngIf="userForm.form.get('email').hasError('required')">
                                 Email can't be empty
@@ -52,15 +59,19 @@
                     </mat-form-field>
 
                     <mat-form-field class="row">
-                        <input matInput placeholder="Password" type="password" formControlName="password" id="password" [errorStateMatcher]="matcher">
+                        <input matInput placeholder="Password" type="password" formControlName="password" id="password"
+                            [errorStateMatcher]="matcher">
                         <ng-container>
-                            <mat-error id="password-invalid-error" *ngIf="userForm.form.get('password').hasError('password')">
+                            <mat-error id="password-invalid-error"
+                                *ngIf="userForm.form.get('password').hasError('password')">
                                 Email can't be empty
                             </mat-error>
-                            <mat-error id="password-less-error" *ngIf="userForm.form.get('password').hasError('minlength')">
+                            <mat-error id="password-less-error"
+                                *ngIf="userForm.form.get('password').hasError('minlength')">
                                 Please enter at least 5 characters
                             </mat-error>
-                            <mat-error id="password-max-error" *ngIf="userForm.form.get('password').hasError('maxlength')">
+                            <mat-error id="password-max-error"
+                                *ngIf="userForm.form.get('password').hasError('maxlength')">
                                 Maximum characters limit of username is 30
                             </mat-error>
 
@@ -68,8 +79,8 @@
                     </mat-form-field>
 
                     <div class="row">
-                        <button mat-raised-button color="primary" (click)="register()">Register</button>
-                        <button mat-raised-button routerLink="/">Cancel</button>
+                        <n-button color="primary" (click)="register()" value="Register"></n-button>
+                        <n-button type="outline" color="secondary" routerLink="/" value="Cancel"></n-button>
                     </div>
 
                 </div>

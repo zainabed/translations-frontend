@@ -53,8 +53,13 @@ export class SidebarComponent implements OnInit, AfterContentInit {
     }
 
     getResourceHref(name) {
-        if(!this.sidebar.resource[name]) return "/";
+        if (!this.sidebar.resource[name]) return "/";
         return this.appData.filterHrefUrl(this.sidebar.resource[name].href);
     }
 
+    isActive() {
+        window.event.stopPropagation();
+        let event = new Event("toggle-navigation");
+        document.dispatchEvent(event);
+    }
 }
