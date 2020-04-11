@@ -1,5 +1,5 @@
 // Core Modules
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { LocaleRquireModule } from './locale.require.module';
 import { Router, RouterModule } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { LocaleComponent, LocaleListComponent, LocaleFormComponent, ImportUriDia
 import { LocaleRoutes } from "./locale.route";
 
 @NgModule({
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         LocaleRquireModule,
         RouterModule.forChild(LocaleRoutes)

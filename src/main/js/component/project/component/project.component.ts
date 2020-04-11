@@ -8,6 +8,7 @@ import { ProjectService } from '../model/project.service';
 @Component({
     selector: "project-component",
     templateUrl: './projects.html',
+    styleUrls: ["./projects.scss"],
     host: {
         class: "row center-center"
     }

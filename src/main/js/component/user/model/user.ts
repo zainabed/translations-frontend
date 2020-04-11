@@ -22,7 +22,6 @@ export class User implements AuthUser {
     setRoles(roles: Array<string>) {
 
         this.roles = new Set(roles);
-        console.log(this.roles);
     }
 
     public isAccountExpired(): boolean {

@@ -1,37 +1,30 @@
-<div class="heading__content"></div>
-<h1 class="mat-h1">Translations</h1>
-<div class="row gutter__column--dt gutter__column--xdt component" *ngIf="(resourceList && resourceList.length) || isSearched">
-    <mat-card class="column__xdt--6 column__dt--6 card__list">
-
-        <mat-toolbar *ngIf="!onSearch" class="background__transparent">
-            <mat-toolbar-row class="toolbar">
-                <div class="left">Keys</div>
-                <div class="right">
-                    <button mat-icon-button (click)="openSearchBox()">
-                        <mat-icon>search</mat-icon>
-                    </button>
-                </div>
-            </mat-toolbar-row>
-        </mat-toolbar>
-        <mat-toolbar *ngIf="onSearch">
-            <mat-toolbar-row class="toolbar">
-                <div class="left">
-                    <button mat-icon-button (click)="closeSearchBox()">
-                        <mat-icon>arrow_back</mat-icon>
-                    </button>
-                </div>
-                <div class="center">
-                    <form [formGroup]="keyForm.form" class="padding--zero searchbox" autocomplete="off">
-                        <mat-form-field class="row">
-                            <input matInput formControlName="name" id="name" placeholder="search">
-                        </mat-form-field>
-                    </form>
-                </div>
-                <div class="right">
-                    <button mat-raised-button color="primary" (click)="search()" class="">Search</button>
-                </div>
-            </mat-toolbar-row>
-        </mat-toolbar>
+<div class="row gutter__column--dt gutter__column--xdt component"
+    *ngIf="(resourceList && resourceList.length) || isSearched">
+    <mat-card class="column__xdt--6 column__dt--6 column__mb--4 card__list">
+        <n-toolbar *ngIf="!onSearch" color="white">
+            <n-toolbar-content direction="center">
+                <n-text type="body2">Keys</n-text>
+            </n-toolbar-content>
+            <n-toolbar-content direction="right">
+                <n-button color="secondary" type="flat" (click)="openSearchBox()" icon="search"></n-button>
+            </n-toolbar-content>
+        </n-toolbar>
+        <n-toolbar color="white" *ngIf="onSearch">
+            <n-toolbar-content direction="left">
+                <n-button icon="arrow_back" type="flat" (click)="closeSearchBox()">
+                </n-button>
+            </n-toolbar-content>
+            <n-toolbar-content direction="center">
+                <form [formGroup]="keyForm.form" class="padding--zero searchbox" autocomplete="off">
+                    <mat-form-field class="row">
+                        <input matInput formControlName="name" id="name" placeholder="search">
+                    </mat-form-field>
+                </form>
+            </n-toolbar-content>
+            <n-toolbar-content direction="right">
+                <n-button color="primary" type="flat" (click)="search()" value="Search"></n-button>
+            </n-toolbar-content>
+        </n-toolbar>
         <mat-card-content>
 
             <mat-nav-list class="row">
@@ -54,13 +47,12 @@
             <div *ngIf="!resourceList || !resourceList.length">
                 <p>No result found for given search value.</p>
             </div>
-            <mat-paginator [length]="page.totalElements" [pageSize]="page.size" (page)="pageHandler($event)"></mat-paginator>
+            <mat-paginator [length]="page.totalElements" [pageSize]="page.size" (page)="pageHandler($event)">
+            </mat-paginator>
         </mat-card-content>
 
     </mat-card>
-    <button mat-fab class="button__float model-path-new" (click)="add()" *ngIf="resourceList && resourceList.length">
-        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-    </button>
+    
     <router-outlet></router-outlet>
 </div>
 
@@ -73,6 +65,7 @@
         <img src="assets/images/empty_records.png">
     </div>
     <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in keys</p>
-    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up here.</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a translation key and it will show up
+        here.</p>
     <button mat-raised-button color="primary" (click)="add()">Add New</button>
 </div>

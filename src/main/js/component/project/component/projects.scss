@@ -1,0 +1,11 @@
+n-tab {
+    display: none;
+}
+@media (max-width: 420px){
+    n-tab {
+        display: block;
+        position: fixed;
+        z-index: 111;
+        bottom: 0;
+    }
+}

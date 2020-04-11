@@ -1,4 +1,4 @@
-import { Component, Injector } from "@angular/core";
+import { Component, Injector, DoCheck } from "@angular/core";
 
 import { ResourceListComponent, ResourcePath } from "../../../lib/component/resource.component.core";
 import { PageEvent } from '@angular/material';
@@ -7,6 +7,9 @@ import { ProjectService, ProjectResourceListComponent } from "../../project/proj
 import { Translation } from "../model/translation";
 import { KeyService } from "../../key/model/key.service";
 import { KeyForm } from "../../key/form/key.form";
+import { ModalHeaderService } from 'src/main/js/layout/header/modal/modal.header.service';
+import { HeaderService, BACKGROUND_COLOR, HEADER_POSITION, HEADER_TYPE, FAB_DIRECTION } from 'src/main/js/layout/header/header.service';
+import { ActivatedRoute } from '@angular/router';
 
 @ResourcePath({
     path: "keys",
@@ -17,7 +20,7 @@ import { KeyForm } from "../../key/form/key.form";
     selector: "translation-list",
     templateUrl: "./translation-list.html",
     host: {
-        class: "column__xdt--11 column__dt--11 component"
+        class: "column__xdt--11 column__dt--11 column__mb--4 component"
     }
 })
 export class TranslationListComponent extends ProjectResourceListComponent<Translation> {
@@ -32,7 +35,11 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
     pageEvent: PageEvent;
 
 
-    constructor(injector: Injector) {
+    constructor(
+        injector: Injector, 
+        private modalHeaderService: ModalHeaderService, 
+        private headerService: HeaderService,
+        route: ActivatedRoute) {
         super(injector);
         this.keyService = injector.get(KeyService);
         this.keyForm = injector.get(KeyForm);
@@ -41,12 +48,36 @@ export class TranslationListComponent extends ProjectResourceListComponent<Trans
         this.pageEvent = new PageEvent();
         this.pageEvent.pageIndex = 0;
         this.pageEvent.pageSize = 10;
+   
+        route.queryParams.subscribe(param =>{
+            this.setHeader(headerService);
+            console.log("inside trans");
+        });
+       
+    }
+ 
+   
+    ngOnDestroy() {
+        this.modalHeaderService.reset();
     }
 
     ngOnInit() {
         super.ngOnInit();
-        
         this.searchUrl = this.keyUrl + "/search/name?projects=" + this.projectId + "&name=";
+        document.addEventListener("OnFabClick", event => {
+            this.add();
+        });
+    }
+
+    setHeader(headerService: HeaderService) {
+        headerService.setHeader({
+            title: "Translation",
+            background: BACKGROUND_COLOR.SECONDARY,
+            position: HEADER_POSITION.STICKY,
+            type: HEADER_TYPE.PROMINENT,
+            fab: true,
+            fabDirection: FAB_DIRECTION.RIGHT
+        });
     }
 
     get() {

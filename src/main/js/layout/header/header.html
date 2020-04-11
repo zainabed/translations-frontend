@@ -1,13 +1,14 @@
-<n-toolbar class="toolbar">
+<n-toolbar class="toolbar" color="{{header.background}}" type="{{header.type}}" position="{{header.position}}"
+    fab_visible="{{header.fab}}" fab_direction="{{header.fabDirection}}">
     <n-toolbar-content direction="left">
         <n-icon size="small" name="menu" *ngIf="userDetails" (click)="toggleSideBar($event)"></n-icon>
     </n-toolbar-content>
     <n-toolbar-content direction="center">
-        <n-text type="h6">Translation Solution</n-text>
+        <n-text type="h6">{{header.title =="Translation App" ? header.title: ""}}</n-text>
     </n-toolbar-content>
     <n-toolbar-content direction="right">
 
-        <n-menu icon="more-vert" direction="right" color="secondary">
+        <n-menu icon="more-vert" direction="right" color="white">
             <n-menu-item *ngIf="userDetails" title="User: Zainul"></n-menu-item>
             <n-menu-item showAsAction="ifRoom" title="About Us" icon="info"></n-menu-item>
             <n-menu-item showAsAction="ifRoom" title="Contact Us" icon="settings-phone"></n-menu-item>
@@ -16,4 +17,7 @@
             <n-menu-item routerLink="/logout" *ngIf="userDetails" title="Logout"></n-menu-item>
         </n-menu>
     </n-toolbar-content>
+    <div slot="prominent" class="prominent">
+        {{header.title !="Translation App" ? header.title: ""}}
+    </div>
 </n-toolbar>

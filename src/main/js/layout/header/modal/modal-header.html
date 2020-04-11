@@ -1,0 +1,18 @@
+<n-toolbar class="toolbar" type="{{type}}" position="{{service.position}}" color="{{service.color}}"
+    *ngIf="service.title">
+    <n-toolbar-content direction="left">
+        <n-icon size="small" name="menu" (click)="onBackClick($event)" [ngClass]="{'visible': !service.isMobile()}">
+        </n-icon>
+    </n-toolbar-content>
+    <n-toolbar-content direction="center">
+        <n-text type="h6">{{service.title}}</n-text>
+    </n-toolbar-content>
+    <n-toolbar-content direction="right">
+
+        <n-menu icon="more-vert" direction="right" color="white" *ngIf="service.menuItems">
+            <ng-container *ngFor="let menu of service.menuItems">
+                <n-menu-item showAsAction="{{menu.action}}" title="{{menu.titel}}" icon="{{menu.icon}}"></n-menu-item>
+            </ng-container>
+        </n-menu>
+    </n-toolbar-content>
+</n-toolbar>

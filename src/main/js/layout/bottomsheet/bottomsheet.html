@@ -1,0 +1,5 @@
+<n-tab *ngIf="items">
+    <ng-container *ngFor="let item of items">
+        <n-tab-item icon="{{item.icon}}" routerLink="{{item.link}}"></n-tab-item>
+    </ng-container>
+</n-tab>

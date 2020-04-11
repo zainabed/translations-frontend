@@ -1,5 +1,5 @@
 // Core Modules
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { TranslationRequireModule } from './translation.require.module';
 import { Router, RouterModule } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { TranslationComponent, TranslationListComponent, TranslationFormComponen
 import { TranslationRoutes } from "./translation.route";
 
 @NgModule({
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], 
     imports: [
         TranslationRequireModule,
         RouterModule.forChild(TranslationRoutes)

@@ -25,6 +25,11 @@
             </n-container>
         </n-list>
     </div>
+    <n-tab class="hidden">
+        <n-container *ngFor="let action of actionList">
+            <n-tab-item title="{{action.title}}" icon="{{action.icon}}"></n-tab-item>
+        </n-container>
+    </n-tab>
 </n-sheet>
 <!--
 <mat-sidenav-container class="sidebar-container">

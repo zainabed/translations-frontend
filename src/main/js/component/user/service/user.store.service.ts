@@ -35,9 +35,7 @@ export class UserStoreService {
         }
 
         let data = JSON.parse(this.storage.getItem(this.key));
-        console.log(data);
         let user: User = new User(data);
-        console.log(user);
         return user;
     }
 

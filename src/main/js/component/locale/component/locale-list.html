@@ -1,7 +1,6 @@
-<div class="heading__content"></div>
-<h1 class="mat-h1">Locales</h1>
-<mat-accordion  *ngIf="resourceList && resourceList.length">
-    <mat-expansion-panel *ngFor="let locale of resourceList" class="column__xdt--8 column__dt--8">
+
+<mat-accordion *ngIf="resourceList && resourceList.length">
+    <mat-expansion-panel *ngFor="let locale of resourceList" class="column__xdt--12 column__dt--12">
         <mat-expansion-panel-header collapsedHeight="72px">
             <mat-panel-title>
                 <img matListAvatar src="assets/images/flags/{{locale.code}}.png" alt="..." class="icon__list">
@@ -14,7 +13,8 @@
         <mat-action-row>
             <button mat-button color="primary" (click)="post(locale.api)" *ngIf="!locale.present">Enable</button>
             <button mat-button color="warn" (click)="delete(locale.api)" *ngIf="locale.present">disable</button>
-            <button mat-button color="accent" (click)="download(locale.api, locale.code)" *ngIf="locale.present">export</button>
+            <button mat-button color="accent" (click)="download(locale.api, locale.code)"
+                *ngIf="locale.present">export</button>
             <button mat-button color="accent" (click)="import(locale)" *ngIf="locale.present">Import</button>
         </mat-action-row>
     </mat-expansion-panel>
@@ -28,6 +28,7 @@
         <img src="assets/images/empty_records.png">
     </div>
     <p class="column__dt--12 column__xdt--12 mat-h1 self__center">Empty in locales</p>
-    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a language locale and it will show up here.</p>
+    <p class="column__dt--12 column__xdt--12 mat-title self__center">Save a language locale and it will show up here.
+    </p>
     <button mat-raised-button color="primary" (click)="add()">Add New</button>
 </div>

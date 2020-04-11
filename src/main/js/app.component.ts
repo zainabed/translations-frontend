@@ -10,6 +10,9 @@ import { MatSnackBar } from '@angular/material';
 import { UserStoreService } from './component/user/service/user.store.service';
 import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 import { RouteSecurity } from './lib/security/route.security';
+import { ModalHeaderService } from './layout/header/modal/modal.header.service';
+import { BottomSheetService } from './layout/bottomsheet/bottomsheet.service';
+import { HeaderService, BACKGROUND_COLOR, HEADER_TYPE, HEADER_POSITION } from './layout/header/header.service';
 
 
 
@@ -28,20 +31,25 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
     private mockData: ResourceMockData,
     public snackBar: MatSnackBar,
     public userStoreService: UserStoreService,
-    private securityFactory: SecurityFactory
+    private securityFactory: SecurityFactory,
+    public modalHeaderService: ModalHeaderService,
+    private bottomSheetService: BottomSheetService,
+    headerService: HeaderService
 
   ) {
     this.authenticationManager = securityFactory.getAuthenticationManager();
+    this.setHeader(headerService);
   }
 
   ngOnInit() {
     this.appResourceData.resource = this.route.snapshot.data.projectResource;
     this.authenticationManager.set(this.userStoreService.getItem());
-    console.log(this.userStoreService.getItem());
-    console.log( this.authenticationManager.get());
+    this.bottomSheetService.reset();
+
+
     if (this.userStoreService.getItem() != null) {
       this.router.navigate(["/", "projects"]);
-    }else{
+    } else {
       this.router.navigate(["/login"]);
     }
 
@@ -56,6 +64,16 @@ export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
     //   this.resourceData.resource = this.mockData.PROJECT_RESOURCE_RESPONSE;
     //   this.router.navigate(["/" + UserRouteNames.UserHome]);
+  }
+
+  setHeader(headerService: HeaderService) {
+    headerService.setHeader({
+      title: "Translation App",
+      background: BACKGROUND_COLOR.PRIMARY,
+      position: HEADER_POSITION.STICKY,
+      type: HEADER_TYPE.NORMAL
+    });
+
   }
   ngAfterContentInit() {
   }

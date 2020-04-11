@@ -7,6 +7,7 @@ import { ResourcePath, ResourceListComponent } from "../../../lib/component/reso
 import { Project } from '../model/project';
 import { UserStoreService } from '../../user/service/user.store.service';
 import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
+import { HeaderService, BACKGROUND_COLOR, HEADER_POSITION, HEADER_TYPE, FAB_DIRECTION } from 'src/main/js/layout/header/header.service';
 
 
 @ResourcePath({
@@ -32,9 +33,10 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         injector: Injector,
         private sidebarService: SidebarService,
         private securityFactory: SecurityFactory,
-        private userStoreService: UserStoreService) {
+        private userStoreService: UserStoreService,
+        headerService: HeaderService) {
         super(injector);
-
+        this.setHeader(headerService);
     }
 
     ngOnInit() {
@@ -43,8 +45,20 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         this.authenticationManager = this.securityFactory.getAuthenticationManager();
         this.authenticationManager.set(this.userStoreService.getItem());
         this.get();
-       
+
     }
+
+    setHeader(headerService: HeaderService) {
+        headerService.setHeader({
+            title: "Projects",
+            background: BACKGROUND_COLOR.PRIMARY,
+            position: HEADER_POSITION.STICKY,
+            type: HEADER_TYPE.PROMINENT,
+            fab: true,
+            fabDirection: FAB_DIRECTION.RIGHT
+        });
+    }
+
 
     get() {
         this.apiUrl += "/search/user?id=" + this.authenticationManager.get().getId();
@@ -71,6 +85,7 @@ export class ProjectListComponent extends ResourceListComponent<Project> impleme
         return projects;
     }
 
+    
     extend(project, extendProject) {
         let projectId = this.appData.getId(project);
         let extendProjectId = this.appData.getId(extendProject);

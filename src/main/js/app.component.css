@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+}
+n-page {
+  position: relative;
+}
+
+
+.content-slot {
+  margin-top: 4rem;
+}

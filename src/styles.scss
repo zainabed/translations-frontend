@@ -310,17 +310,6 @@ $color-map : 'darkcyan', 'darkorange', 'darkblue' , 'cornflowerblue';
   background: transparent !important;
 }
 
-.tieto__logo--side{
-  position: fixed;
-  right:0;
-  bottom: 0;
-  z-index: 1;
-  background-image: url(/assets/images/tieto_logo_side.png);
-  width: 202px;
-  height: 250px;
-  background-size: cover;
-  background-position: bottom;
-}
 
 .heading__content{
   position: fixed;
@@ -399,4 +388,42 @@ mat-panel-title .panel__title{
   color: gray !important;
   cursor: default !important;
   background: transparent !important;
+}
+
+.page-content{
+  width: 100%;
+  flex: 0 0 100%;
+}
+
+@media (max-width: 420px) {
+  .page--modal {
+      position: absolute !important;
+  }
+}
+
+@media (min-width: 890px){
+  div[slot="content"]{
+   // top: 100px;
+   // position: absolute;
+  }
+}
+
+bottom-sheet{
+  display: none;
+}
+@media (max-width: 420px) {
+  bottom-sheet {
+    bottom: 0px;
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 56px;
+    z-index: 2222;
+    width: 100%;
+    box-shadow: 0 0px 4px rgba(0,0,0,.2);
+
+    n-tab{
+      width: 100%;        
+    }
+  }
 }

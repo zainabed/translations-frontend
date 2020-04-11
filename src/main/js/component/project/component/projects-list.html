@@ -1,5 +1,3 @@
-<div class="heading__content"></div>
-<h1 class="mat-h1 pad">Projects</h1>
 <div class="row component gutter__column--dt gutter__column--xdt" *ngIf="resourceList && resourceList.length">
     <div *ngFor="let project of resourceList" class="column__xdt--4 column__dt--4">
         <mat-card class="project__card">
@@ -28,10 +26,6 @@
 
 </div>
 
-
-<button mat-fab class="button__float" routerLink="/projects/new" *ngIf="resourceList && resourceList.length">
-    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-</button>
 
 <div class="row center-center" *ngIf="httpProgress.progress">
     <mat-spinner></mat-spinner>

@@ -37,6 +37,8 @@ import { ResourceMockData } from "./lib/http/mock/resource.mock.data";
 import { SecurityFactory, Security } from '@zainabed/security';
 import { SecurityFactoryImpl } from '@zainabed/soteria';
 import { AccessModule } from './component/access/access.module';
+import { ModalHeaderComponent } from './layout/header/modal/modal.header.component';
+import { BottomSheetModule } from './layout/bottomsheet/bottomsheet.module';
 
 
 @NgModule({
@@ -59,13 +61,14 @@ import { AccessModule } from './component/access/access.module';
     TranslationModule,
     ContentModule,
     AccessModule,
+    BottomSheetModule,
     RouterModule.forRoot([
       {
         path: '', component: AppComponent,
         resolve: { "projectResource": AppResourceDataResolve },
         //   children: ProjectRoutes
       },
-      { path: '', component: HeaderComponent, outlet: 'toolbar' },
+      { path: '', component: HeaderComponent, outlet: 'appbar' },
       { path: '', component: SidebarComponent, outlet: 'sidebar' },
       // { path: '', component: BreadcrumbComponent, outlet: 'breadcrumb' }
     ],

@@ -1,7 +1,7 @@
-import { Component, Injector } from "@angular/core";
+import { Component, Injector, OnDestroy } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { saveAs } from 'file-saver';
-import {  tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { ResourceListComponent, ResourcePath } from "../../../lib/component/resource.component.core";
 import { ProjectService, ProjectResourceListComponent } from "../../project/project.core";
@@ -13,6 +13,9 @@ import { Locale } from "../model/locale";
 import { LocaleUri } from "../model/locale.uri";
 import { LocalService } from "../service/locale.service";
 import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
+import { ModalHeaderService } from 'src/main/js/layout/header/modal/modal.header.service';
+import { BottomSheetService } from 'src/main/js/layout/bottomsheet/bottomsheet.service';
+import { HeaderService, BACKGROUND_COLOR, HEADER_POSITION, HEADER_TYPE, FAB_DIRECTION } from 'src/main/js/layout/header/header.service';
 
 @ResourcePath({
     path: "locales",
@@ -22,12 +25,13 @@ import { SecurityFactory, AuthenticationManager } from '@zainabed/security';
 @Component({
     selector: "locale-list",
     templateUrl: "./locale-list.html",
+    styleUrls: ["./locale.scss"],
     host: {
-        class: "column__xdt--10 column__dt--10 component"
+        class: "column__xdt--10 column__dt--10 component column__mb--4"
     },
     entryComponents: [ImportUriDialogComponent]
 })
-export class LocaleListComponent extends ResourceListComponent<Locale> {
+export class LocaleListComponent extends ResourceListComponent<Locale> implements OnDestroy {
 
     private downloadLocaleCode: string;
     private localeApi: string;
@@ -36,11 +40,35 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
     private dialogWith: string = "500px"
 
 
-    constructor(injector: Injector, public dialog: MatDialog, public http: HttpClient, 
-        public securityFactory: SecurityFactory) {
+    constructor(injector: Injector,
+        public dialog: MatDialog,
+        public http: HttpClient,
+        public securityFactory: SecurityFactory,
+        private modalHeaderServie: ModalHeaderService,
+        bottomSheetService: BottomSheetService,
+        headerService: HeaderService) {
         super(injector);
         this.projectService = injector.get(ProjectService);
 
+        bottomSheetService.set([
+            { title: "Locale", icon: "language", link: "/projects/" + this.projectService.projectId + "/locales" },
+            { title: "Translation", icon: "translate", link: "/projects/" + this.projectService.projectId + "/translations" }
+        ]);
+        this.setHeader(headerService);
+    }
+
+    setHeader(headerService: HeaderService) {
+        headerService.setHeader({
+            title: "Language",
+            background: BACKGROUND_COLOR.BLACK,
+            position: HEADER_POSITION.STICKY,
+            type: HEADER_TYPE.PROMINENT,
+            fabDirection: FAB_DIRECTION.RIGHT
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.modalHeaderServie.reset();
     }
 
     ngOnInit() {
@@ -48,6 +76,14 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         this.projectApi = this.appData.getResourceListUrlFor(this.projectService.resource, this._path);
         this.localeApi = this.apiUrl;
         this.get();
+
+        this.setModalHeader();
+
+    }
+
+    setModalHeader() {
+        this.modalHeaderServie.title = "Locale";
+        this.modalHeaderServie.color = "gray";
     }
 
     onGetSuccess(response) {
@@ -84,7 +120,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         dialogRef.afterClosed().subscribe(format => {
             if (format.length) {
                 this.downloadLocaleCode = code;
-                
+
                 this.http.get(api + "/export/" + format, {
                     headers: {
                         Authorization: jwtToken.type + " " + jwtToken.token
@@ -109,7 +145,7 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
             data: {}
         });
 
-        dialogRef.afterClosed().subscribe( importFile => {
+        dialogRef.afterClosed().subscribe(importFile => {
             if (importFile) {
                 //let localeUri: LocaleUri = new LocaleUri(data, locale.code);
                 this.importLanguage(locale.api, importFile);
@@ -131,6 +167,10 @@ export class LocaleListComponent extends ResourceListComponent<Locale> {
         this.get();
     }
 
-
+    toggleSideBar($event: any) {
+        $event.stopPropagation();
+        let event = new Event("toggle-navigation");
+        document.dispatchEvent(event);
+    }
 
 }

@@ -4,6 +4,9 @@ import { MaterialModule } from "../../lib/material/mareial.module"
 import { HeaderComponent } from './header.component';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { ModalHeaderComponent } from './modal/modal.header.component';
+import { ModalHeaderService } from './modal/modal.header.service';
+import { HeaderService } from './header.service';
 
 
 @NgModule({
@@ -15,9 +18,13 @@ import { BrowserModule } from '@angular/platform-browser';
         CommonModule,
     ],
     declarations: [
-        HeaderComponent
+        HeaderComponent,
+        ModalHeaderComponent
     ],
-    providers: []
+    providers: [
+        ModalHeaderService,
+        HeaderService
+    ]
 })
 export class HeaderModule {
 

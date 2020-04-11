@@ -62,4 +62,12 @@ export class SidebarComponent implements OnInit, AfterContentInit {
         let event = new Event("toggle-navigation");
         document.dispatchEvent(event);
     }
+
+    isMobile(){
+        if(document.body.clientWidth <= 420) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
